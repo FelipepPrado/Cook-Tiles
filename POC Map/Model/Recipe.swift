@@ -5,23 +5,23 @@ import SwiftData
 @Model
 final class Recipe {
     var name: String
-    var status: Bool
+    var status: RecipeStatus
     var reward: Int
     var time: Int
     var level: RecipeLevel
     var steps: [RecipeStep]
-    var ingredients: [String]
+    var ingredients: [Igredient]
     var tags: [RecipeTag]
     var category: RecipeCategory
 
     init(
         name: String,
-        status: Bool,
+        status: RecipeStatus,
         reward: Int,
         time: Int,
         level: RecipeLevel,
         steps: [RecipeStep],
-        ingredients: [String],
+        ingredients: [Igredient],
         tags: [RecipeTag],
         category: RecipeCategory
     ) {

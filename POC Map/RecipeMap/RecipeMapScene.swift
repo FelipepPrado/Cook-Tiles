@@ -87,11 +87,11 @@ final class MapScene: SKScene {
     var previousTouchPosition: CGPoint?
 
     override func didMove(to view: SKView) {
-
+        
         backgroundColor = .systemMint
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
-        createMap(numberOfTiles: recipes.count + 1)
+        createMap(numberOfTiles: recipes.count == 0 ? 9 : recipes.count)
         createCamera()
     }
 
