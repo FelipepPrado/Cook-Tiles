@@ -1,24 +1,37 @@
-//
-//  ContentView.swift
-//  POC Map
-//
-//  Created by Felipe Prado de Lima on 25/08/26.
-//
-
 import SwiftUI
+import SpriteKit
+import SwiftData
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+    @Query private var recipeModel: [Recipe]
+    
+    private var sortedRecipes: [Recipe] {
+        recipeModel.sorted {
+            $0.category.rawValue < $1.category.rawValue
         }
-        .padding()
+    }
+
+    private var scene: SKScene {
+
+        let scene = MapScene(
+            size: CGSize(width: 800, height: 800)
+        )
+        
+        scene.recipes = recipeModel
+        scene.scaleMode = .aspectFill
+        return scene
+    }
+
+    var body: some View {
+        SpriteView(scene: scene)
+            .ignoresSafeArea()
     }
 }
 
 #Preview {
     ContentView()
+    .modelContainer(
+        for: Recipe.self,
+        inMemory: true
+    )
 }

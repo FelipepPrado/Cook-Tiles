@@ -1,17 +1,13 @@
-//
-//  POC_MapApp.swift
-//  POC Map
-//
-//  Created by Felipe Prado de Lima on 25/08/26.
-//
-
 import SwiftUI
+import SwiftData
 
 @main
 struct POC_MapApp: App {
+    //Usar Json para fazer machamada uma unica vez com o @AppStorage
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: [Recipe.self])
     }
 }
