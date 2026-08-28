@@ -76,6 +76,8 @@ final class MapScene: SKScene {
     let tileSize = CGSize(width: 155, height: 155)
 
     var recipes: [Recipe] = []
+    //precisa ordenar isso aqui de alguma forma para ficar filtrado
+    var recipeTiles: [RecipeTile] = []
     
     let xDistance: CGFloat = 85.25
     let yDistance: CGFloat = 54.25
@@ -108,55 +110,117 @@ final class MapScene: SKScene {
 
     // MARK: - Map
 
+//    func createMap(numberOfTiles: Int) {
+//
+//        let side = Int(Double(numberOfTiles).squareRoot())
+//        let center = side / 2
+//
+//        var positions: [CGPoint] = []
+//
+//        for row in 0..<side {
+//
+//            for column in 0..<side {
+//
+//                let rowFromCenter = row - center
+//                let columnFromCenter = column - center
+//
+//                let x = CGFloat(columnFromCenter - rowFromCenter) * xDistance
+//
+//                let y = CGFloat(-columnFromCenter - rowFromCenter) * yDistance
+//
+//                positions.append(
+//                    CGPoint(x: x, y: y)
+//                )
+//            }
+//        }
+//
+//        positions.sort {
+//
+//            if $0.y == $1.y {
+//                return $0.x < $1.x
+//            }
+//
+//            return $0.y > $1.y
+//        }
+//        
+//
+//        for position in positions {
+//
+//            let imageName: String
+//
+//            if position == .zero {
+//                imageName = "tileTest"
+//            } else {
+//                imageName = "tile2"
+//                
+//            }
+//
+//            let tile = SKSpriteNode(imageNamed: imageName)
+//
+//            tile.size = tileSize
+//            tile.position = position
+//
+//            addChild(tile)
+//        }
+//    }
     func createMap(numberOfTiles: Int) {
 
         let side = Int(Double(numberOfTiles).squareRoot())
         let center = side / 2
 
-        var positions: [CGPoint] = []
+        var positions: [(point: CGPoint, row: Int, col: Int)] = []
 
         for row in 0..<side {
-
             for column in 0..<side {
 
                 let rowFromCenter = row - center
                 let columnFromCenter = column - center
 
                 let x = CGFloat(columnFromCenter - rowFromCenter) * xDistance
-
                 let y = CGFloat(-columnFromCenter - rowFromCenter) * yDistance
 
-                positions.append(
-                    CGPoint(x: x, y: y)
-                )
+                positions.append((
+                    point: CGPoint(x: x, y: y),
+                    row: rowFromCenter,
+                    col: columnFromCenter
+                ))
             }
         }
 
+        // Ordena pra manter a sobreposição correta
         positions.sort {
-
-            if $0.y == $1.y {
-                return $0.x < $1.x
+            if $0.point.y == $1.point.y {
+                return $0.point.x < $1.point.x
             }
-
-            return $0.y > $1.y
+            return $0.point.y > $1.point.y
         }
+
+        var recipeIndex = 0
 
         for position in positions {
 
-            let imageName: String
-
-            if position == .zero {
-                imageName = "tileTest"
-            } else {
-                imageName = "tile2"
+            // Tile central
+            if position.row == 0 && position.col == 0 {
+                let castle = SKSpriteNode(imageNamed: "tileTest")
+                castle.size = tileSize
+                castle.position = position.point
+                addChild(castle)
+                continue
             }
-
+            guard recipeIndex < recipes.count else { continue }
+            let recipe = recipes[recipeIndex]
+            // Atribui a imagem numerada (tile_1, tile_2, ... tile_24)
+            let imageName = "tile_\(recipeIndex + 1)"
             let tile = SKSpriteNode(imageNamed: imageName)
-
             tile.size = tileSize
-            tile.position = position
+            tile.position = position.point
+            tile.name = "recipe_\(recipeIndex)"
 
             addChild(tile)
+            let recipeTile = RecipeTile(recipe: recipe, tile: tile)
+            recipeTiles.append(recipeTile)
+
+            recipeIndex += 1
         }
     }
 
