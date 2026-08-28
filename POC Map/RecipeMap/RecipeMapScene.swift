@@ -2,98 +2,32 @@
 import SwiftUI
 import SpriteKit
 
-//final class MapScene: SKScene {
-//
-//    override func didMove(to view: SKView) {
-//
-//        backgroundColor = .systemMint
-//        anchorPoint = CGPoint(x: 0.5, y: 0.5)
-//
-//        let tileSize = CGSize(width: 100, height: 100)
-//
-//        // Castle
-//        let castle = SKSpriteNode(imageNamed: "tileTest")
-//        castle.size = tileSize
-//        castle.position = CGPoint(x: 0, y: 0)
-//
-//        // Direita
-//        let tileRight = SKSpriteNode(imageNamed: "tile2")
-//        tileRight.size = tileSize
-//        tileRight.position = CGPoint(x: 55, y: -35)
-//
-//        // Esquerda
-//        let tileLeft = SKSpriteNode(imageNamed: "tile2")
-//        tileLeft.size = tileSize
-//        tileLeft.position = CGPoint(x: -55, y: 35)
-//        
-//        let tileTop = SKSpriteNode(imageNamed: "tile2")
-//        tileTop.size = tileSize
-//        tileTop.position = CGPoint(x: 55, y: 35)
-//        
-//        let tileBottom = SKSpriteNode(imageNamed: "tile2")
-//        tileBottom.size = tileSize
-//        tileBottom.position = CGPoint(x: -55, y: -35)
-//        
-//        let tileTopLeft = SKSpriteNode(imageNamed: "tile2")
-//        tileTopLeft.size = tileSize
-//        tileTopLeft.position = CGPoint(x: 0, y: 70)
-//        
-//        let tileTopRight = SKSpriteNode(imageNamed: "tile2")
-//        tileTopRight.size = tileSize
-//        tileTopRight.position = CGPoint(x: 110, y: 0)
-//        
-//        let tileBottomLeft = SKSpriteNode(imageNamed: "tile2")
-//        tileBottomLeft.size = tileSize
-//        tileBottomLeft.position = CGPoint(x: -110, y: 0)
-//        
-//        let tileBottomRight = SKSpriteNode(imageNamed: "tile2")
-//        tileBottomRight.size = tileSize
-//        tileBottomRight.position = CGPoint(x: 0, y: -70)
-//
-//        addChild(tileTopLeft)
-//        
-//        addChild(tileTop)
-//        
-//        addChild(tileTopRight)
-//        
-//        addChild(tileLeft)
-//        
-//        addChild(castle)
-//        
-//        addChild(tileRight)
-//        
-//        addChild(tileBottomLeft)
-//        
-//        addChild(tileBottom)
-//        
-//        addChild(tileBottomRight)
-//        
-//    }
-//}
-
 final class MapScene: SKScene {
 
     let tileSize = CGSize(width: 155, height: 155)
 
     var recipes: [Recipe] = []
-    //precisa ordenar isso aqui de alguma forma para ficar filtrado
+
     var recipeTiles: [RecipeTile] = []
-    
+
+    var onRecipeTapped: ((Recipe) -> Void)?
+
     let xDistance: CGFloat = 85.25
     let yDistance: CGFloat = 54.25
 
-    // Câmera do mapa
     let mapCamera = SKCameraNode()
 
-    // Guarda onde o dedo estava
     var previousTouchPosition: CGPoint?
+    
+    // Identifica se o usuário está arrastando o mapa
+    var isDragging = false
 
     override func didMove(to view: SKView) {
-        
+
         backgroundColor = .systemMint
+
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
-        createMap(numberOfTiles: recipes.count == 0 ? 9 : recipes.count)
         createCamera()
     }
 
@@ -110,118 +44,186 @@ final class MapScene: SKScene {
 
     // MARK: - Map
 
-//    func createMap(numberOfTiles: Int) {
-//
-//        let side = Int(Double(numberOfTiles).squareRoot())
-//        let center = side / 2
-//
-//        var positions: [CGPoint] = []
-//
-//        for row in 0..<side {
-//
-//            for column in 0..<side {
-//
-//                let rowFromCenter = row - center
-//                let columnFromCenter = column - center
-//
-//                let x = CGFloat(columnFromCenter - rowFromCenter) * xDistance
-//
-//                let y = CGFloat(-columnFromCenter - rowFromCenter) * yDistance
-//
-//                positions.append(
-//                    CGPoint(x: x, y: y)
-//                )
-//            }
-//        }
-//
-//        positions.sort {
-//
-//            if $0.y == $1.y {
-//                return $0.x < $1.x
-//            }
-//
-//            return $0.y > $1.y
-//        }
-//        
-//
-//        for position in positions {
-//
-//            let imageName: String
-//
-//            if position == .zero {
-//                imageName = "tileTest"
-//            } else {
-//                imageName = "tile2"
-//                
-//            }
-//
-//            let tile = SKSpriteNode(imageNamed: imageName)
-//
-//            tile.size = tileSize
-//            tile.position = position
-//
-//            addChild(tile)
-//        }
-//    }
     func createMap(numberOfTiles: Int) {
 
-        let side = Int(Double(numberOfTiles).squareRoot())
+        let side = Int(
+            Double(numberOfTiles).squareRoot()
+        )
+
         let center = side / 2
 
-        var positions: [(point: CGPoint, row: Int, col: Int)] = []
+        var positions: [
+            (
+                point: CGPoint,
+                row: Int,
+                col: Int
+            )
+        ] = []
 
         for row in 0..<side {
+
             for column in 0..<side {
 
                 let rowFromCenter = row - center
                 let columnFromCenter = column - center
 
-                let x = CGFloat(columnFromCenter - rowFromCenter) * xDistance
-                let y = CGFloat(-columnFromCenter - rowFromCenter) * yDistance
+                let x =
+                    CGFloat(
+                        columnFromCenter - rowFromCenter
+                    ) * xDistance
 
-                positions.append((
-                    point: CGPoint(x: x, y: y),
-                    row: rowFromCenter,
-                    col: columnFromCenter
-                ))
+                let y =
+                    CGFloat(
+                        -columnFromCenter - rowFromCenter
+                    ) * yDistance
+
+                positions.append(
+                    (
+                        point: CGPoint(
+                            x: x,
+                            y: y
+                        ),
+                        row: rowFromCenter,
+                        col: columnFromCenter
+                    )
+                )
             }
         }
 
-        // Ordena pra manter a sobreposição correta
+        // Ordena para manter a sobreposição correta
         positions.sort {
+
             if $0.point.y == $1.point.y {
                 return $0.point.x < $1.point.x
             }
+
             return $0.point.y > $1.point.y
         }
+
+        // Garante que não acumularemos tiles
+        // se o mapa for recriado
+        recipeTiles.removeAll()
 
         var recipeIndex = 0
 
         for position in positions {
 
             // Tile central
-            if position.row == 0 && position.col == 0 {
-                let castle = SKSpriteNode(imageNamed: "tileTest")
+            if position.row == 0 &&
+                position.col == 0 {
+
+                let castle = SKSpriteNode(
+                    imageNamed: "tileTest"
+                )
+
                 castle.size = tileSize
                 castle.position = position.point
+
                 addChild(castle)
+
                 continue
             }
-            guard recipeIndex < recipes.count else { continue }
+
+            guard recipeIndex < recipes.count else {
+                continue
+            }
+
             let recipe = recipes[recipeIndex]
-            // Atribui a imagem numerada (tile_1, tile_2, ... tile_24)
-            let imageName = "tile_\(recipeIndex + 1)"
-            let tile = SKSpriteNode(imageNamed: imageName)
+            
+            let imageName =
+                "tile_\(recipeIndex + 1)"
+
+            let tile = SKSpriteNode(
+                imageNamed: imageName
+            )
+
             tile.size = tileSize
             tile.position = position.point
-            tile.name = "recipe_\(recipeIndex)"
+
+            // Pode continuar existindo.
+            // É útil para debug.
+            tile.name =
+                "recipe_\(recipeIndex)"
 
             addChild(tile)
-            let recipeTile = RecipeTile(recipe: recipe, tile: tile)
+
+            let recipeTile = RecipeTile(
+                recipe: recipe,
+                tile: tile
+            )
+
             recipeTiles.append(recipeTile)
 
             recipeIndex += 1
         }
+    }
+    
+    func reloadMap() {
+
+        // Remove os tiles antigos,
+        // mas mantém a câmera
+        children
+            .filter { $0 !== mapCamera }
+            .forEach {
+                $0.removeFromParent()
+            }
+
+        recipeTiles.removeAll()
+
+        createMap(
+            numberOfTiles: recipes.isEmpty
+                ? 9
+                : recipes.count + 1
+        )
+    }
+    
+    func recipeTile(at point: CGPoint) -> RecipeTile? {
+
+        //Tamanhos ficos da parte superior
+        let topWidth: CGFloat = 155
+        let topHeight: CGFloat = 97.15
+
+        let halfWidth = topWidth / 2
+        let halfHeight = topHeight / 2
+
+        let yOffset =
+            (tileSize.height - topHeight) / 2
+
+        var selectedTile: RecipeTile?
+        var smallestDistance = CGFloat.infinity
+
+        for recipeTile in recipeTiles {
+
+            let tilePosition =
+                recipeTile.tile.position
+
+            // Centro da FACE SUPERIOR,
+            // não do sprite inteiro
+            let hitCenter = CGPoint(
+                x: tilePosition.x,
+                y: tilePosition.y + yOffset
+            )
+
+            let deltaX =
+                abs(point.x - hitCenter.x)
+
+            let deltaY =
+                abs(point.y - hitCenter.y)
+
+            let distance =
+                deltaX / halfWidth
+                +
+                deltaY / halfHeight
+
+            if distance <= 1,
+               distance < smallestDistance {
+
+                smallestDistance = distance
+                selectedTile = recipeTile
+            }
+        }
+
+        return selectedTile
     }
 
     // MARK: - Touch
@@ -235,7 +237,12 @@ final class MapScene: SKScene {
             return
         }
 
-        previousTouchPosition = touch.location(in: view)
+        previousTouchPosition =
+            touch.location(in: view)
+
+        // Todo toque começa sendo considerado
+        // um possível clique
+        isDragging = false
     }
 
     override func touchesMoved(
@@ -250,37 +257,54 @@ final class MapScene: SKScene {
             return
         }
 
-        let currentTouchPosition = touch.location(in: view)
+        let currentTouchPosition =
+            touch.location(in: view)
 
         let movementX =
-            currentTouchPosition.x - previousTouchPosition.x
+            currentTouchPosition.x
+            - previousTouchPosition.x
 
         let movementY =
-            currentTouchPosition.y - previousTouchPosition.y
+            currentTouchPosition.y
+            - previousTouchPosition.y
+
+        // Se o dedo realmente se moveu,
+        // consideramos um drag
+        if abs(movementX) > 2 ||
+            abs(movementY) > 2 {
+
+            isDragging = true
+        }
 
         // Move a câmera
         mapCamera.position.x -= movementX
         mapCamera.position.y += movementY
 
         // Limites da câmera
-        let minX: CGFloat = -4*xDistance
-        let maxX: CGFloat = 4*xDistance
+        let minX: CGFloat = -4 * xDistance
+        let maxX: CGFloat = 4 * xDistance
 
-        let minY: CGFloat = -4*yDistance
-        let maxY: CGFloat = 4*yDistance
+        let minY: CGFloat = -4 * yDistance
+        let maxY: CGFloat = 4 * yDistance
 
-        // Impede a câmera de ultrapassar os limites
         mapCamera.position.x = min(
-            max(mapCamera.position.x, minX),
+            max(
+                mapCamera.position.x,
+                minX
+            ),
             maxX
         )
 
         mapCamera.position.y = min(
-            max(mapCamera.position.y, minY),
+            max(
+                mapCamera.position.y,
+                minY
+            ),
             maxY
         )
 
-        self.previousTouchPosition = currentTouchPosition
+        self.previousTouchPosition =
+            currentTouchPosition
     }
 
     override func touchesEnded(
@@ -288,6 +312,43 @@ final class MapScene: SKScene {
         with event: UIEvent?
     ) {
 
+        defer {
+            previousTouchPosition = nil
+            isDragging = false
+        }
+
+        guard !isDragging else {
+            return
+        }
+
+        guard let touch = touches.first else {
+            return
+        }
+
+        let location = touch.location(in: self)
+
+        guard let recipeTile = recipeTile(
+            at: location
+        ) else {
+            return
+        }
+
+        print("Recipe clicada:", recipeTile.recipe.name)
+        print(recipeTile.tile.position)
+
+        onRecipeTapped?(
+            recipeTile.recipe
+        )
+    }
+
+    override func touchesCancelled(
+        _ touches: Set<UITouch>,
+        with event: UIEvent?
+    ) {
+
+        // Caso o sistema cancele o toque,
+        // também limpamos o estado
         previousTouchPosition = nil
+        isDragging = false
     }
 }
