@@ -17,7 +17,7 @@ struct ContentView: View {
             size: CGSize(width: 800, height: 800)
         )
         
-        scene.recipes = recipeModel
+        scene.recipes = sortedRecipes
         scene.scaleMode = .aspectFill
         return scene
     }

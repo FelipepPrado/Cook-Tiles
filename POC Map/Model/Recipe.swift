@@ -3,25 +3,25 @@ import SwiftUI
 import SwiftData
 
 @Model
-final class Recipe {
+final class Recipe{
     var name: String
-    var status: Bool
+    var status: RecipeStatus
     var reward: Int
     var time: Int
     var level: RecipeLevel
     var steps: [RecipeStep]
-    var ingredients: [String]
+    var ingredients: [Igredient]
     var tags: [RecipeTag]
     var category: RecipeCategory
 
     init(
         name: String,
-        status: Bool,
+        status: RecipeStatus,
         reward: Int,
         time: Int,
         level: RecipeLevel,
         steps: [RecipeStep],
-        ingredients: [String],
+        ingredients: [Igredient],
         tags: [RecipeTag],
         category: RecipeCategory
     ) {
@@ -35,6 +35,7 @@ final class Recipe {
         self.tags = tags
         self.category = category
     }
+    
 }
 
 enum RecipeStatus: String, Codable{
@@ -42,7 +43,7 @@ enum RecipeStatus: String, Codable{
     case unlocked
     case unavailable
     
-    var rawValue: String {
+    var displayName: String {
         switch self{
         case .locked:
             "Fechado"
@@ -65,7 +66,7 @@ enum RecipeLevel: String, Codable {
     case medium
     case hard
     
-    var rawValue: String {
+    var displayName: String {
         switch self{
         case .easy:
             "Fácil"
@@ -85,21 +86,18 @@ enum RecipeTag: String, Codable {
 }
 
 enum RecipeCategory: String, Codable, CaseIterable {
-    case sobremesa
-    case pratoPrincipal
-    case entrada
-    case acompanhamento
+    case sobremesa = "Sobremesa"
+    case pratoPrincipal = "Prato Principal"
+    case entrada = "Entrada"
+    case guarnicao = "Guarnição"
     
-    var rawValue: String {
-        switch self{
-        case .sobremesa:
-            "Sobremesa"
-        case .pratoPrincipal:
-            "Prato Principal"
-        case .entrada:
-            "Entrada"
-        case .acompanhamento:
-            "Acompanhamento"
-        }
-    }
+//    var displayName: String {
+//        switch self {
+//        case .sobremesa: "Sobremesa"
+//        case .pratoPrincipal: "Prato Principal"
+//        case .entrada: "Entrada"
+//        case .acompanhamento: "Acompanhamento"
+//        }
+//    }
 }
+
