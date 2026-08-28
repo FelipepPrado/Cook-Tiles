@@ -90,14 +90,5 @@ enum RecipeCategory: String, Codable, CaseIterable {
     case pratoPrincipal = "Prato Principal"
     case entrada = "Entrada"
     case guarnicao = "Guarnição"
-    
-//    var displayName: String {
-//        switch self {
-//        case .sobremesa: "Sobremesa"
-//        case .pratoPrincipal: "Prato Principal"
-//        case .entrada: "Entrada"
-//        case .acompanhamento: "Acompanhamento"
-//        }
-//    }
 }
 

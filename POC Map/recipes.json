@@ -123,7 +123,7 @@
   },
   {
     "name": "Pavê de Chocolate",
-    "status": "locked",
+    "status": "unlocked",
     "reward": 110,
     "time": 60,
     "level": "medium",
@@ -207,7 +207,7 @@
   },
   {
     "name": "Estrogonofe de Carne",
-    "status": "locked",
+    "status": "unlocked",
     "reward": 80,
     "time": 50,
     "level": "medium",
@@ -519,7 +519,7 @@
   },
   {
     "name": "Purê de Batata",
-    "status": "locked",
+    "status": "unlocked",
     "reward": 35,
     "time": 35,
     "level": "easy",
@@ -589,7 +589,7 @@
   },
   {
     "name": "Batata Rústica Assada",
-    "status": "locked",
+    "status": "unlocked",
     "reward": 50,
     "time": 45,
     "level": "easy",
