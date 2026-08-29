@@ -13,6 +13,8 @@ final class Recipe{
     var ingredients: [Igredient]
     var tags: [RecipeTag]
     var category: RecipeCategory
+    var id: Int
+    var price: Int
 
     init(
         name: String,
@@ -23,7 +25,9 @@ final class Recipe{
         steps: [RecipeStep],
         ingredients: [Igredient],
         tags: [RecipeTag],
-        category: RecipeCategory
+        category: RecipeCategory,
+        id: Int,
+        price: Int
     ) {
         self.name = name
         self.status = status
@@ -34,6 +38,8 @@ final class Recipe{
         self.ingredients = ingredients
         self.tags = tags
         self.category = category
+        self.id = id
+        self.price = price
     }
     
 }

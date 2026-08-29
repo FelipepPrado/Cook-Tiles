@@ -5,12 +5,12 @@ import SwiftData
 struct POC_MapApp: App {
     //Usar Json para fazer machamada uma unica vez com o @AppStorage
     let container: ModelContainer
-    
+
     init() {
         do {
             container = try ModelContainer(for: Recipe.self)
         } catch {
-            fatalError("Erro ao criar ModelContainer: \(error)")
+            fatalError("Erro no ModelContainer: \(error)")
         }
     }
     var body: some Scene {
