@@ -20,6 +20,8 @@ struct RecipeDTO: Codable {
     let ingredients: [Igredient]
     let tags: [String]
     let category: String
+    let id: Int
+    let price: Int
 
     func toRecipe() -> Recipe {
         return Recipe(
@@ -31,7 +33,9 @@ struct RecipeDTO: Codable {
             steps: steps,
             ingredients: ingredients,
             tags: tags.compactMap { RecipeTag(rawValue: $0) },
-            category: RecipeCategory(rawValue: category) ?? .pratoPrincipal
+            category: RecipeCategory(rawValue: category) ?? .pratoPrincipal,
+            id: id,
+            price: price
         )
     }
 }

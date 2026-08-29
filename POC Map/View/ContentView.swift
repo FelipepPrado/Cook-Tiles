@@ -4,7 +4,7 @@ import SwiftData
 
 struct ContentView: View {
 
-    @Query private var recipeModel: [Recipe]
+    @Query(sort: \Recipe.id, order: .forward) private var recipeModel: [Recipe]
     
     @State private var selectedRecipe: Recipe?
 
@@ -12,11 +12,6 @@ struct ContentView: View {
         size: CGSize(width: 800, height: 800)
     )
 
-    private var sortedRecipes: [Recipe] {
-        recipeModel.sorted {
-            $0.category.rawValue < $1.category.rawValue
-        }
-    }
 
     var body: some View {
 
@@ -29,16 +24,18 @@ struct ContentView: View {
                 scene.scaleMode = .aspectFill
 
                 scene.onRecipeTapped = { recipe in
-                    selectedRecipe = recipe
+                    if recipe.status == .unlocked || recipe.status == .locked{
+                        selectedRecipe = recipe
+                    }
                 }
 
                 scene.reloadMap()
             }
 
             .sheet(item: $selectedRecipe) { recipe in
-                RecipeDetailView(
-                    recipe: recipe
-                )
+                RecipeDetailView(recipe: recipe) {
+                        scene.refreshTileStates()
+                }
             }
     }
 }

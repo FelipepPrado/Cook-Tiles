@@ -145,7 +145,7 @@ final class MapScene: SKScene {
                 "tile_\(recipeIndex + 1)"
 
             let tile = SKSpriteNode(
-                imageNamed: "tile2"
+                imageNamed: imageName
             )
 
             tile.size = tileSize

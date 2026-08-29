@@ -1,8 +1,68 @@
 [
   {
+    "id": 1,
+    "name": "Pavê de Chocolate",
+    "status": "locked",
+    "reward": 110,
+    "price": 65,
+    "time": 60,
+    "level": "medium",
+    "category": "sobremesa",
+    "tags": ["vegetarian"],
+    "ingredients": [
+      { "name": "biscoito champanhe", "quantity": 1.0, "unit": "pacote (200g)", "status": true },
+      { "name": "leite", "quantity": 3.0, "unit": "xícara (chá)", "status": true },
+      { "name": "chocolate ao leite picado", "quantity": 200.0, "unit": "g", "status": true },
+      { "name": "creme de leite", "quantity": 1.0, "unit": "lata", "status": true },
+      { "name": "açúcar", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
+      { "name": "amido de milho", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
+      { "name": "gema de ovo", "quantity": 2.0, "unit": "unidade", "status": true },
+      { "name": "chocolate granulado", "quantity": 3.0, "unit": "colher (sopa)", "status": true }
+    ],
+    "steps": [
+      { "order": 1, "instruction": "Numa panela, misture o leite, o açúcar, as gemas e o amido de milho e leve ao fogo médio, mexendo até engrossar.", "process": "fogão" },
+      { "order": 2, "instruction": "Retire do fogo, acrescente o chocolate picado e misture até derreter completamente.", "process": "preparo" },
+      { "order": 3, "instruction": "Acrescente o creme de leite e misture bem. Reserve.", "process": "preparo" },
+      { "order": 4, "instruction": "Monte o pavê numa travessa: camada de biscoitos, camada de creme, biscoitos, creme.", "process": "montagem" },
+      { "order": 5, "instruction": "Finalize com chocolate granulado por cima e leve à geladeira por pelo menos 4 horas.", "process": "resfriamento" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Bolo de Cenoura com Cobertura de Chocolate",
+    "status": "locked",
+    "reward": 130,
+    "price": 80,
+    "time": 90,
+    "level": "hard",
+    "category": "sobremesa",
+    "tags": ["vegetarian"],
+    "ingredients": [
+      { "name": "cenoura média", "quantity": 3.0, "unit": "unidade", "status": true },
+      { "name": "ovo", "quantity": 3.0, "unit": "unidade", "status": true },
+      { "name": "óleo", "quantity": 1.0, "unit": "xícara (chá)", "status": true },
+      { "name": "açúcar", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
+      { "name": "farinha de trigo", "quantity": 2.5, "unit": "xícara (chá)", "status": true },
+      { "name": "fermento em pó", "quantity": 1.0, "unit": "colher (sopa)", "status": true },
+      { "name": "chocolate em pó", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
+      { "name": "manteiga", "quantity": 1.0, "unit": "colher (sopa)", "status": true },
+      { "name": "leite", "quantity": 5.0, "unit": "colher (sopa)", "status": true }
+    ],
+    "steps": [
+      { "order": 1, "instruction": "Preaqueça o forno a 180 °C. Unte uma fôrma retangular com manteiga e farinha.", "process": "preparo" },
+      { "order": 2, "instruction": "Descasque as cenouras e corte em rodelas. Bata no liquidificador com os ovos e o óleo até ficar liso.", "process": "preparo" },
+      { "order": 3, "instruction": "Transfira para uma tigela, acrescente o açúcar, a farinha e o fermento peneirados. Misture até ficar homogêneo.", "process": "preparo" },
+      { "order": 4, "instruction": "Despeje na fôrma e asse por cerca de 40 minutos.", "process": "forno" },
+      { "order": 5, "instruction": "Para a cobertura, aqueça numa panela a manteiga, o chocolate em pó e o leite, mexendo até engrossar.", "process": "fogão" },
+      { "order": 6, "instruction": "Espalhe a cobertura sobre o bolo ainda quente e deixe esfriar.", "process": "montagem" }
+    ]
+  },
+  {
+    "id": 3,
     "name": "Bolo de Laranja",
     "status": "locked",
     "reward": 120,
+    "price": 70,
     "time": 120,
     "level": "medium",
     "category": "sobremesa",
@@ -27,32 +87,43 @@
     ]
   },
   {
-    "name": "Brigadeiro",
+    "id": 4,
+    "name": "Estrogonofe de Carne",
     "status": "locked",
-    "reward": 40,
-    "time": 30,
-    "level": "easy",
-    "category": "sobremesa",
-    "tags": ["vegetarian"],
+    "reward": 80,
+    "price": 50,
+    "time": 50,
+    "level": "medium",
+    "category": "pratoPrincipal",
+    "tags": [],
     "ingredients": [
-      { "name": "leite condensado", "quantity": 1.0, "unit": "lata", "status": true },
-      { "name": "chocolate em pó", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
-      { "name": "manteiga", "quantity": 1.0, "unit": "colher (sopa)", "status": true },
-      { "name": "chocolate granulado", "quantity": 1.0, "unit": "xícara (chá)", "status": true }
+      { "name": "filé mignon em tiras", "quantity": 500.0, "unit": "g", "status": true },
+      { "name": "cebola picada", "quantity": 1.0, "unit": "unidade", "status": true },
+      { "name": "alho picado", "quantity": 2.0, "unit": "dente", "status": true },
+      { "name": "cogumelo fatiado", "quantity": 200.0, "unit": "g", "status": true },
+      { "name": "ketchup", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
+      { "name": "mostarda", "quantity": 1.0, "unit": "colher (sopa)", "status": true },
+      { "name": "creme de leite", "quantity": 1.0, "unit": "lata", "status": true },
+      { "name": "óleo", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
+      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true },
+      { "name": "pimenta-do-reino", "quantity": 1.0, "unit": "a gosto", "status": true }
     ],
     "steps": [
-      { "order": 1, "instruction": "Numa panela funda, misture o leite condensado, o chocolate em pó e a manteiga.", "process": "preparo" },
-      { "order": 2, "instruction": "Leve ao fogo baixo, mexendo sem parar com uma colher de pau até a massa desgrudar do fundo da panela.", "process": "fogão" },
-      { "order": 3, "instruction": "Transfira para um prato untado com manteiga e deixe esfriar.", "process": "resfriamento" },
-      { "order": 4, "instruction": "Com as mãos untadas, enrole bolinhas e passe no chocolate granulado.", "process": "montagem" }
+      { "order": 1, "instruction": "Tempere a carne com sal e pimenta. Aqueça o óleo numa panela e sele a carne em fogo alto. Reserve.", "process": "fogão" },
+      { "order": 2, "instruction": "Na mesma panela, refogue a cebola e o alho até dourar.", "process": "fogão" },
+      { "order": 3, "instruction": "Acrescente os cogumelos e refogue por 3 minutos.", "process": "fogão" },
+      { "order": 4, "instruction": "Devolva a carne, adicione o ketchup e a mostarda. Misture bem.", "process": "fogão" },
+      { "order": 5, "instruction": "Abaixe o fogo, acrescente o creme de leite e mexa até aquecer. Não deixe ferver. Sirva com arroz e batata palha.", "process": "fogão" }
     ]
   },
   {
+    "id": 5,
     "name": "Pudim de Leite",
     "status": "locked",
     "reward": 100,
+    "price": 60,
     "time": 90,
-    "level": "medium",
+    "level": "hard",
     "category": "sobremesa",
     "tags": ["vegetarian"],
     "ingredients": [
@@ -72,11 +143,13 @@
     ]
   },
   {
+    "id": 6,
     "name": "Mousse de Maracujá",
     "status": "locked",
     "reward": 60,
+    "price": 35,
     "time": 40,
-    "level": "easy",
+    "level": "medium",
     "category": "sobremesa",
     "tags": ["vegetarian"],
     "ingredients": [
@@ -94,63 +167,115 @@
     ]
   },
   {
-    "name": "Bolo de Cenoura com Cobertura de Chocolate",
+    "id": 7,
+    "name": "Escondidinho de Carne Seca",
     "status": "locked",
-    "reward": 130,
+    "reward": 140,
+    "price": 85,
     "time": 90,
-    "level": "medium",
+    "level": "hard",
+    "category": "pratoPrincipal",
+    "tags": [],
+    "ingredients": [
+      { "name": "carne seca (charque) dessalgada e desfiada", "quantity": 500.0, "unit": "g", "status": true },
+      { "name": "mandioca descascada", "quantity": 1.0, "unit": "kg", "status": true },
+      { "name": "leite", "quantity": 1.0, "unit": "xícara (chá)", "status": true },
+      { "name": "manteiga", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
+      { "name": "cebola picada", "quantity": 1.0, "unit": "unidade", "status": true },
+      { "name": "alho picado", "quantity": 2.0, "unit": "dente", "status": true },
+      { "name": "creme de leite", "quantity": 1.0, "unit": "lata", "status": true },
+      { "name": "queijo muçarela ralado", "quantity": 200.0, "unit": "g", "status": true },
+      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
+    ],
+    "steps": [
+      { "order": 1, "instruction": "Cozinhe a mandioca em água com sal até ficar macia. Escorra e amasse enquanto quente, adicionando o leite e a manteiga até formar um purê liso.", "process": "fogão" },
+      { "order": 2, "instruction": "Numa panela, refogue a cebola e o alho na manteiga até dourar.", "process": "fogão" },
+      { "order": 3, "instruction": "Acrescente a carne seca desfiada e refogue por 10 minutos. Adicione o creme de leite e misture.", "process": "fogão" },
+      { "order": 4, "instruction": "Preaqueça o forno a 200 °C. Num refratário, faça uma camada de purê de mandioca, outra de carne seca e finalize com mais purê.", "process": "montagem" },
+      { "order": 5, "instruction": "Cubra com a muçarela ralada e leve ao forno por 20 minutos até gratinar.", "process": "forno" }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Macarrão ao Alho e Óleo",
+    "status": "unlocked",
+    "reward": 40,
+    "price": 0,
+    "time": 25,
+    "level": "easy",
+    "category": "pratoPrincipal",
+    "tags": ["vegan"],
+    "ingredients": [
+      { "name": "espaguete", "quantity": 500.0, "unit": "g", "status": true },
+      { "name": "alho fatiado", "quantity": 6.0, "unit": "dente", "status": true },
+      { "name": "azeite de oliva", "quantity": 0.5, "unit": "xícara (chá)", "status": true },
+      { "name": "pimenta calabresa", "quantity": 1.0, "unit": "colher (chá)", "status": true },
+      { "name": "salsinha picada", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
+      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
+    ],
+    "steps": [
+      { "order": 1, "instruction": "Cozinhe o espaguete em água fervente com sal até ficar al dente. Reserve 1 xícara da água do cozimento e escorra.", "process": "fogão" },
+      { "order": 2, "instruction": "Numa frigideira grande, aqueça o azeite em fogo baixo e frite o alho fatiado até dourar levemente. Cuidado para não queimar.", "process": "fogão" },
+      { "order": 3, "instruction": "Acrescente a pimenta calabresa e mexa rapidamente.", "process": "fogão" },
+      { "order": 4, "instruction": "Adicione o macarrão escorrido e um pouco da água do cozimento. Mexa para envolver.", "process": "fogão" },
+      { "order": 5, "instruction": "Finalize com a salsinha picada e sirva imediatamente.", "process": "montagem" }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Brigadeiro",
+    "status": "unlocked",
+    "reward": 40,
+    "price": 0,
+    "time": 30,
+    "level": "easy",
     "category": "sobremesa",
     "tags": ["vegetarian"],
     "ingredients": [
-      { "name": "cenoura média", "quantity": 3.0, "unit": "unidade", "status": true },
-      { "name": "ovo", "quantity": 3.0, "unit": "unidade", "status": true },
-      { "name": "óleo", "quantity": 1.0, "unit": "xícara (chá)", "status": true },
-      { "name": "açúcar", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
-      { "name": "farinha de trigo", "quantity": 2.5, "unit": "xícara (chá)", "status": true },
-      { "name": "fermento em pó", "quantity": 1.0, "unit": "colher (sopa)", "status": true },
+      { "name": "leite condensado", "quantity": 1.0, "unit": "lata", "status": true },
       { "name": "chocolate em pó", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
       { "name": "manteiga", "quantity": 1.0, "unit": "colher (sopa)", "status": true },
-      { "name": "leite", "quantity": 5.0, "unit": "colher (sopa)", "status": true }
+      { "name": "chocolate granulado", "quantity": 1.0, "unit": "xícara (chá)", "status": true }
     ],
     "steps": [
-      { "order": 1, "instruction": "Preaqueça o forno a 180 °C. Unte uma fôrma retangular com manteiga e farinha.", "process": "preparo" },
-      { "order": 2, "instruction": "Descasque as cenouras e corte em rodelas. Bata no liquidificador com os ovos e o óleo até ficar liso.", "process": "preparo" },
-      { "order": 3, "instruction": "Transfira para uma tigela, acrescente o açúcar, a farinha e o fermento peneirados. Misture até ficar homogêneo.", "process": "preparo" },
-      { "order": 4, "instruction": "Despeje na fôrma e asse por cerca de 40 minutos.", "process": "forno" },
-      { "order": 5, "instruction": "Para a cobertura, aqueça numa panela a manteiga, o chocolate em pó e o leite, mexendo até engrossar.", "process": "fogão" },
-      { "order": 6, "instruction": "Espalhe a cobertura sobre o bolo ainda quente e deixe esfriar.", "process": "montagem" }
+      { "order": 1, "instruction": "Numa panela funda, misture o leite condensado, o chocolate em pó e a manteiga.", "process": "preparo" },
+      { "order": 2, "instruction": "Leve ao fogo baixo, mexendo sem parar com uma colher de pau até a massa desgrudar do fundo da panela.", "process": "fogão" },
+      { "order": 3, "instruction": "Transfira para um prato untado com manteiga e deixe esfriar.", "process": "resfriamento" },
+      { "order": 4, "instruction": "Com as mãos untadas, enrole bolinhas e passe no chocolate granulado.", "process": "montagem" }
     ]
   },
   {
-    "name": "Pavê de Chocolate",
-    "status": "unlocked",
-    "reward": 110,
-    "time": 60,
+    "id": 10,
+    "name": "Batata Rústica Assada",
+    "status": "locked",
+    "reward": 50,
+    "price": 30,
+    "time": 45,
     "level": "medium",
-    "category": "sobremesa",
-    "tags": ["vegetarian"],
+    "category": "guarnicao",
+    "tags": ["vegan", "healthy"],
     "ingredients": [
-      { "name": "biscoito champanhe", "quantity": 1.0, "unit": "pacote (200g)", "status": true },
-      { "name": "leite", "quantity": 3.0, "unit": "xícara (chá)", "status": true },
-      { "name": "chocolate ao leite picado", "quantity": 200.0, "unit": "g", "status": true },
-      { "name": "creme de leite", "quantity": 1.0, "unit": "lata", "status": true },
-      { "name": "açúcar", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
-      { "name": "amido de milho", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
-      { "name": "gema de ovo", "quantity": 2.0, "unit": "unidade", "status": true },
-      { "name": "chocolate granulado", "quantity": 3.0, "unit": "colher (sopa)", "status": true }
+      { "name": "batata grande com casca", "quantity": 4.0, "unit": "unidade", "status": true },
+      { "name": "azeite de oliva", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
+      { "name": "alho picado", "quantity": 3.0, "unit": "dente", "status": true },
+      { "name": "alecrim fresco", "quantity": 2.0, "unit": "ramo", "status": true },
+      { "name": "páprica defumada", "quantity": 1.0, "unit": "colher (chá)", "status": true },
+      { "name": "sal grosso", "quantity": 1.0, "unit": "colher (chá)", "status": true },
+      { "name": "pimenta-do-reino", "quantity": 1.0, "unit": "a gosto", "status": true }
     ],
     "steps": [
-      { "order": 1, "instruction": "Numa panela, misture o leite, o açúcar, as gemas e o amido de milho e leve ao fogo médio, mexendo até engrossar.", "process": "fogão" },
-      { "order": 2, "instruction": "Retire do fogo, acrescente o chocolate picado e misture até derreter completamente.", "process": "preparo" },
-      { "order": 3, "instruction": "Acrescente o creme de leite e misture bem. Reserve.", "process": "preparo" },
-      { "order": 4, "instruction": "Monte o pavê numa travessa: camada de biscoitos, camada de creme, biscoitos, creme.", "process": "montagem" },
-      { "order": 5, "instruction": "Finalize com chocolate granulado por cima e leve à geladeira por pelo menos 4 horas.", "process": "resfriamento" }
+      { "order": 1, "instruction": "Preaqueça o forno a 220 °C. Lave as batatas e corte em gomos com casca.", "process": "preparo" },
+      { "order": 2, "instruction": "Numa tigela, misture as batatas com o azeite, o alho, o alecrim, a páprica, o sal grosso e a pimenta.", "process": "preparo" },
+      { "order": 3, "instruction": "Espalhe as batatas numa assadeira em camada única, sem empilhar.", "process": "montagem" },
+      { "order": 4, "instruction": "Asse por 35 a 40 minutos, virando na metade do tempo, até ficarem douradas e crocantes por fora.", "process": "forno" }
     ]
   },
   {
+    "id": 11,
     "name": "Bife à Parmegiana",
     "status": "locked",
     "reward": 60,
+    "price": 35,
     "time": 60,
     "level": "medium",
     "category": "pratoPrincipal",
@@ -178,11 +303,13 @@
     ]
   },
   {
+    "id": 12,
     "name": "Frango Xadrez",
     "status": "locked",
     "reward": 70,
+    "price": 40,
     "time": 40,
-    "level": "easy",
+    "level": "medium",
     "category": "pratoPrincipal",
     "tags": [],
     "ingredients": [
@@ -206,61 +333,65 @@
     ]
   },
   {
-    "name": "Estrogonofe de Carne",
-    "status": "unlocked",
-    "reward": 80,
-    "time": 50,
-    "level": "medium",
-    "category": "pratoPrincipal",
-    "tags": [],
-    "ingredients": [
-      { "name": "filé mignon em tiras", "quantity": 500.0, "unit": "g", "status": true },
-      { "name": "cebola picada", "quantity": 1.0, "unit": "unidade", "status": true },
-      { "name": "alho picado", "quantity": 2.0, "unit": "dente", "status": true },
-      { "name": "cogumelo fatiado", "quantity": 200.0, "unit": "g", "status": true },
-      { "name": "ketchup", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
-      { "name": "mostarda", "quantity": 1.0, "unit": "colher (sopa)", "status": true },
-      { "name": "creme de leite", "quantity": 1.0, "unit": "lata", "status": true },
-      { "name": "óleo", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
-      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true },
-      { "name": "pimenta-do-reino", "quantity": 1.0, "unit": "a gosto", "status": true }
-    ],
-    "steps": [
-      { "order": 1, "instruction": "Tempere a carne com sal e pimenta. Aqueça o óleo numa panela e sele a carne em fogo alto. Reserve.", "process": "fogão" },
-      { "order": 2, "instruction": "Na mesma panela, refogue a cebola e o alho até dourar.", "process": "fogão" },
-      { "order": 3, "instruction": "Acrescente os cogumelos e refogue por 3 minutos.", "process": "fogão" },
-      { "order": 4, "instruction": "Devolva a carne, adicione o ketchup e a mostarda. Misture bem.", "process": "fogão" },
-      { "order": 5, "instruction": "Abaixe o fogo, acrescente o creme de leite e mexa até aquecer. Não deixe ferver. Sirva com arroz e batata palha.", "process": "fogão" }
-    ]
-  },
-  {
-    "name": "Macarrão ao Alho e Óleo",
+    "id": 13,
+    "name": "Feijão Carioca",
     "status": "locked",
     "reward": 40,
-    "time": 25,
-    "level": "easy",
-    "category": "pratoPrincipal",
-    "tags": ["vegan"],
+    "price": 25,
+    "time": 60,
+    "level": "hard",
+    "category": "guarnicao",
+    "tags": ["vegan", "healthy"],
     "ingredients": [
-      { "name": "espaguete", "quantity": 500.0, "unit": "g", "status": true },
-      { "name": "alho fatiado", "quantity": 6.0, "unit": "dente", "status": true },
-      { "name": "azeite de oliva", "quantity": 0.5, "unit": "xícara (chá)", "status": true },
-      { "name": "pimenta calabresa", "quantity": 1.0, "unit": "colher (chá)", "status": true },
-      { "name": "salsinha picada", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
+      { "name": "feijão carioca", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
+      { "name": "água", "quantity": 1.5, "unit": "litro", "status": true },
+      { "name": "alho picado", "quantity": 3.0, "unit": "dente", "status": true },
+      { "name": "cebola picada", "quantity": 1.0, "unit": "unidade", "status": true },
+      { "name": "folha de louro", "quantity": 2.0, "unit": "unidade", "status": true },
+      { "name": "óleo", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
       { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
     ],
     "steps": [
-      { "order": 1, "instruction": "Cozinhe o espaguete em água fervente com sal até ficar al dente. Reserve 1 xícara da água do cozimento e escorra.", "process": "fogão" },
-      { "order": 2, "instruction": "Numa frigideira grande, aqueça o azeite em fogo baixo e frite o alho fatiado até dourar levemente. Cuidado para não queimar.", "process": "fogão" },
-      { "order": 3, "instruction": "Acrescente a pimenta calabresa e mexa rapidamente.", "process": "fogão" },
-      { "order": 4, "instruction": "Adicione o macarrão escorrido e um pouco da água do cozimento. Mexa para envolver.", "process": "fogão" },
-      { "order": 5, "instruction": "Finalize com a salsinha picada e sirva imediatamente.", "process": "montagem" }
+      { "order": 1, "instruction": "Deixe o feijão de molho em água por pelo menos 8 horas. Escorra e descarte a água.", "process": "preparo" },
+      { "order": 2, "instruction": "Numa panela de pressão, coloque o feijão, a água e as folhas de louro. Cozinhe por 25 minutos após pegar pressão.", "process": "fogão" },
+      { "order": 3, "instruction": "Numa frigideira, aqueça o óleo e refogue o alho e a cebola até dourar.", "process": "fogão" },
+      { "order": 4, "instruction": "Retire 2 conchas de feijão cozido, amasse e acrescente ao refogado. Misture.", "process": "fogão" },
+      { "order": 5, "instruction": "Despeje o refogado de volta na panela com o feijão, tempere com sal e cozinhe por mais 10 minutos.", "process": "fogão" }
     ]
   },
   {
+    "id": 14,
+    "name": "Farofa de Bacon",
+    "status": "locked",
+    "reward": 45,
+    "price": 25,
+    "time": 25,
+    "level": "hard",
+    "category": "guarnicao",
+    "tags": [],
+    "ingredients": [
+      { "name": "farinha de mandioca", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
+      { "name": "bacon picado", "quantity": 200.0, "unit": "g", "status": true },
+      { "name": "cebola picada", "quantity": 1.0, "unit": "unidade", "status": true },
+      { "name": "manteiga", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
+      { "name": "ovo", "quantity": 2.0, "unit": "unidade", "status": true },
+      { "name": "salsinha picada", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
+      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
+    ],
+    "steps": [
+      { "order": 1, "instruction": "Numa frigideira grande, frite o bacon em fogo médio até ficar crocante. Retire e reserve, mantendo a gordura na frigideira.", "process": "fogão" },
+      { "order": 2, "instruction": "Na mesma frigideira, acrescente a manteiga e refogue a cebola até dourar.", "process": "fogão" },
+      { "order": 3, "instruction": "Quebre os ovos diretamente na frigideira e mexa rapidamente para cozinhar em pedaços.", "process": "fogão" },
+      { "order": 4, "instruction": "Acrescente a farinha de mandioca aos poucos, mexendo em fogo baixo até ficar sequinha e tostada.", "process": "fogão" },
+      { "order": 5, "instruction": "Devolva o bacon, acrescente a salsinha, ajuste o sal e sirva.", "process": "montagem" }
+    ]
+  },
+  {
+    "id": 15,
     "name": "Risoto de Cogumelos",
     "status": "locked",
     "reward": 150,
+    "price": 90,
     "time": 60,
     "level": "hard",
     "category": "pratoPrincipal",
@@ -289,113 +420,11 @@
     ]
   },
   {
-    "name": "Escondidinho de Carne Seca",
-    "status": "locked",
-    "reward": 140,
-    "time": 90,
-    "level": "hard",
-    "category": "pratoPrincipal",
-    "tags": [],
-    "ingredients": [
-      { "name": "carne seca (charque) dessalgada e desfiada", "quantity": 500.0, "unit": "g", "status": true },
-      { "name": "mandioca descascada", "quantity": 1.0, "unit": "kg", "status": true },
-      { "name": "leite", "quantity": 1.0, "unit": "xícara (chá)", "status": true },
-      { "name": "manteiga", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
-      { "name": "cebola picada", "quantity": 1.0, "unit": "unidade", "status": true },
-      { "name": "alho picado", "quantity": 2.0, "unit": "dente", "status": true },
-      { "name": "creme de leite", "quantity": 1.0, "unit": "lata", "status": true },
-      { "name": "queijo muçarela ralado", "quantity": 200.0, "unit": "g", "status": true },
-      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
-    ],
-    "steps": [
-      { "order": 1, "instruction": "Cozinhe a mandioca em água com sal até ficar macia. Escorra e amasse enquanto quente, adicionando o leite e a manteiga até formar um purê liso.", "process": "fogão" },
-      { "order": 2, "instruction": "Numa panela, refogue a cebola e o alho na manteiga até dourar.", "process": "fogão" },
-      { "order": 3, "instruction": "Acrescente a carne seca desfiada e refogue por 10 minutos. Adicione o creme de leite e misture.", "process": "fogão" },
-      { "order": 4, "instruction": "Preaqueça o forno a 200 °C. Num refratário, faça uma camada de purê de mandioca, outra de carne seca e finalize com mais purê.", "process": "montagem" },
-      { "order": 5, "instruction": "Cubra com a muçarela ralada e leve ao forno por 20 minutos até gratinar.", "process": "forno" }
-    ]
-  },
-  {
-    "name": "Bolinho de Bacalhau",
-    "status": "locked",
-    "reward": 100,
-    "time": 60,
-    "level": "hard",
-    "category": "entrada",
-    "tags": [],
-    "ingredients": [
-      { "name": "bacalhau dessalgado e desfiado", "quantity": 400.0, "unit": "g", "status": true },
-      { "name": "batata cozida e amassada", "quantity": 500.0, "unit": "g", "status": true },
-      { "name": "ovo", "quantity": 2.0, "unit": "unidade", "status": true },
-      { "name": "cebola ralada", "quantity": 1.0, "unit": "unidade", "status": true },
-      { "name": "salsinha picada", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
-      { "name": "óleo para fritar", "quantity": 1.0, "unit": "litro", "status": true },
-      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true },
-      { "name": "pimenta-do-reino", "quantity": 1.0, "unit": "a gosto", "status": true }
-    ],
-    "steps": [
-      { "order": 1, "instruction": "Numa tigela grande, misture o bacalhau desfiado com a batata amassada, os ovos, a cebola, a salsinha, sal e pimenta.", "process": "preparo" },
-      { "order": 2, "instruction": "Misture bem até formar uma massa homogênea. Se necessário, ajuste a textura com um pouco de farinha.", "process": "preparo" },
-      { "order": 3, "instruction": "Com as mãos levemente untadas, modele os bolinhos em formato oval.", "process": "preparo" },
-      { "order": 4, "instruction": "Aqueça o óleo a 180 °C numa panela funda. Frite os bolinhos em pequenas porções até dourarem por igual.", "process": "fritura" },
-      { "order": 5, "instruction": "Retire com uma escumadeira e coloque sobre papel-toalha para escorrer o excesso de óleo. Sirva quente.", "process": "montagem" }
-    ]
-  },
-  {
-    "name": "Bruschetta de Tomate",
-    "status": "locked",
-    "reward": 30,
-    "time": 20,
-    "level": "easy",
-    "category": "entrada",
-    "tags": ["vegan"],
-    "ingredients": [
-      { "name": "pão italiano fatiado", "quantity": 6.0, "unit": "fatia", "status": true },
-      { "name": "tomate maduro picado em cubos", "quantity": 3.0, "unit": "unidade", "status": true },
-      { "name": "alho", "quantity": 1.0, "unit": "dente", "status": true },
-      { "name": "manjericão fresco", "quantity": 6.0, "unit": "folha", "status": true },
-      { "name": "azeite de oliva", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
-      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
-    ],
-    "steps": [
-      { "order": 1, "instruction": "Preaqueça o forno a 200 °C. Disponha as fatias de pão numa assadeira e leve ao forno por 5 minutos até ficarem crocantes.", "process": "forno" },
-      { "order": 2, "instruction": "Numa tigela, misture os tomates picados com o azeite, o sal e o manjericão rasgado.", "process": "preparo" },
-      { "order": 3, "instruction": "Retire os pães do forno e esfregue o dente de alho sobre cada fatia.", "process": "preparo" },
-      { "order": 4, "instruction": "Coloque a mistura de tomate sobre cada fatia e sirva imediatamente.", "process": "montagem" }
-    ]
-  },
-  {
-    "name": "Coxinha de Frango",
-    "status": "locked",
-    "reward": 130,
-    "time": 90,
-    "level": "hard",
-    "category": "entrada",
-    "tags": [],
-    "ingredients": [
-      { "name": "peito de frango cozido e desfiado", "quantity": 500.0, "unit": "g", "status": true },
-      { "name": "farinha de trigo", "quantity": 3.0, "unit": "xícara (chá)", "status": true },
-      { "name": "caldo de galinha", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
-      { "name": "catupiry (requeijão cremoso)", "quantity": 200.0, "unit": "g", "status": true },
-      { "name": "cebola picada", "quantity": 1.0, "unit": "unidade", "status": true },
-      { "name": "alho picado", "quantity": 2.0, "unit": "dente", "status": true },
-      { "name": "ovo batido", "quantity": 2.0, "unit": "unidade", "status": true },
-      { "name": "farinha de rosca", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
-      { "name": "óleo para fritar", "quantity": 1.0, "unit": "litro", "status": true },
-      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
-    ],
-    "steps": [
-      { "order": 1, "instruction": "Refogue a cebola e o alho no óleo. Acrescente o frango desfiado, tempere com sal e misture o catupiry. Reserve o recheio.", "process": "fogão" },
-      { "order": 2, "instruction": "Numa panela, aqueça o caldo de galinha e adicione a farinha de trigo de uma vez, mexendo vigorosamente até a massa soltar do fundo.", "process": "fogão" },
-      { "order": 3, "instruction": "Deixe a massa esfriar. Abra porções na mão, coloque o recheio e modele no formato de coxinha.", "process": "preparo" },
-      { "order": 4, "instruction": "Passe cada coxinha no ovo batido e depois na farinha de rosca.", "process": "preparo" },
-      { "order": 5, "instruction": "Frite em óleo quente a 180 °C até dourar por igual. Escorra em papel-toalha e sirva.", "process": "fritura" }
-    ]
-  },
-  {
+    "id": 16,
     "name": "Salada Caprese",
-    "status": "locked",
+    "status": "unlocked",
     "reward": 20,
+    "price": 0,
     "time": 10,
     "level": "easy",
     "category": "entrada",
@@ -416,9 +445,62 @@
     ]
   },
   {
+    "id": 17,
+    "name": "Arroz Branco",
+    "status": "unlocked",
+    "reward": 20,
+    "price": 0,
+    "time": 30,
+    "level": "medium",
+    "category": "guarnicao",
+    "tags": ["vegan", "healthy"],
+    "ingredients": [
+      { "name": "arroz", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
+      { "name": "água fervente", "quantity": 4.0, "unit": "xícara (chá)", "status": true },
+      { "name": "alho picado", "quantity": 2.0, "unit": "dente", "status": true },
+      { "name": "cebola picada", "quantity": 0.5, "unit": "unidade", "status": true },
+      { "name": "óleo", "quantity": 1.0, "unit": "colher (sopa)", "status": true },
+      { "name": "sal", "quantity": 1.0, "unit": "colher (chá)", "status": true }
+    ],
+    "steps": [
+      { "order": 1, "instruction": "Lave o arroz em água corrente até a água sair limpa. Escorra bem.", "process": "preparo" },
+      { "order": 2, "instruction": "Numa panela, aqueça o óleo em fogo médio. Refogue a cebola e o alho até ficarem dourados.", "process": "fogão" },
+      { "order": 3, "instruction": "Acrescente o arroz e mexa por 1 minuto para envolver nos temperos.", "process": "fogão" },
+      { "order": 4, "instruction": "Adicione a água fervente e o sal. Deixe ferver, abaixe o fogo e tampe a panela.", "process": "fogão" },
+      { "order": 5, "instruction": "Cozinhe por 15 a 20 minutos sem mexer, até a água secar e o arroz ficar soltinho.", "process": "fogão" }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Vinagrete",
+    "status": "locked",
+    "reward": 15,
+    "price": 10,
+    "time": 15,
+    "level": "easy",
+    "category": "guarnicao",
+    "tags": ["vegan", "healthy"],
+    "ingredients": [
+      { "name": "tomate picado em cubos", "quantity": 3.0, "unit": "unidade", "status": true },
+      { "name": "cebola picada em cubos", "quantity": 1.0, "unit": "unidade", "status": true },
+      { "name": "pimentão verde picado", "quantity": 1.0, "unit": "unidade", "status": true },
+      { "name": "vinagre de vinho tinto", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
+      { "name": "azeite de oliva", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
+      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
+    ],
+    "steps": [
+      { "order": 1, "instruction": "Pique o tomate, a cebola e o pimentão em cubos pequenos e uniformes.", "process": "preparo" },
+      { "order": 2, "instruction": "Numa tigela, misture todos os vegetais.", "process": "preparo" },
+      { "order": 3, "instruction": "Tempere com o vinagre, o azeite e o sal. Misture bem.", "process": "preparo" },
+      { "order": 4, "instruction": "Deixe descansar por 15 minutos na geladeira antes de servir.", "process": "resfriamento" }
+    ]
+  },
+  {
+    "id": 19,
     "name": "Sopa de Cebola Gratinada",
     "status": "locked",
     "reward": 90,
+    "price": 55,
     "time": 60,
     "level": "medium",
     "category": "entrada",
@@ -445,11 +527,62 @@
     ]
   },
   {
+    "id": 20,
+    "name": "Bruschetta de Tomate",
+    "status": "locked",
+    "reward": 30,
+    "price": 20,
+    "time": 20,
+    "level": "medium",
+    "category": "entrada",
+    "tags": ["vegan"],
+    "ingredients": [
+      { "name": "pão italiano fatiado", "quantity": 6.0, "unit": "fatia", "status": true },
+      { "name": "tomate maduro picado em cubos", "quantity": 3.0, "unit": "unidade", "status": true },
+      { "name": "alho", "quantity": 1.0, "unit": "dente", "status": true },
+      { "name": "manjericão fresco", "quantity": 6.0, "unit": "folha", "status": true },
+      { "name": "azeite de oliva", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
+      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
+    ],
+    "steps": [
+      { "order": 1, "instruction": "Preaqueça o forno a 200 °C. Disponha as fatias de pão numa assadeira e leve ao forno por 5 minutos até ficarem crocantes.", "process": "forno" },
+      { "order": 2, "instruction": "Numa tigela, misture os tomates picados com o azeite, o sal e o manjericão rasgado.", "process": "preparo" },
+      { "order": 3, "instruction": "Retire os pães do forno e esfregue o dente de alho sobre cada fatia.", "process": "preparo" },
+      { "order": 4, "instruction": "Coloque a mistura de tomate sobre cada fatia e sirva imediatamente.", "process": "montagem" }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Purê de Batata",
+    "status": "locked",
+    "reward": 35,
+    "price": 20,
+    "time": 35,
+    "level": "medium",
+    "category": "guarnicao",
+    "tags": ["vegetarian"],
+    "ingredients": [
+      { "name": "batata grande", "quantity": 4.0, "unit": "unidade", "status": true },
+      { "name": "leite quente", "quantity": 0.5, "unit": "xícara (chá)", "status": true },
+      { "name": "manteiga", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
+      { "name": "noz-moscada", "quantity": 1.0, "unit": "pitada", "status": true },
+      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
+    ],
+    "steps": [
+      { "order": 1, "instruction": "Descasque as batatas e corte em pedaços médios. Cozinhe em água com sal até ficarem macias.", "process": "fogão" },
+      { "order": 2, "instruction": "Escorra a água e amasse as batatas ainda quentes com um espremedor.", "process": "preparo" },
+      { "order": 3, "instruction": "Acrescente a manteiga e vá adicionando o leite quente aos poucos, mexendo até ficar cremoso.", "process": "preparo" },
+      { "order": 4, "instruction": "Tempere com sal e noz-moscada. Sirva quente.", "process": "montagem" }
+    ]
+  },
+  {
+    "id": 22,
     "name": "Guacamole",
     "status": "locked",
     "reward": 25,
+    "price": 15,
     "time": 15,
-    "level": "easy",
+    "level": "medium",
     "category": "entrada",
     "tags": ["vegan", "healthy"],
     "ingredients": [
@@ -469,146 +602,61 @@
     ]
   },
   {
-    "name": "Arroz Branco",
+    "id": 23,
+    "name": "Bolinho de Bacalhau",
     "status": "locked",
-    "reward": 20,
-    "time": 30,
-    "level": "easy",
-    "category": "acompanhamento",
-    "tags": ["vegan", "healthy"],
-    "ingredients": [
-      { "name": "arroz", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
-      { "name": "água fervente", "quantity": 4.0, "unit": "xícara (chá)", "status": true },
-      { "name": "alho picado", "quantity": 2.0, "unit": "dente", "status": true },
-      { "name": "cebola picada", "quantity": 0.5, "unit": "unidade", "status": true },
-      { "name": "óleo", "quantity": 1.0, "unit": "colher (sopa)", "status": true },
-      { "name": "sal", "quantity": 1.0, "unit": "colher (chá)", "status": true }
-    ],
-    "steps": [
-      { "order": 1, "instruction": "Lave o arroz em água corrente até a água sair limpa. Escorra bem.", "process": "preparo" },
-      { "order": 2, "instruction": "Numa panela, aqueça o óleo em fogo médio. Refogue a cebola e o alho até ficarem dourados.", "process": "fogão" },
-      { "order": 3, "instruction": "Acrescente o arroz e mexa por 1 minuto para envolver nos temperos.", "process": "fogão" },
-      { "order": 4, "instruction": "Adicione a água fervente e o sal. Deixe ferver, abaixe o fogo e tampe a panela.", "process": "fogão" },
-      { "order": 5, "instruction": "Cozinhe por 15 a 20 minutos sem mexer, até a água secar e o arroz ficar soltinho.", "process": "fogão" }
-    ]
-  },
-  {
-    "name": "Feijão Carioca",
-    "status": "locked",
-    "reward": 40,
+    "reward": 100,
+    "price": 60,
     "time": 60,
-    "level": "easy",
-    "category": "acompanhamento",
-    "tags": ["vegan", "healthy"],
-    "ingredients": [
-      { "name": "feijão carioca", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
-      { "name": "água", "quantity": 1.5, "unit": "litro", "status": true },
-      { "name": "alho picado", "quantity": 3.0, "unit": "dente", "status": true },
-      { "name": "cebola picada", "quantity": 1.0, "unit": "unidade", "status": true },
-      { "name": "folha de louro", "quantity": 2.0, "unit": "unidade", "status": true },
-      { "name": "óleo", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
-      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
-    ],
-    "steps": [
-      { "order": 1, "instruction": "Deixe o feijão de molho em água por pelo menos 8 horas. Escorra e descarte a água.", "process": "preparo" },
-      { "order": 2, "instruction": "Numa panela de pressão, coloque o feijão, a água e as folhas de louro. Cozinhe por 25 minutos após pegar pressão.", "process": "fogão" },
-      { "order": 3, "instruction": "Numa frigideira, aqueça o óleo e refogue o alho e a cebola até dourar.", "process": "fogão" },
-      { "order": 4, "instruction": "Retire 2 conchas de feijão cozido, amasse e acrescente ao refogado. Misture.", "process": "fogão" },
-      { "order": 5, "instruction": "Despeje o refogado de volta na panela com o feijão, tempere com sal e cozinhe por mais 10 minutos.", "process": "fogão" }
-    ]
-  },
-  {
-    "name": "Purê de Batata",
-    "status": "unlocked",
-    "reward": 35,
-    "time": 35,
-    "level": "easy",
-    "category": "acompanhamento",
-    "tags": ["vegetarian"],
-    "ingredients": [
-      { "name": "batata grande", "quantity": 4.0, "unit": "unidade", "status": true },
-      { "name": "leite quente", "quantity": 0.5, "unit": "xícara (chá)", "status": true },
-      { "name": "manteiga", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
-      { "name": "noz-moscada", "quantity": 1.0, "unit": "pitada", "status": true },
-      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
-    ],
-    "steps": [
-      { "order": 1, "instruction": "Descasque as batatas e corte em pedaços médios. Cozinhe em água com sal até ficarem macias.", "process": "fogão" },
-      { "order": 2, "instruction": "Escorra a água e amasse as batatas ainda quentes com um espremedor.", "process": "preparo" },
-      { "order": 3, "instruction": "Acrescente a manteiga e vá adicionando o leite quente aos poucos, mexendo até ficar cremoso.", "process": "preparo" },
-      { "order": 4, "instruction": "Tempere com sal e noz-moscada. Sirva quente.", "process": "montagem" }
-    ]
-  },
-  {
-    "name": "Farofa de Bacon",
-    "status": "locked",
-    "reward": 45,
-    "time": 25,
-    "level": "easy",
-    "category": "acompanhamento",
+    "level": "hard",
+    "category": "entrada",
     "tags": [],
     "ingredients": [
-      { "name": "farinha de mandioca", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
-      { "name": "bacon picado", "quantity": 200.0, "unit": "g", "status": true },
-      { "name": "cebola picada", "quantity": 1.0, "unit": "unidade", "status": true },
-      { "name": "manteiga", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
+      { "name": "bacalhau dessalgado e desfiado", "quantity": 400.0, "unit": "g", "status": true },
+      { "name": "batata cozida e amassada", "quantity": 500.0, "unit": "g", "status": true },
       { "name": "ovo", "quantity": 2.0, "unit": "unidade", "status": true },
+      { "name": "cebola ralada", "quantity": 1.0, "unit": "unidade", "status": true },
       { "name": "salsinha picada", "quantity": 2.0, "unit": "colher (sopa)", "status": true },
-      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
-    ],
-    "steps": [
-      { "order": 1, "instruction": "Numa frigideira grande, frite o bacon em fogo médio até ficar crocante. Retire e reserve, mantendo a gordura na frigideira.", "process": "fogão" },
-      { "order": 2, "instruction": "Na mesma frigideira, acrescente a manteiga e refogue a cebola até dourar.", "process": "fogão" },
-      { "order": 3, "instruction": "Quebre os ovos diretamente na frigideira e mexa rapidamente para cozinhar em pedaços.", "process": "fogão" },
-      { "order": 4, "instruction": "Acrescente a farinha de mandioca aos poucos, mexendo em fogo baixo até ficar sequinha e tostada.", "process": "fogão" },
-      { "order": 5, "instruction": "Devolva o bacon, acrescente a salsinha, ajuste o sal e sirva.", "process": "montagem" }
-    ]
-  },
-  {
-    "name": "Vinagrete",
-    "status": "locked",
-    "reward": 15,
-    "time": 15,
-    "level": "easy",
-    "category": "acompanhamento",
-    "tags": ["vegan", "healthy"],
-    "ingredients": [
-      { "name": "tomate picado em cubos", "quantity": 3.0, "unit": "unidade", "status": true },
-      { "name": "cebola picada em cubos", "quantity": 1.0, "unit": "unidade", "status": true },
-      { "name": "pimentão verde picado", "quantity": 1.0, "unit": "unidade", "status": true },
-      { "name": "vinagre de vinho tinto", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
-      { "name": "azeite de oliva", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
-      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
-    ],
-    "steps": [
-      { "order": 1, "instruction": "Pique o tomate, a cebola e o pimentão em cubos pequenos e uniformes.", "process": "preparo" },
-      { "order": 2, "instruction": "Numa tigela, misture todos os vegetais.", "process": "preparo" },
-      { "order": 3, "instruction": "Tempere com o vinagre, o azeite e o sal. Misture bem.", "process": "preparo" },
-      { "order": 4, "instruction": "Deixe descansar por 15 minutos na geladeira antes de servir.", "process": "resfriamento" }
-    ]
-  },
-  {
-    "name": "Batata Rústica Assada",
-    "status": "unlocked",
-    "reward": 50,
-    "time": 45,
-    "level": "easy",
-    "category": "acompanhamento",
-    "tags": ["vegan", "healthy"],
-    "ingredients": [
-      { "name": "batata grande com casca", "quantity": 4.0, "unit": "unidade", "status": true },
-      { "name": "azeite de oliva", "quantity": 3.0, "unit": "colher (sopa)", "status": true },
-      { "name": "alho picado", "quantity": 3.0, "unit": "dente", "status": true },
-      { "name": "alecrim fresco", "quantity": 2.0, "unit": "ramo", "status": true },
-      { "name": "páprica defumada", "quantity": 1.0, "unit": "colher (chá)", "status": true },
-      { "name": "sal grosso", "quantity": 1.0, "unit": "colher (chá)", "status": true },
+      { "name": "óleo para fritar", "quantity": 1.0, "unit": "litro", "status": true },
+      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true },
       { "name": "pimenta-do-reino", "quantity": 1.0, "unit": "a gosto", "status": true }
     ],
     "steps": [
-      { "order": 1, "instruction": "Preaqueça o forno a 220 °C. Lave as batatas e corte em gomos com casca.", "process": "preparo" },
-      { "order": 2, "instruction": "Numa tigela, misture as batatas com o azeite, o alho, o alecrim, a páprica, o sal grosso e a pimenta.", "process": "preparo" },
-      { "order": 3, "instruction": "Espalhe as batatas numa assadeira em camada única, sem empilhar.", "process": "montagem" },
-      { "order": 4, "instruction": "Asse por 35 a 40 minutos, virando na metade do tempo, até ficarem douradas e crocantes por fora.", "process": "forno" }
+      { "order": 1, "instruction": "Numa tigela grande, misture o bacalhau desfiado com a batata amassada, os ovos, a cebola, a salsinha, sal e pimenta.", "process": "preparo" },
+      { "order": 2, "instruction": "Misture bem até formar uma massa homogênea. Se necessário, ajuste a textura com um pouco de farinha.", "process": "preparo" },
+      { "order": 3, "instruction": "Com as mãos levemente untadas, modele os bolinhos em formato oval.", "process": "preparo" },
+      { "order": 4, "instruction": "Aqueça o óleo a 180 °C numa panela funda. Frite os bolinhos em pequenas porções até dourarem por igual.", "process": "fritura" },
+      { "order": 5, "instruction": "Retire com uma escumadeira e coloque sobre papel-toalha para escorrer o excesso de óleo. Sirva quente.", "process": "montagem" }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Coxinha de Frango",
+    "status": "locked",
+    "reward": 130,
+    "price": 80,
+    "time": 90,
+    "level": "hard",
+    "category": "entrada",
+    "tags": [],
+    "ingredients": [
+      { "name": "peito de frango cozido e desfiado", "quantity": 500.0, "unit": "g", "status": true },
+      { "name": "farinha de trigo", "quantity": 3.0, "unit": "xícara (chá)", "status": true },
+      { "name": "caldo de galinha", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
+      { "name": "catupiry (requeijão cremoso)", "quantity": 200.0, "unit": "g", "status": true },
+      { "name": "cebola picada", "quantity": 1.0, "unit": "unidade", "status": true },
+      { "name": "alho picado", "quantity": 2.0, "unit": "dente", "status": true },
+      { "name": "ovo batido", "quantity": 2.0, "unit": "unidade", "status": true },
+      { "name": "farinha de rosca", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
+      { "name": "óleo para fritar", "quantity": 1.0, "unit": "litro", "status": true },
+      { "name": "sal", "quantity": 1.0, "unit": "a gosto", "status": true }
+    ],
+    "steps": [
+      { "order": 1, "instruction": "Refogue a cebola e o alho no óleo. Acrescente o frango desfiado, tempere com sal e misture o catupiry. Reserve o recheio.", "process": "fogão" },
+      { "order": 2, "instruction": "Numa panela, aqueça o caldo de galinha e adicione a farinha de trigo de uma vez, mexendo vigorosamente até a massa soltar do fundo.", "process": "fogão" },
+      { "order": 3, "instruction": "Deixe a massa esfriar. Abra porções na mão, coloque o recheio e modele no formato de coxinha.", "process": "preparo" },
+      { "order": 4, "instruction": "Passe cada coxinha no ovo batido e depois na farinha de rosca.", "process": "preparo" },
+      { "order": 5, "instruction": "Frite em óleo quente a 180 °C até dourar por igual. Escorra em papel-toalha e sirva.", "process": "fritura" }
     ]
   }
 ]
