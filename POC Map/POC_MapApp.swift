@@ -15,7 +15,7 @@ struct POC_MapApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MapView()
                 .onAppear {
                     let context = container.mainContext
                     DataLoader.loadRecipesIfNeeded(context: context)
