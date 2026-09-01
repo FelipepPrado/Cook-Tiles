@@ -1,7 +1,7 @@
 import SwiftData
 
 @Model
-class Player {
+final class Player {
     var coin: Int
     var banner: String
     

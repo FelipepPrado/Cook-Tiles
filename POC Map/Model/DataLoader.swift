@@ -42,6 +42,26 @@ struct RecipeDTO: Codable {
 
 struct DataLoader {
     
+    static func loadPlayerIfNeeded(context: ModelContext) {
+            let descriptor = FetchDescriptor<Player>()
+
+            do {
+                let players = try context.fetch(descriptor)
+
+                guard players.isEmpty else {
+                    return
+                }
+
+                let player = Player(coin: 0, banner: "Loba")
+
+                context.insert(player)
+
+                try context.save()
+
+            } catch {
+                print("Erro ao criar Player: \(error)")
+            }
+        }
     static func loadRecipesIfNeeded(context: ModelContext) {
 
         // Verifica se já existem receitas salvas
