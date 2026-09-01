@@ -91,7 +91,7 @@ enum RecipeTag: String, Codable {
     case spicy
 }
 
-enum RecipeCategory: String, Codable, CaseIterable {
+enum RecipeCategory: String, Codable {
     case sobremesa = "Sobremesa"
     case pratoPrincipal = "Prato Principal"
     case entrada = "Entrada"

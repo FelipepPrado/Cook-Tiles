@@ -1,12 +1,12 @@
 
 import SwiftUI
-import SpriteKit
+internal import SpriteKit
 
 final class MapScene: SKScene {
 
     let tileSize = CGSize(
-        width: 155,
-        height: 155
+        width: 250,
+        height: 270.8
     )
 
     var recipes: [Recipe] = []
@@ -15,8 +15,8 @@ final class MapScene: SKScene {
 
     var onRecipeTapped: ((Recipe) -> Void)?
 
-    let xDistance: CGFloat = 85.25
-    let yDistance: CGFloat = 54.25
+    let xDistance: CGFloat = 143
+    let yDistance: CGFloat = 71
 
     let mapCamera = SKCameraNode()
 
@@ -123,7 +123,7 @@ final class MapScene: SKScene {
                 position.col == 0 {
 
                 let castle = SKSpriteNode(
-                    imageNamed: "tileTest"
+                    imageNamed: "tile_1"
                 )
 
                 castle.size = tileSize
@@ -145,7 +145,7 @@ final class MapScene: SKScene {
                 "tile_\(recipeIndex + 1)"
 
             let tile = SKSpriteNode(
-                imageNamed: imageName
+                imageNamed: "tile_1"
             )
 
             tile.size = tileSize
@@ -247,10 +247,10 @@ final class MapScene: SKScene {
 
         let hasUnlockedNeighbor =
             neighbors.contains { neighbor in
-                neighbor.recipe.status
-                    == .unlocked
+                neighbor.recipe.category == recipeTile.recipe.category
+                && neighbor.recipe.status == .unlocked
             }
-
+        
         if hasUnlockedNeighbor {
             return .locked
         }
@@ -262,24 +262,19 @@ final class MapScene: SKScene {
     /// em seguida, atualiza os visuais.
     func refreshTileStates() {
 
-        // Primeiro calculamos os estados.
-        for recipeTile in recipeTiles {
-
-            let newStatus =
-                calculatedStatus(
-                    for: recipeTile
-                )
-
-            recipeTile.recipe.status =
-                newStatus
+        let newStatuses = recipeTiles.map { recipeTile in
+            (
+                recipeTile,
+                calculatedStatus(for: recipeTile)
+            )
         }
 
-        // Depois atualizamos os visuais.
-        for recipeTile in recipeTiles {
+        for (recipeTile, status) in newStatuses {
+            recipeTile.recipe.status = status
+        }
 
-            updateVisual(
-                for: recipeTile
-            )
+        for recipeTile in recipeTiles {
+            updateVisual(for: recipeTile)
         }
     }
 
@@ -514,6 +509,14 @@ final class MapScene: SKScene {
             "Position:",
             recipeTile.row,
             recipeTile.col
+        )
+        print(
+            "Category:",
+            recipeTile.recipe.category.rawValue
+        )
+        print(
+            "level:",
+            recipeTile.recipe.level
         )
 
         onRecipeTapped?(

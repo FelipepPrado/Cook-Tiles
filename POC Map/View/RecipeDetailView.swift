@@ -1,17 +1,15 @@
 import SwiftUI
 
 struct RecipeDetailView: View {
-    let recipe: Recipe
-    var onStatusChanged: () -> Void
+    let viewModel: RecipeDetailViewModel
     
     var body: some View {
         VStack {
-            Text(recipe.name)
-            if recipe.status == .locked {
-                Text("\(recipe.reward)")
+            Text(viewModel.recipe.name)
+            if viewModel.recipe.status == .locked {
+                Text("\(viewModel.recipe.reward)")
                 Button {
-                    recipe.status = .unlocked
-                    onStatusChanged()
+                    viewModel.buyRecipe()
                 } label: {
                     Text("Comprar Receita")
                         .padding(10)
@@ -20,10 +18,9 @@ struct RecipeDetailView: View {
                         .foregroundStyle(Color.white)
                 }
 
-            } else if recipe.status == .unlocked{
+            } else if viewModel.recipe.status == .unlocked{
                 Button {
-                    recipe.status = .locked
-                    onStatusChanged()
+                    viewModel.lockRecipe()
                 } label: {
                     Text("Bloquear Receita")
                         .padding(10)

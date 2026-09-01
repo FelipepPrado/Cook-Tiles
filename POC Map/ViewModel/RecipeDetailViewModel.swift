@@ -1,1 +1,28 @@
+import Observation
+import AVFoundation
+internal import SpriteKit
 
+
+@Observable
+final class RecipeDetailViewModel{
+    let recipe: Recipe
+    private let mapViewModel: MapViewModel
+    
+    init(recipe: Recipe, mapViewModel: MapViewModel) {
+        self.recipe = recipe
+        self.mapViewModel = mapViewModel
+    }
+    
+    var recipeName: String { recipe.name }
+    var reward: Int { recipe.reward }
+    var isLocked: Bool { recipe.status == .locked }
+    var isUnlocked: Bool { recipe.status == .unlocked }
+    
+    func buyRecipe() {
+        mapViewModel.unlockRecipe(recipe)
+    }
+    
+    func lockRecipe() {
+        mapViewModel.lockRecipe(recipe)
+    }
+}
