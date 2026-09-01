@@ -1,5 +1,5 @@
 import SwiftUI
-import SpriteKit
+internal import SpriteKit
 
 final class RecipeTile {
     let recipe: Recipe

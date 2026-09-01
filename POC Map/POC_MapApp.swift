@@ -9,18 +9,18 @@ struct POC_MapApp: App {
     init() {
         do {
             container = try ModelContainer(for: Recipe.self)
+            let context = container.mainContext
+            DataLoader.loadRecipesIfNeeded(context: context)
+            
         } catch {
             fatalError("Erro no ModelContainer: \(error)")
         }
     }
+    
     var body: some Scene {
         WindowGroup {
             MapView()
-                .onAppear {
-                    let context = container.mainContext
-                    DataLoader.loadRecipesIfNeeded(context: context)
-                 }
         }
-        .modelContainer(for: [Recipe.self])
+        .modelContainer(container)
     }
 }

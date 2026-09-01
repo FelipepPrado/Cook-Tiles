@@ -7,7 +7,7 @@
     "price": 65,
     "time": 60,
     "level": "medium",
-    "category": "sobremesa",
+    "category": "Sobremesa",
     "tags": ["vegetarian"],
     "ingredients": [
       { "name": "biscoito champanhe", "quantity": 1.0, "unit": "pacote (200g)", "status": true },
@@ -35,7 +35,7 @@
     "price": 80,
     "time": 90,
     "level": "hard",
-    "category": "sobremesa",
+    "category": "Sobremesa",
     "tags": ["vegetarian"],
     "ingredients": [
       { "name": "cenoura média", "quantity": 3.0, "unit": "unidade", "status": true },
@@ -65,7 +65,7 @@
     "price": 70,
     "time": 120,
     "level": "medium",
-    "category": "sobremesa",
+    "category": "Sobremesa",
     "tags": ["vegetarian"],
     "ingredients": [
       { "name": "laranja pêra", "quantity": 2.0, "unit": "unidade", "status": true },
@@ -94,7 +94,7 @@
     "price": 50,
     "time": 50,
     "level": "medium",
-    "category": "pratoPrincipal",
+    "category": "Prato Principal",
     "tags": [],
     "ingredients": [
       { "name": "filé mignon em tiras", "quantity": 500.0, "unit": "g", "status": true },
@@ -124,7 +124,7 @@
     "price": 60,
     "time": 90,
     "level": "hard",
-    "category": "sobremesa",
+    "category": "Sobremesa",
     "tags": ["vegetarian"],
     "ingredients": [
       { "name": "leite condensado", "quantity": 1.0, "unit": "lata", "status": true },
@@ -150,7 +150,7 @@
     "price": 35,
     "time": 40,
     "level": "medium",
-    "category": "sobremesa",
+    "category": "Sobremesa",
     "tags": ["vegetarian"],
     "ingredients": [
       { "name": "polpa de maracujá", "quantity": 1.0, "unit": "xícara (chá)", "status": true },
@@ -174,7 +174,7 @@
     "price": 85,
     "time": 90,
     "level": "hard",
-    "category": "pratoPrincipal",
+    "category": "Prato Principal",
     "tags": [],
     "ingredients": [
       { "name": "carne seca (charque) dessalgada e desfiada", "quantity": 500.0, "unit": "g", "status": true },
@@ -203,7 +203,7 @@
     "price": 0,
     "time": 25,
     "level": "easy",
-    "category": "pratoPrincipal",
+    "category": "Prato Principal",
     "tags": ["vegan"],
     "ingredients": [
       { "name": "espaguete", "quantity": 500.0, "unit": "g", "status": true },
@@ -229,7 +229,7 @@
     "price": 0,
     "time": 30,
     "level": "easy",
-    "category": "sobremesa",
+    "category": "Sobremesa",
     "tags": ["vegetarian"],
     "ingredients": [
       { "name": "leite condensado", "quantity": 1.0, "unit": "lata", "status": true },
@@ -252,7 +252,7 @@
     "price": 30,
     "time": 45,
     "level": "medium",
-    "category": "guarnicao",
+    "category": "Guarnição",
     "tags": ["vegan", "healthy"],
     "ingredients": [
       { "name": "batata grande com casca", "quantity": 4.0, "unit": "unidade", "status": true },
@@ -278,7 +278,7 @@
     "price": 35,
     "time": 60,
     "level": "medium",
-    "category": "pratoPrincipal",
+    "category": "Prato Principal",
     "tags": [],
     "ingredients": [
       { "name": "filé mignon (bife, ~1 cm de espessura)", "quantity": 2.0, "unit": "unidade", "status": true },
@@ -310,7 +310,7 @@
     "price": 40,
     "time": 40,
     "level": "medium",
-    "category": "pratoPrincipal",
+    "category": "Prato Principal",
     "tags": [],
     "ingredients": [
       { "name": "peito de frango em cubos", "quantity": 500.0, "unit": "g", "status": true },
@@ -340,7 +340,7 @@
     "price": 25,
     "time": 60,
     "level": "hard",
-    "category": "guarnicao",
+    "category": "Guarnição",
     "tags": ["vegan", "healthy"],
     "ingredients": [
       { "name": "feijão carioca", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
@@ -367,7 +367,7 @@
     "price": 25,
     "time": 25,
     "level": "hard",
-    "category": "guarnicao",
+    "category": "Guarnição",
     "tags": [],
     "ingredients": [
       { "name": "farinha de mandioca", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
@@ -394,7 +394,7 @@
     "price": 90,
     "time": 60,
     "level": "hard",
-    "category": "pratoPrincipal",
+    "category": "Prato Principal",
     "tags": ["vegetarian"],
     "ingredients": [
       { "name": "arroz arbóreo", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
@@ -427,7 +427,7 @@
     "price": 0,
     "time": 10,
     "level": "easy",
-    "category": "entrada",
+    "category": "Entrada",
     "tags": ["vegetarian", "healthy"],
     "ingredients": [
       { "name": "tomate maduro", "quantity": 3.0, "unit": "unidade", "status": true },
@@ -452,7 +452,7 @@
     "price": 0,
     "time": 30,
     "level": "medium",
-    "category": "guarnicao",
+    "category": "Guarnição",
     "tags": ["vegan", "healthy"],
     "ingredients": [
       { "name": "arroz", "quantity": 2.0, "unit": "xícara (chá)", "status": true },
@@ -478,7 +478,7 @@
     "price": 10,
     "time": 15,
     "level": "easy",
-    "category": "guarnicao",
+    "category": "Guarnição",
     "tags": ["vegan", "healthy"],
     "ingredients": [
       { "name": "tomate picado em cubos", "quantity": 3.0, "unit": "unidade", "status": true },
@@ -503,7 +503,7 @@
     "price": 55,
     "time": 60,
     "level": "medium",
-    "category": "entrada",
+    "category": "Entrada",
     "tags": ["vegetarian"],
     "ingredients": [
       { "name": "cebola grande fatiada", "quantity": 4.0, "unit": "unidade", "status": true },
@@ -534,7 +534,7 @@
     "price": 20,
     "time": 20,
     "level": "medium",
-    "category": "entrada",
+    "category": "Entrada",
     "tags": ["vegan"],
     "ingredients": [
       { "name": "pão italiano fatiado", "quantity": 6.0, "unit": "fatia", "status": true },
@@ -559,7 +559,7 @@
     "price": 20,
     "time": 35,
     "level": "medium",
-    "category": "guarnicao",
+    "category": "Guarnição",
     "tags": ["vegetarian"],
     "ingredients": [
       { "name": "batata grande", "quantity": 4.0, "unit": "unidade", "status": true },
@@ -583,7 +583,7 @@
     "price": 15,
     "time": 15,
     "level": "medium",
-    "category": "entrada",
+    "category": "Entrada",
     "tags": ["vegan", "healthy"],
     "ingredients": [
       { "name": "abacate maduro", "quantity": 2.0, "unit": "unidade", "status": true },
@@ -609,7 +609,7 @@
     "price": 60,
     "time": 60,
     "level": "hard",
-    "category": "entrada",
+    "category": "Entrada",
     "tags": [],
     "ingredients": [
       { "name": "bacalhau dessalgado e desfiado", "quantity": 400.0, "unit": "g", "status": true },
@@ -637,7 +637,7 @@
     "price": 80,
     "time": 90,
     "level": "hard",
-    "category": "entrada",
+    "category": "Entrada",
     "tags": [],
     "ingredients": [
       { "name": "peito de frango cozido e desfiado", "quantity": 500.0, "unit": "g", "status": true },
