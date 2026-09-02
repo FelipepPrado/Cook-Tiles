@@ -16,37 +16,42 @@ struct MapView: View {
     var body: some View {
         @Bindable var path = viewRouter
         NavigationStack(path: $path.path) {
-            HStack {
-                Spacer()
-                Text("\(player.coin)")
-                    .font(.largeTitle)
-                    .padding()
-                Spacer()
+            
+            ZStack{
+                SpriteView(scene: viewModel.mapScene)
+                    .ignoresSafeArea()
+                
+//                VStack{
+//                    Spacer()
+//                    TabBarComponent()
+//                }.frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            SpriteView(scene: viewModel.mapScene)
-                .ignoresSafeArea()
+            .onAppear {
+                viewModel.initMap(recipes: recipeModel)
+            }
+        
+            .sheet(item: $viewModel.selectedRecipe) { recipe in
+                RecipeDetailView(viewModel: RecipeDetailViewModel(recipe: recipe, mapViewModel: viewModel, player: player))
+            }
+            .navigationDestination(for: NameViews.self){
+                destination in
+                ViewManagar.viewForDestination(destination)
+            }
             
-                .onAppear {
-                    viewModel.initMap(recipes: recipeModel)
-                }
-            
-                .sheet(item: $viewModel.selectedRecipe) { recipe in
-                    RecipeDetailView(viewModel: RecipeDetailViewModel(recipe: recipe, mapViewModel: viewModel, player: player))
-                }
-                .navigationDestination(for: NameViews.self){
-                    destination in
-                    ViewManagar.viewForDestination(destination)
-                }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                TabBarComponent()
+            }
         }
     }
 }
 
 
-#Preview {
-    
-    MapView()
-        .modelContainer(
-            for: Recipe.self,
-            inMemory: true
-        )
-}
+//#Preview {
+//    
+//    MapView()
+//        .modelContainer(
+//            for: Recipe.self, Pl
+//            inMemory: true
+//        )
+//        .environment(ViewRouter())
+//}
