@@ -123,11 +123,19 @@ final class MapScene: SKScene {
                 position.col == 0 {
 
                 let castle = SKSpriteNode(
-                    imageNamed: "tile_1"
+                    imageNamed: "tile_test"
                 )
 
                 castle.size = tileSize
                 castle.position = position.point
+
+                    let overlay = SKSpriteNode(imageNamed: "castelo")
+                    overlay.anchorPoint = CGPoint(x: 0.5, y: 0)
+                    overlay.size = CGSize(width: 250, height: 143.83)
+                    overlay.position = CGPoint(x: 0, y: 30)
+                    overlay.zPosition = 1
+
+                    castle.addChild(overlay)
 
                 addChild(castle)
 
@@ -143,18 +151,66 @@ final class MapScene: SKScene {
 
             let imageName =
                 "tile_\(recipeIndex + 1)"
+           
+            
 
             let tile = SKSpriteNode(
-                imageNamed: "tile_1"
+                imageNamed: imageName
             )
 
             tile.size = tileSize
-
-            tile.position =
-                position.point
-
-            tile.name =
-                "recipe_\(recipeIndex)"
+            tile.position = position.point
+            tile.name = "recipe_\(recipeIndex)"
+            
+//            let overlayName: String
+//            
+//            
+//            if recipe.status == .locked || recipe.status == .unavailable {
+//                overlayName =
+//                "nuvem"
+//            }else{
+////                let overlayName =
+////                "tile_\(recipeIndex + 1)_overlay"
+//                overlayName =
+//                "batata"
+//            }
+            
+            let tileOverlay = SKSpriteNode(imageNamed: "nuvem")
+            
+            tileOverlay.anchorPoint = CGPoint(x: 0.5, y: 0)
+//            tileOverlay.size = CGSize(width: 250, height: 143.83)
+            tileOverlay.position = CGPoint(x: 0, y: 30)
+            tileOverlay.zPosition = 0.9
+            
+//            let priceLabel = SKLabelNode(text: "R$ \(recipe.price)")
+//            
+//            if recipe.status == .locked {
+//                priceLabel.horizontalAlignmentMode = .center
+//                priceLabel.verticalAlignmentMode = .center
+//                priceLabel.fontSize = 24
+//                priceLabel.fontName = "AvenirNext-Bold"
+//                priceLabel.fontColor = .black
+//                priceLabel.position = CGPoint(x: 0, y: 100)
+//                priceLabel.zPosition = 1.1
+//
+//                let padding: CGFloat = 8
+//                let background = SKShapeNode(
+//                    rectOf: CGSize(
+//                        width: priceLabel.frame.width + padding * 2,
+//                        height: priceLabel.frame.height + padding
+//                    ),
+//                    cornerRadius: 30
+//                )
+//                background.fillColor = .white
+//                background.strokeColor = .clear
+//                background.position = priceLabel.position
+//                background.zPosition = 1
+//
+//                tile.addChild(background)
+//                tile.addChild(priceLabel)
+//            }
+            
+            tile.addChild(tileOverlay)
 
             addChild(tile)
 
@@ -164,6 +220,7 @@ final class MapScene: SKScene {
             let recipeTile = RecipeTile(
                 recipe: recipe,
                 tile: tile,
+                overlay: tileOverlay,
                 row: position.row,
                 col: position.col
             )
@@ -229,7 +286,7 @@ final class MapScene: SKScene {
     }
 
     // MARK: - Status
-
+    
     func calculatedStatus(
         for recipeTile: RecipeTile
     ) -> RecipeStatus {
@@ -280,34 +337,24 @@ final class MapScene: SKScene {
 
     // MARK: - Tile Visual
 
-    func updateVisual(
-        for recipeTile: RecipeTile
-    ) {
+    func updateVisual(for recipeTile: RecipeTile) {
+
+        recipeTile.tile.alpha = 1
+        recipeTile.tile.colorBlendFactor = 0
 
         switch recipeTile.recipe.status {
 
         case .unlocked:
-
-            recipeTile.tile.alpha = 1
-
-            recipeTile.tile.colorBlendFactor = 0
+            recipeTile.overlay.texture = SKTexture(imageNamed: "batata")
 
         case .locked:
-
-            recipeTile.tile.alpha = 0.7
-
-            recipeTile.tile.color = .gray
-
-            recipeTile.tile.colorBlendFactor = 0.25
+            recipeTile.overlay.texture = SKTexture(imageNamed: "nuvem")
 
         case .unavailable:
-
-            recipeTile.tile.alpha = 0.3
-
-            recipeTile.tile.color = .gray
-
-            recipeTile.tile.colorBlendFactor = 0.65
+            recipeTile.overlay.texture = SKTexture(imageNamed: "nuvem")
         }
+
+        recipeTile.overlay.size = CGSize(width: 250, height: 143.83)
     }
 
     // MARK: - Hit Test

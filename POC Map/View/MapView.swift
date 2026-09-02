@@ -16,6 +16,13 @@ struct MapView: View {
     var body: some View {
         @Bindable var path = viewRouter
         NavigationStack(path: $path.path) {
+            HStack {
+                Spacer()
+                Text("\(player.coin)")
+                    .font(.largeTitle)
+                    .padding()
+                Spacer()
+            }
             SpriteView(scene: viewModel.mapScene)
                 .ignoresSafeArea()
             

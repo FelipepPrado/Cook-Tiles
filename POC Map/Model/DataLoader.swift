@@ -22,6 +22,7 @@ struct RecipeDTO: Codable {
     let category: String
     let id: Int
     let price: Int
+    let overlayImage: String
 
     func toRecipe() -> Recipe {
         return Recipe(
@@ -35,7 +36,8 @@ struct RecipeDTO: Codable {
             tags: tags.compactMap { RecipeTag(rawValue: $0) },
             category: RecipeCategory(rawValue: category) ?? .pratoPrincipal,
             id: id,
-            price: price
+            price: price,
+            overlayImage: overlayImage
         )
     }
 }
@@ -52,7 +54,7 @@ struct DataLoader {
                     return
                 }
 
-                let player = Player(coin: 0, banner: "Loba")
+                let player = Player(coin: 300, banner: "Loba")
 
                 context.insert(player)
 
