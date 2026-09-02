@@ -17,7 +17,7 @@ struct RecipeUnlockedComponent: View {
                     .frame(width: 74, height: 74)
                     .padding(.bottom, 10)
                 Text("Receita")
-                    .foregroundStyle(.letter)
+                    .foregroundStyle(.cream50)
                     .font(.body)
             }
         }
