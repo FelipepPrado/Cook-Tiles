@@ -90,11 +90,24 @@ enum RecipeLevel: String, Codable {
     }
 }
 
-enum RecipeTag: String, Codable {
+enum RecipeTag: String, Codable{
     case vegetarian
     case vegan
     case healthy
     case spicy
+    
+    var displayName: String {
+        switch self{
+        case .healthy:
+            "Saudável"
+        case .spicy:
+            "Piquante"
+        case .vegetarian:
+            "Vegetariano"
+        case .vegan:
+            "Vegano"
+        }
+    }
 }
 
 enum RecipeCategory: String, Codable {
