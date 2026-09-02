@@ -8,6 +8,7 @@ final class MapViewModel{
     var mapScene = MapScene(
         size: CGSize(width: 1378, height: 850)
     )
+    private var mapInitialized: Bool = false
     
     init(selectedRecipe: Recipe? = nil, mapScene: MapScene = MapScene(
         size: CGSize(width: 1378, height: 850)
@@ -17,6 +18,7 @@ final class MapViewModel{
     }
     
     func initMap(recipes: [Recipe]){
+        guard !mapInitialized else { return }
         mapScene.recipes = recipes
         mapScene.scaleMode = .aspectFill
 
@@ -26,6 +28,7 @@ final class MapViewModel{
             }
         }
         mapScene.reloadMap()
+        mapInitialized = true
     }
     
     func unlockRecipe(_ recipe: Recipe){

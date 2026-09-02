@@ -7,7 +7,7 @@ struct RecipeDetailView: View {
         VStack {
             Text(viewModel.recipe.name)
             if viewModel.recipe.status == .locked {
-                Text("\(viewModel.recipe.reward)")
+                Text("\(viewModel.recipe.price)")
                 Button {
                     viewModel.buyRecipe()
                 } label: {
