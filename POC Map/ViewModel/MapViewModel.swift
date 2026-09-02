@@ -8,13 +8,19 @@ final class MapViewModel{
     var mapScene = MapScene(
         size: CGSize(width: 1378, height: 850)
     )
+
     private var mapInitialized: Bool = false
+
+
+    var showPopup: Bool = true
     
     init(selectedRecipe: Recipe? = nil, mapScene: MapScene = MapScene(
         size: CGSize(width: 1378, height: 850)
     )) {
         self.selectedRecipe = selectedRecipe
         self.mapScene = mapScene
+     
+        self.showPopup = showPopup
     }
     
     func initMap(recipes: [Recipe]){
@@ -25,6 +31,7 @@ final class MapViewModel{
         mapScene.onRecipeTapped = { recipe in
             if recipe.status == .unlocked || recipe.status == .locked{
                 self.selectedRecipe = recipe
+                self.showPopup = true
             }
         }
         mapScene.reloadMap()

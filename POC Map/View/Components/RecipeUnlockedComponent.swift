@@ -8,8 +8,8 @@ struct RecipeUnlockedComponent: View {
                 .frame(width: 120, height: 145)
                 .cornerRadius(10)
                 .background(RoundedRectangle(cornerRadius: 10)
-                                .fill(Color("edgeComponent"))
-                                .stroke(Color("edgeComponent"), lineWidth: 3))
+                .fill(Color("edgeComponent"))
+                .stroke(Color("edgeComponent"), lineWidth: 3))
             
             VStack{
                 Image("diamondStarter").resizable()

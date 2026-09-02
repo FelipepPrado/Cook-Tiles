@@ -2,7 +2,7 @@ import SwiftUI
 
 struct RecipeView: View {
     var body: some View {
-        EmptyView()
+        Text("recipe view")
     }
 }
 
