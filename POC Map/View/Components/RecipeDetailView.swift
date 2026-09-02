@@ -14,12 +14,20 @@ struct RecipeDetailView: View {
                         .bold()
                         .foregroundStyle(Color.brown100)
                         .font(.callout)
+                    if viewModel.recipe.status == .unlocked {
+                        Text("\(viewModel.recipe.time) min")
+                            .foregroundStyle(Color.brown700)
+                            .bold()
+                            .font(.body)
+                    }else if viewModel.recipe.status == .locked {
+                        Text("???")
+                            .foregroundStyle(Color.brown700)
+                            .bold()
+                            .font(.body)
+                    }
                     
-                    Text("\(viewModel.recipe.time)")
-                        .foregroundStyle(Color.brown700)
-                        .bold()
-                        .font(.body)
                 }
+                .padding(.leading, 25)
                 
                     Spacer()
                 
@@ -29,30 +37,45 @@ struct RecipeDetailView: View {
                         .foregroundStyle(Color.brown100)
                         .font(.callout)
                     
-                    Text("\(viewModel.recipe.portions) min")
-                        .foregroundStyle(Color.brown700)
-                        .bold()
-                        .font(.body)
+                    if viewModel.recipe.status == .unlocked {
+                        Text(viewModel.recipe.portions)
+                            .foregroundStyle(Color.brown700)
+                            .bold()
+                            .font(.body)
+                    }
+                    else if viewModel.recipe.status == .locked {
+                        Text("???")
+                            .foregroundStyle(Color.brown700)
+                            .bold()
+                            .font(.body)
+                    }
                 }
+                .padding(.trailing, 20)
                 
             }
             .padding(.bottom, 15)
-
+            
             Text(viewModel.recipe.name)
                 .foregroundStyle(Color.brown700)
                 .bold()
                 .font(.title)
+                .padding(.bottom, 10)
+            
+            HStack(spacing: 10) {
+                ForEach (viewModel.recipe.tags, id: \.rawValue){ tag in
+                    TagComponent(tag: tag)
+                }
+            }
+            .padding(.bottom, 8)
+            
+            DescriptionComponent(recipe: viewModel.recipe)
+                .padding(.bottom, 8)
             
             if viewModel.recipe.status == .locked {
-                Text("\(viewModel.recipe.price)")
                 Button {
                     viewModel.buyRecipe()
                 } label: {
-                    Text("Adquirir \(viewModel.recipe.price)p")
-                        .padding(10)
-                        .background(Color.brown200)
-                        .cornerRadius(10)
-                        .foregroundStyle(Color.cream500)
+                    FillButtonComponent(text: "Adquirir \(viewModel.recipe.price)p")
                 }
 
             } else if viewModel.recipe.status == .unlocked{
@@ -69,33 +92,21 @@ struct RecipeDetailView: View {
                     viewRouter.recipeView()
                     viewModel.close()
                 } label: {
-                    Text("Ver Mais")
-                        .padding(10)
-                        .background(Color.brown200)
-                        .cornerRadius(10)
-                        .foregroundStyle(Color.cream500)
-                       
+                    FillButtonComponent(text: "Ver Mais")
+                        .padding(.bottom, 8)
                 
                 }
                 Button {
                     viewRouter.stepsView()
                     viewModel.close()
                 } label: {
-                    Text("Iniciar Receita")
-                        .padding(10)
-                        .background(Color.cream600)
-                        .cornerRadius(10)
-                        .foregroundStyle(Color.brown200)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.brown200, lineWidth: 3)
-                        )
+                    StrokeButtonComponent(text: "Iniciar Receita")
                 }
 
             }
         }
-        .padding(.bottom, 100)
-        .frame(width: 300, height: 600)
+//        .padding(.bottom, 200)
+        .frame(width: 350, height: 630)
         .background(Image("popupBackground") // Replace with your Asset Catalog image name
             .resizable()         // Allows the image to scale down or up
             .scaledToFill()      // Scales the image to completely fill the view
