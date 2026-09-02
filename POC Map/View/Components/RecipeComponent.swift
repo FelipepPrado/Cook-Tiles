@@ -26,7 +26,7 @@ struct RecipeComponent: View {
                             .frame(width: 20, height: 17)
                     }
                     .frame(width: 90, height: 30)
-                    .background(Color.greenFrame)
+                    .background(.green500)
                     .cornerRadius(30)
                     .foregroundStyle(.white)
                     
@@ -39,9 +39,9 @@ struct RecipeComponent: View {
                         .foregroundStyle(Color(recipe.category.rawValue))
                     
                     Text("Receita")
-                        .foregroundStyle(.letter)
+//                        .foregroundStyle(.letter)
                         .font(.body)
-                        .foregroundColor(Color("letterColor"))
+                        .foregroundColor(.brown200)
                 case .unavailable:
                     Image("unavailableSymbol")
                         .frame(width: 42.5, height: 72.5)
@@ -64,7 +64,8 @@ struct RecipeComponent: View {
             tags: [],
             category: .sobremesa,
             id: 1,
-            price: 10
+            price: 10,
+            overlayImage: "nuvem"
         )
     )
 }
@@ -80,9 +81,10 @@ struct RecipeComponent: View {
             steps: [],
             ingredients: [],
             tags: [],
-            category: .guarnicao,
+            category: .sobremesa,
             id: 1,
-            price: 10
+            price: 10,
+            overlayImage: "batata"
         )
     )
 }
@@ -100,7 +102,8 @@ struct RecipeComponent: View {
             tags: [],
             category: .sobremesa,
             id: 1,
-            price: 10
+            price: 10,
+            overlayImage: "nuvem"
         )
     )
 }

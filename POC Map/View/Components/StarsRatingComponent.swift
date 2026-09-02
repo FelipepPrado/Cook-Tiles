@@ -20,7 +20,7 @@ struct StarsRatingComponent: View {
         .padding(.horizontal, 18.4)
         .padding(.top, 8.6)
         .padding(.bottom, 14.6)
-        .background(.greenFrame)
+        .background(.green500)
     }
 }
 
