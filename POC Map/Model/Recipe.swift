@@ -15,6 +15,7 @@ final class Recipe{
     var category: RecipeCategory
     var id: Int
     var price: Int
+    var overlayImage: String
 
     init(
         name: String,
@@ -27,7 +28,8 @@ final class Recipe{
         tags: [RecipeTag],
         category: RecipeCategory,
         id: Int,
-        price: Int
+        price: Int,
+        overlayImage: String
     ) {
         self.name = name
         self.status = status
@@ -40,6 +42,7 @@ final class Recipe{
         self.category = category
         self.id = id
         self.price = price
+        self.overlayImage = overlayImage
     }
     
 }
