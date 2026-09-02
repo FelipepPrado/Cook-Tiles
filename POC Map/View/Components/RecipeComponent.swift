@@ -65,7 +65,9 @@ struct RecipeComponent: View {
             category: .sobremesa,
             id: 1,
             price: 10,
-            overlayImage: "nuvem"
+            overlayImage: "nuvem",
+            portions: "10"
+            
         )
     )
 }
@@ -84,7 +86,8 @@ struct RecipeComponent: View {
             category: .sobremesa,
             id: 1,
             price: 10,
-            overlayImage: "batata"
+            overlayImage: "batata",
+            portions: "10"
         )
     )
 }
@@ -103,7 +106,8 @@ struct RecipeComponent: View {
             category: .sobremesa,
             id: 1,
             price: 10,
-            overlayImage: "nuvem"
+            overlayImage: "nuvem",
+            portions: "10"
         )
     )
 }
