@@ -101,7 +101,7 @@ enum RecipeTag: String, Codable{
         case .healthy:
             "Saudável"
         case .spicy:
-            "Piquante"
+            "Picante"
         case .vegetarian:
             "Vegetariano"
         case .vegan:
