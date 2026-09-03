@@ -75,7 +75,7 @@ struct RecipeDetailView: View {
                 Button {
                     viewModel.buyRecipe()
                 } label: {
-                    FillButtonComponent(text: "Adquirir \(viewModel.recipe.price)p")
+                    FillButtonComponent(text: "Adquirir \(viewModel.recipe.price) P")
                 }
 
             } else if viewModel.recipe.status == .unlocked{
@@ -97,7 +97,7 @@ struct RecipeDetailView: View {
                 
                 }
                 Button {
-                    viewRouter.stepsView()
+                    viewRouter.stepsView(recipe: viewModel.recipe)
                     viewModel.close()
                 } label: {
                     StrokeButtonComponent(text: "Iniciar Receita")
@@ -105,11 +105,10 @@ struct RecipeDetailView: View {
 
             }
         }
-//        .padding(.bottom, 200)
         .frame(width: 350, height: 630)
-        .background(Image("popupBackground") // Replace with your Asset Catalog image name
-            .resizable()         // Allows the image to scale down or up
-            .scaledToFill()      // Scales the image to completely fill the view
+        .background(Image("popupBackground")
+            .resizable()
+            .scaledToFill()
             .ignoresSafeArea() )
         
     }

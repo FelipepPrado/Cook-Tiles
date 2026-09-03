@@ -14,6 +14,7 @@ struct MapView: View {
     }
     
     @State private var viewModel = MapViewModel()
+    
     var body: some View {
         @Bindable var path = viewRouter
         NavigationStack(path: $path.path) {

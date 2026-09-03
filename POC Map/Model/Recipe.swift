@@ -110,17 +110,19 @@ enum RecipeTag: String, Codable{
     }
 }
 
-enum RecipeCategory: String, Codable {
-    case sobremesa 
+enum RecipeCategory: String, Codable, CaseIterable, Identifiable {
+    case sobremesa
     case pratoPrincipal
     case entrada
     case guarnicao
-    
-    var displayName: String{
-        switch self{
-            case .entrada:
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .entrada:
             "Entrada"
-            case .guarnicao:
+        case .guarnicao:
             "Guarnição"
         case .pratoPrincipal:
             "Prato Principal"
