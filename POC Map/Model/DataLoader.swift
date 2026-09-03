@@ -23,6 +23,7 @@ struct RecipeDTO: Codable {
     let id: Int
     let price: Int
     let overlayImage: String
+    let portions: String
 
     func toRecipe() -> Recipe {
         return Recipe(
@@ -37,7 +38,8 @@ struct RecipeDTO: Codable {
             category: RecipeCategory(rawValue: category) ?? .pratoPrincipal,
             id: id,
             price: price,
-            overlayImage: overlayImage
+            overlayImage: overlayImage,
+            portions: portions
         )
     }
 }

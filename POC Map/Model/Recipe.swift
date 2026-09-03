@@ -16,6 +16,7 @@ final class Recipe{
     var id: Int
     var price: Int
     var overlayImage: String
+    var portions: String
 
     init(
         name: String,
@@ -29,7 +30,8 @@ final class Recipe{
         category: RecipeCategory,
         id: Int,
         price: Int,
-        overlayImage: String
+        overlayImage: String,
+        portions: String
     ) {
         self.name = name
         self.status = status
@@ -43,6 +45,7 @@ final class Recipe{
         self.id = id
         self.price = price
         self.overlayImage = overlayImage
+        self.portions = portions
     }
     
 }
@@ -87,17 +90,43 @@ enum RecipeLevel: String, Codable {
     }
 }
 
-enum RecipeTag: String, Codable {
+enum RecipeTag: String, Codable{
     case vegetarian
     case vegan
     case healthy
     case spicy
+    
+    var displayName: String {
+        switch self{
+        case .healthy:
+            "Saudável"
+        case .spicy:
+            "Piquante"
+        case .vegetarian:
+            "Vegetariano"
+        case .vegan:
+            "Vegano"
+        }
+    }
 }
 
 enum RecipeCategory: String, Codable {
-    case sobremesa = "Sobremesa"
-    case pratoPrincipal = "Prato Principal"
-    case entrada = "Entrada"
-    case guarnicao = "Guarnição"
+    case sobremesa 
+    case pratoPrincipal
+    case entrada
+    case guarnicao
+    
+    var displayName: String{
+        switch self{
+            case .entrada:
+            "Entrada"
+            case .guarnicao:
+            "Guarnição"
+        case .pratoPrincipal:
+            "Prato Principal"
+        case .sobremesa:
+            "Sobremesa"
+        }
+    }
 }
 

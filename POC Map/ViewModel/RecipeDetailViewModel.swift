@@ -19,6 +19,7 @@ final class RecipeDetailViewModel{
     var reward: Int { recipe.reward }
     var isLocked: Bool { recipe.status == .locked }
     var isUnlocked: Bool { recipe.status == .unlocked }
+   
     
     func buyRecipe() {
         if player.coin >= recipe.price{
@@ -29,5 +30,9 @@ final class RecipeDetailViewModel{
     
     func lockRecipe() {
         mapViewModel.lockRecipe(recipe)
+    }
+    
+    func close(){
+        mapViewModel.showPopup = false
     }
 }
