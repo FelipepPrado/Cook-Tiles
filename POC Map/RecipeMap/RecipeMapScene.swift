@@ -264,20 +264,20 @@ final class MapScene: SKScene {
         
         priceLabel.horizontalAlignmentMode = .center
         priceLabel.verticalAlignmentMode = .center
-        priceLabel.fontSize = 24
+        priceLabel.fontSize = 20
         priceLabel.fontName = "AvenirNext-Bold"
-        priceLabel.fontColor = .black
+        priceLabel.fontColor = .white
         priceLabel.zPosition = 1.1
         
         let padding: CGFloat = 8
         let background = SKShapeNode(
             rectOf: CGSize(
-                width: priceLabel.frame.width + padding * 2,
-                height: priceLabel.frame.height + padding * 2
+                width: priceLabel.frame.width + padding * 3,
+                height: priceLabel.frame.height + padding * 3
             ),
             cornerRadius: 30
         )
-        background.fillColor = .white
+        background.fillColor = .green500
         background.strokeColor = .clear
         background.zPosition = 1
         
