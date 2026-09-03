@@ -18,6 +18,7 @@ final class NewMealViewModel{
         }
     }
     var imageData: Data?
+    var recipeCategory: RecipeCategory?
     
     init(newMeal: Meal = Meal(image: Data(), stars: 3, recipes: [], score: 0, comment: "")) {
         self.newMeal = newMeal
