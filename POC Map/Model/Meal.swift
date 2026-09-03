@@ -6,7 +6,7 @@ class Meal {
     var image: Data
     var stars: Int
     var recipes: [Recipe]
-    var score: Int = 0
+    var score: Int
     var comment: String
     
     init(image: Data, stars: Int, recipes: [Recipe], score: Int, comment: String) {

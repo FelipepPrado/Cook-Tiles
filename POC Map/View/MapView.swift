@@ -20,11 +20,6 @@ struct MapView: View {
             ZStack{
                 SpriteView(scene: viewModel.mapScene)
                     .ignoresSafeArea()
-                
-//                VStack{
-//                    Spacer()
-//                    TabBarComponent()
-//                }.frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .onAppear {
                 viewModel.initMap(recipes: recipeModel)
@@ -46,12 +41,14 @@ struct MapView: View {
 }
 
 
-//#Preview {
-//    
-//    MapView()
-//        .modelContainer(
-//            for: Recipe.self, Pl
-//            inMemory: true
-//        )
-//        .environment(ViewRouter())
-//}
+#Preview {
+    MapView()
+        .modelContainer(
+            for: [
+                Recipe.self,
+                Player.self
+            ],
+            inMemory: true
+        )
+        .environment(ViewRouter())
+}
