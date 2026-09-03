@@ -62,12 +62,15 @@ struct MapView: View {
     
 }
 
-//#Preview {
-//    
-//    MapView()
-//        .modelContainer(
-//            for: Recipe.self, Pl
-//            inMemory: true
-//        )
-//        .environment(ViewRouter())
-//}
+
+#Preview {
+    MapView()
+        .modelContainer(
+            for: [
+                Recipe.self,
+                Player.self
+            ],
+            inMemory: true
+        )
+        .environment(ViewRouter())
+}
