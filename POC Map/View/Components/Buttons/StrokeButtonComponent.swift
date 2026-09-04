@@ -25,6 +25,7 @@ struct StrokeButtonComponent: View {
     }
 }
 
-//#Preview {
-//    StrokeButtonComponent()
-//}
+#Preview {
+    @Previewable @State var text: String = "Hello, World!"
+    StrokeButtonComponent(text: text)
+}

@@ -1,4 +1,4 @@
-struct Igredient: Codable{
+struct Igredient: Codable, Hashable{
     var name: String
     var quantity: Double
     var unit: String
