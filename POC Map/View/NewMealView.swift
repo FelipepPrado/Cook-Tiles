@@ -47,7 +47,7 @@ struct NewMealView: View {
                             }
                         }
                         
-                        StarRatingInputComponent(rating: $viewModel.newMeal.stars)
+                        StarRatingInputComponent(rating: $viewModel.newMeal.stars, isInput: true)
                     }
                     
                     VStack(spacing: 20){

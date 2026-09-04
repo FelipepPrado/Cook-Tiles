@@ -3,6 +3,7 @@ import SwiftUI
 struct StarRatingInputComponent: View {
     @Binding var rating: Int
     var maximumRating: Int = 5
+    let isInput: Bool
     
     var body: some View {
         ZStack{
@@ -25,9 +26,18 @@ struct StarRatingInputComponent: View {
             .padding(.top, 25)
             HStack (alignment: .center, spacing: 15) {
                 ForEach(1..<maximumRating + 1, id: \.self) { number in
-                    Button {
-                        rating = number
-                    } label: {
+                    if isInput{
+                        Button {
+                            rating = number
+                        } label: {
+                            Image(systemName: "star.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundStyle(number <= rating ? .white : .green700)
+                                .animation(.linear, value:  rating)
+                        }
+                    }
+                    else{
                         Image(systemName: "star.fill")
                             .resizable()
                             .scaledToFit()
@@ -46,6 +56,6 @@ struct StarRatingInputComponent: View {
 }
 
 #Preview {
-    @Previewable @State var rating: Int = 0
-    StarRatingInputComponent(rating: $rating)
+    @Previewable @State var rating: Int = 3
+    StarRatingInputComponent(rating: $rating, isInput: false)
 }
