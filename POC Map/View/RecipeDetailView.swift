@@ -54,12 +54,21 @@ struct RecipeDetailView: View {
                 
             }
             .padding(.bottom, 15)
-            
-            Text(viewModel.recipe.name)
-                .foregroundStyle(Color.brown700)
-                .bold()
-                .font(.title)
-                .padding(.bottom, 10)
+            VStack(spacing:3){
+                
+                Text(viewModel.recipe.name)
+                    .foregroundStyle(Color.brown700)
+                    .bold()
+                    .font(.largeTitle)
+                    .frame(maxWidth: 280)
+                    .multilineTextAlignment(.center)
+                
+                Rectangle()
+                    .fill(.brown100)
+                    .frame(width: 280, height: 2)
+
+            }
+            .padding(.bottom, 10)
             
             HStack(spacing: 10) {
                 ForEach (viewModel.recipe.tags, id: \.rawValue){ tag in
@@ -75,7 +84,7 @@ struct RecipeDetailView: View {
                 Button {
                     viewModel.buyRecipe()
                 } label: {
-                    FillButtonComponent(text: "Adquirir \(viewModel.recipe.price) P")
+                    FillButtonComponent(recipe: viewModel.recipe, text: "Adquirir \(viewModel.recipe.price) P")
                 }
 
             } else if viewModel.recipe.status == .unlocked{
@@ -89,10 +98,11 @@ struct RecipeDetailView: View {
 //                        .foregroundStyle(Color.white)
 //                }
                 Button {
-                    viewRouter.recipeView()
+                    viewRouter.recipeView(recipe: viewModel.recipe)
                     viewModel.close()
+//                    print(viewModel.recipe.category.rawValue)
                 } label: {
-                    FillButtonComponent(text: "Ver Mais")
+                    FillButtonComponent(recipe: viewModel.recipe, text: "Ver Mais")
                         .padding(.bottom, 8)
                 
                 }

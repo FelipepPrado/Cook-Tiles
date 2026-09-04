@@ -6,7 +6,6 @@ struct StepsView: View {
     var viewModel: StepsViewModel
     let timer = Timer.publish(every: 0.3, on: .main, in: .common).autoconnect()
     
-    
     var body: some View {
         Group {
             if let frame = viewModel.cameraManager.currentFrame {
