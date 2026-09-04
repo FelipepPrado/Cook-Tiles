@@ -16,12 +16,12 @@ struct LockedRecipeComponent: View {
             RoundedRectangle(cornerRadius: 10)
                 .fill(.cream600)
                 .stroke(.cream800, lineWidth: 3)
-                .frame(width: 120, height: 145)
+                .frame(width: 120, height: 140)
             VStack(spacing: 10){
                 Image("padlockSymbol")
                     .frame(width: 74, height: 74)
                     .cornerRadius(10)
-                HStack{
+                HStack(spacing: 2){
                     Text("\(recipe.price)")
                         .font(Font.custom("Hammersmith One", size: 17, relativeTo: .callout))
                     Image("recipeCoin")

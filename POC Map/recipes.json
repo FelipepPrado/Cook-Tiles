@@ -31,7 +31,7 @@
   },
   {
     "id": 2,
-    "name": "Bolo de Cenoura com Cobertura de Chocolate",
+    "name": "Bolo de Cenoura",
     "overlayImage": "bolo_de_cenoura",
     "status": "locked",
     "reward": 130,
@@ -180,8 +180,8 @@
   },
   {
     "id": 7,
-    "name": "Escondidinho de Carne Seca",
-    "overlayImage": "escondidinho_de_carne_seca",
+    "name": "Escondidinho",
+    "overlayImage": "escondidinho",
     "status": "locked",
     "reward": 140,
     "price": 85,
@@ -264,8 +264,8 @@
   },
   {
     "id": 10,
-    "name": "Batata Rústica Assada",
-    "overlayImage": "batata_rustica_assada",
+    "name": "Batata Rústica",
+    "overlayImage": "batata_rustica",
     "status": "locked",
     "reward": 50,
     "price": 30,
@@ -533,8 +533,8 @@
   },
   {
     "id": 19,
-    "name": "Sopa de Cebola Gratinada",
-    "overlayImage": "sopa_de_cebola_gratinada",
+    "name": "Sopa de Cebola",
+    "overlayImage": "sopa_de_cebola",
     "status": "locked",
     "reward": 90,
     "price": 55,

@@ -8,14 +8,48 @@
 import SwiftUI
 
 struct IngredientComponent: View {
+    let igredient: Igredient
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Losango()
+                .fill(Color.cream200)
+                .frame(width: 125, height: 125)
+            
+            ZStack {
+                
+                VStack{
+                    
+                    Text("\(igredient.quantity.formatted(.number.precision(.fractionLength(0)))) \(igredient.unit)")
+                        .font(.callout
+                            .bold())
+                        .foregroundColor(.brown200)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.6)
+                    
+                    Text(igredient.name)
+                        .font(.caption2)
+                        .bold()
+                        .foregroundColor(.brown200)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.6)
+                        
+                }
+                .frame(width: 90, height: 80)
+            }
+
+            Losango()
+                .stroke(Color.cream800, lineWidth: 4)
+                .frame(width: 125, height: 125)
+        }
     }
 }
 
 #Preview {
-    IngredientComponent()
+    IngredientComponent(igredient: Igredient(name: "alho", quantity: 100, unit: "gramas", status: false))
 }
+
 struct Losango: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()

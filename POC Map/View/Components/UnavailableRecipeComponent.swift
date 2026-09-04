@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UnavailableRecipeComponent: View {
+
     var body: some View {
         ZStack(){
             RoundedRectangle(cornerRadius: 10)
@@ -24,3 +25,4 @@ struct UnavailableRecipeComponent: View {
 #Preview {
     UnavailableRecipeComponent()
 }
+
