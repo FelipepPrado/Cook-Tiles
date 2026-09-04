@@ -22,7 +22,7 @@ struct StarRatingInputComponent: View {
                     .foregroundColor(.green)
                     .scaleEffect(x: -1, y: 1)
             }
-            .padding(.top, 35)
+            .padding(.top, 25)
             HStack (alignment: .center, spacing: 15) {
                 ForEach(1..<maximumRating + 1, id: \.self) { number in
                     Button {
