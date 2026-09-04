@@ -6,7 +6,7 @@ internal import SpriteKit
 @Observable
 final class RecipeDetailViewModel{
     let recipe: Recipe
-    private let mapViewModel: MapViewModel
+    let mapViewModel: MapViewModel
     let player: Player
     
     init(recipe: Recipe, mapViewModel: MapViewModel, player: Player) {

@@ -7,7 +7,7 @@ enum NameViews: Hashable{
     case MapView
     case NewMealView
     case RecipeListView
-    case RecipeView
+    case RecipeView(recipe: Recipe)
     case StepsView(recipe: Recipe)
 }
 
@@ -47,8 +47,8 @@ class ViewRouter{
         path.append(NameViews.RecipeListView)
     }
     
-    func recipeView(){
-        path.append(NameViews.RecipeView)
+    func recipeView(recipe: Recipe){
+        path.append(NameViews.RecipeView(recipe: recipe))
     }
     
     func stepsView(recipe: Recipe){
@@ -71,8 +71,8 @@ enum ViewManagar {
             NewMealView()
         case .RecipeListView:
             RecipeListView()
-        case .RecipeView:
-            RecipeView()
+        case .RecipeView(let recipe):
+            RecipeView(viewModel: RecipeViewModel(recipe: recipe))
         case .StepsView(let recipe):
             StepsView(viewModel: StepsViewModel(recipe: recipe))
         }
