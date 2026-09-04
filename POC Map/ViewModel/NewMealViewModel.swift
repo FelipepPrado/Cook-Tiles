@@ -19,13 +19,18 @@ final class NewMealViewModel{
     }
     var imageData: Data?
     var recipeCategory: RecipeCategory?
+    var recipesDic: [RecipeCategory: Recipe] = [:]
     
     init(newMeal: Meal = Meal(image: Data(), stars: 3, recipes: [], score: 0, comment: "")) {
         self.newMeal = newMeal
     }
     
-    func addMeal(context: ModelContext){
+    func addMeal(context: ModelContext, _ player: Player){
         do{
+            for recipe in newMeal.recipes{
+                newMeal.score += recipe.reward
+            }
+            player.coin += newMeal.score
             context.insert(newMeal)
             try context.save()
         } catch{

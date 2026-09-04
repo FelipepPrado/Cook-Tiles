@@ -58,7 +58,13 @@ struct MapView: View {
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 TabBarComponent()
             }
-            
+            .toolbar{
+                ToolbarItem(placement: .topBarLeading){
+                    VStack{
+                        Text("\(player.coin)")
+                    }
+                }
+            }
         }
     }
     
