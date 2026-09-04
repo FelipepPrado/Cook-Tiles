@@ -11,6 +11,6 @@ final class AddRecipetoMealViewModel {
     }
     
     func addRecipe(_ recipe: Recipe){
-        viewModel.newMeal.recipes.append(recipe)
+        viewModel.recipesDic[recipe.category] = recipe
     }
 }
