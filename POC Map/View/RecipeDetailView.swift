@@ -53,7 +53,8 @@ struct RecipeDetailView: View {
                 .padding(.trailing, 20)
                 
             }
-            .padding(.bottom, 15)
+            .padding(.bottom, 3)
+            
             VStack(spacing:3){
                 
                 Text(viewModel.recipe.name)
@@ -102,7 +103,7 @@ struct RecipeDetailView: View {
 //                    print(viewModel.recipe.category.rawValue)
                 } label: {
                     FillButtonComponent(recipe: viewModel.recipe, text: "Ver Mais")
-                        .padding(.bottom, 8)
+                        .padding(.bottom, 5)
                 
                 }
                 Button {
@@ -114,7 +115,7 @@ struct RecipeDetailView: View {
 
             }
         }
-        .frame(width: 350, height: 630)
+        .frame(maxWidth: 350, minHeight: 650)
         .background(Image("popupBackground")
             .resizable()
             .scaledToFill()
