@@ -253,7 +253,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9DZ7V9949Y;
+				DEVELOPMENT_TEAM = ZJ74SHVP9P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Este aplicativo precisa acessar a sua câmera para identificar seus gestos manuais, permitindo que você avance os passos da receita sem precisar tocar (ou sujar) a tela.";
@@ -287,7 +287,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9DZ7V9949Y;
+				DEVELOPMENT_TEAM = ZJ74SHVP9P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Este aplicativo precisa acessar a sua câmera para identificar seus gestos manuais, permitindo que você avance os passos da receita sem precisar tocar (ou sujar) a tela.";

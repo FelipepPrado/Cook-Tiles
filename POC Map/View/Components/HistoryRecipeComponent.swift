@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HistoryRecipeComponent: View {
+    let meal: Meal
+    
     var body: some View {
         ZStack(){
             HStack(spacing: -30){
@@ -34,14 +36,21 @@ struct HistoryRecipeComponent: View {
                 .frame(width: 161, height: 251)
             
             VStack(spacing: 16){
-                Image("arrozFrito")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 115, height: 115)
+                if let uiImage = UIImage(data: meal.image){
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 115, height: 115)
+                }
+                else{
+                    Image("arrozFrito")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 115, height: 115)
+                }
                 
-                Rectangle()
-                    .fill(.green700)
-                    .frame(width: 172, height: 39)
+                StarsRatingComponent(stars: meal.stars)
+                    .frame(width: 172, height: 40)
             }
             .padding(.horizontal, 20)
             .padding(.top, 20)
@@ -51,5 +60,13 @@ struct HistoryRecipeComponent: View {
 }
 
 #Preview {
-    HistoryRecipeComponent()
+    HistoryRecipeComponent(
+        meal: Meal(
+            image: Data(),
+            stars: 3,
+            recipes: [],
+            score: 0,
+            comment: ""
+        )
+    )
 }
