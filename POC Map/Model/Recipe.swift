@@ -13,6 +13,10 @@ final class Recipe{
     var ingredients: [Igredient]
     var tags: [RecipeTag]
     var category: RecipeCategory
+    var id: Int
+    var price: Int
+    var overlayImage: String
+    var portions: String
 
     init(
         name: String,
@@ -23,7 +27,11 @@ final class Recipe{
         steps: [RecipeStep],
         ingredients: [Igredient],
         tags: [RecipeTag],
-        category: RecipeCategory
+        category: RecipeCategory,
+        id: Int,
+        price: Int,
+        overlayImage: String,
+        portions: String
     ) {
         self.name = name
         self.status = status
@@ -34,6 +42,10 @@ final class Recipe{
         self.ingredients = ingredients
         self.tags = tags
         self.category = category
+        self.id = id
+        self.price = price
+        self.overlayImage = overlayImage
+        self.portions = portions
     }
     
 }
@@ -78,26 +90,45 @@ enum RecipeLevel: String, Codable {
     }
 }
 
-enum RecipeTag: String, Codable {
+enum RecipeTag: String, Codable{
     case vegetarian
     case vegan
     case healthy
     case spicy
+    
+    var displayName: String {
+        switch self{
+        case .healthy:
+            "Saudável"
+        case .spicy:
+            "Picante"
+        case .vegetarian:
+            "Vegetariano"
+        case .vegan:
+            "Vegano"
+        }
+    }
 }
 
-enum RecipeCategory: String, Codable, CaseIterable {
-    case sobremesa = "Sobremesa"
-    case pratoPrincipal = "Prato Principal"
-    case entrada = "Entrada"
-    case guarnicao = "Guarnição"
-    
-//    var displayName: String {
-//        switch self {
-//        case .sobremesa: "Sobremesa"
-//        case .pratoPrincipal: "Prato Principal"
-//        case .entrada: "Entrada"
-//        case .acompanhamento: "Acompanhamento"
-//        }
-//    }
+enum RecipeCategory: String, Codable, CaseIterable, Identifiable {
+    case sobremesa
+    case pratoPrincipal
+    case entrada
+    case guarnicao
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .entrada:
+            "Entrada"
+        case .guarnicao:
+            "Guarnição"
+        case .pratoPrincipal:
+            "Prato Principal"
+        case .sobremesa:
+            "Sobremesa"
+        }
+    }
 }
 

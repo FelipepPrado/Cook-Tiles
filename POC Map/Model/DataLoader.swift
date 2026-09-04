@@ -20,6 +20,10 @@ struct RecipeDTO: Codable {
     let ingredients: [Igredient]
     let tags: [String]
     let category: String
+    let id: Int
+    let price: Int
+    let overlayImage: String
+    let portions: String
 
     func toRecipe() -> Recipe {
         return Recipe(
@@ -31,13 +35,37 @@ struct RecipeDTO: Codable {
             steps: steps,
             ingredients: ingredients,
             tags: tags.compactMap { RecipeTag(rawValue: $0) },
-            category: RecipeCategory(rawValue: category) ?? .pratoPrincipal
+            category: RecipeCategory(rawValue: category) ?? .pratoPrincipal,
+            id: id,
+            price: price,
+            overlayImage: overlayImage,
+            portions: portions
         )
     }
 }
 
 struct DataLoader {
     
+    static func loadPlayerIfNeeded(context: ModelContext) {
+            let descriptor = FetchDescriptor<Player>()
+
+            do {
+                let players = try context.fetch(descriptor)
+
+                guard players.isEmpty else {
+                    return
+                }
+
+                let player = Player(coin: 300, banner: "Loba")
+
+                context.insert(player)
+
+                try context.save()
+
+            } catch {
+                print("Erro ao criar Player: \(error)")
+            }
+        }
     static func loadRecipesIfNeeded(context: ModelContext) {
 
         // Verifica se já existem receitas salvas
