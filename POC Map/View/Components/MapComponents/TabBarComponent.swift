@@ -54,6 +54,7 @@ struct TabBarComponent: View {
                 }).buttonStyle(.plain)
             }
         }
+        
     }
 }
 
