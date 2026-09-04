@@ -58,7 +58,6 @@ struct RecipeDetailView: View {
                 
                 Text(viewModel.recipe.name)
                     .foregroundStyle(Color.brown700)
-                    .bold()
                     .font(.largeTitle)
                     .frame(maxWidth: 280)
                     .multilineTextAlignment(.center)

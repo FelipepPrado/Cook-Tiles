@@ -12,9 +12,7 @@ final class RecipeViewModel{
     init(recipe: Recipe) {
         self.recipe = recipe
 
-        
     }
 
-    
 
 }
