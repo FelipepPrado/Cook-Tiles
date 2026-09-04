@@ -30,7 +30,7 @@ struct DescriptionComponent: View {
                     .font(Font.callout.bold())
                     .foregroundStyle(Color.brown100)
             }
-            .frame(width: 280, height: 287)
+            .frame(width: 280, height: 280)
             .background(Color.cream600)
         }
     }
