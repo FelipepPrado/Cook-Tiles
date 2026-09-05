@@ -260,7 +260,7 @@ final class MapScene: SKScene {
             container.position = CGPoint(x: 0, y: 100)
             container.zPosition = 1
         
-        let priceLabel = SKLabelNode(text: "R$ \(price)")
+        let priceLabel = SKLabelNode(text:"\(price)")
         
         priceLabel.horizontalAlignmentMode = .center
         priceLabel.verticalAlignmentMode = .center
