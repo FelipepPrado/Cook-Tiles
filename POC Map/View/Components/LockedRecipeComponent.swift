@@ -48,13 +48,14 @@ struct LockedRecipeComponent: View {
             time: 1,
             level: .easy,
             steps: [],
-            ingredients: [],
+            igredients: [],
             tags: [],
             category: .sobremesa,
             id: 1,
             price: 50,
             overlayImage: "nuvem",
-            portions: "duas"
+            portions: "duas",
+            recipeDescription: ""
             )
         )
 }

@@ -23,7 +23,7 @@ struct HexagonShape: Shape {
     }
 }
 
-struct ResourceBadge: View {
+struct StatusCoinComponent: View {
     let coin: Int
     var body: some View {
         HStack(spacing: 12) {
@@ -45,5 +45,5 @@ struct ResourceBadge: View {
 }
 
 #Preview {
-    ResourceBadge(coin: 100)
+    StatusCoinComponent(coin: 100)
 }
