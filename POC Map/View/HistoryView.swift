@@ -27,7 +27,6 @@ struct HistoryView: View {
                 }
                 .frame(maxWidth: 288)
                 .frame(maxHeight: .infinity, alignment: .center)
-                .border(.black, width: 1)
             }
             else{
                 ScrollView(.vertical) {
