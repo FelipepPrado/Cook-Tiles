@@ -17,6 +17,7 @@ final class Recipe{
     var price: Int
     var overlayImage: String
     var portions: String
+    var meals: [Meal] = []
 
     init(
         name: String,

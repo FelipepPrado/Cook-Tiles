@@ -5,6 +5,8 @@ import SwiftUI
 class Meal {
     var image: Data
     var stars: Int
+    
+    @Relationship(inverse: \Recipe.meals)
     var recipes: [Recipe]
     var score: Int
     var comment: String
