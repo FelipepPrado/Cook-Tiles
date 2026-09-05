@@ -20,7 +20,7 @@ struct IngredientComponent: View {
                 
                 VStack{
                     
-                    Text("\(igredient.quantity.formatted(.number.precision(.fractionLength(0)))) \(igredient.unit)")
+                    Text("\(igredient.quantity) \(igredient.unit)")
                         .font(.callout
                             .bold())
                         .foregroundColor(.brown200)
@@ -47,7 +47,7 @@ struct IngredientComponent: View {
 }
 
 #Preview {
-    IngredientComponent(igredient: Igredient(name: "alho", quantity: 100, unit: "gramas", status: false))
+    IngredientComponent(igredient: Igredient(name: "alho", quantity: "100", unit: "gramas", status: false))
 }
 
 struct Losango: Shape {

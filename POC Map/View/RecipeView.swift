@@ -94,15 +94,15 @@ struct RecipeView: View {
     @ViewBuilder
     private var ingredientsGrid: some View {
         VStack(spacing: -60) {
-            let linhas = viewModel.organizarEmLinhas(ingredientes: viewModel.recipe.ingredients)
+            let linhas = viewModel.organizarEmLinhas(ingredientes: viewModel.recipe.igredients)
             
             ForEach(0..<linhas.count, id: \.self) { indexDaLinha in
                 HStack(spacing: 0) {
                     ForEach(0..<linhas[indexDaLinha].count, id: \.self) { indexDoIngrediente in
                         
-                        if let ingrediente = linhas[indexDaLinha][indexDoIngrediente] {
+                        if let igredient = linhas[indexDaLinha][indexDoIngrediente] {
 
-                            IngredientComponent(igredient: ingrediente)
+                            IngredientComponent(igredient: igredient)
                                 .padding(2)
                         } else {
  

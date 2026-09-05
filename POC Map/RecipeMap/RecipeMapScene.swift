@@ -163,7 +163,7 @@ final class MapScene: SKScene {
             tile.name = "recipe_\(recipeIndex)"
             
             
-            let tileOverlay = SKSpriteNode(imageNamed: "nuvem")
+            let tileOverlay = SKSpriteNode(imageNamed: "\(recipe.overlayImage)")
             
             tileOverlay.anchorPoint = CGPoint(x: 0.5, y: 0)
             
@@ -345,7 +345,7 @@ final class MapScene: SKScene {
         switch recipeTile.recipe.status {
             
         case .unlocked:
-            recipeTile.overlay.texture = SKTexture(imageNamed: "batata")
+            recipeTile.overlay.texture = SKTexture(imageNamed: "\(recipeTile.recipe.overlayImage)")
             recipeTile.priceTag.isHidden = true
             
         case .locked:

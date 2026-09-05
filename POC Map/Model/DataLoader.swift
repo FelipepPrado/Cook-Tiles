@@ -17,13 +17,14 @@ struct RecipeDTO: Codable {
     let time: Int
     let level: String
     let steps: [RecipeStep]
-    let ingredients: [Igredient]
+    let igredients: [Igredient]
     let tags: [String]
     let category: String
     let id: Int
     let price: Int
     let overlayImage: String
     let portions: String
+    let recipeDescription: String
 
     func toRecipe() -> Recipe {
         return Recipe(
@@ -33,13 +34,14 @@ struct RecipeDTO: Codable {
             time: time,
             level: RecipeLevel(rawValue: level) ?? .easy,
             steps: steps,
-            ingredients: ingredients,
+            igredients: igredients,
             tags: tags.compactMap { RecipeTag(rawValue: $0) },
             category: RecipeCategory(rawValue: category) ?? .pratoPrincipal,
             id: id,
             price: price,
             overlayImage: overlayImage,
-            portions: portions
+            portions: portions,
+            recipeDescription: recipeDescription
         )
     }
 }
@@ -56,7 +58,7 @@ struct DataLoader {
                     return
                 }
 
-                let player = Player(coin: 300, banner: "Loba")
+                let player = Player(coin: 1300, banner: "Loba")
 
                 context.insert(player)
 

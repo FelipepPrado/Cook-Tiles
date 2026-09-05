@@ -23,7 +23,7 @@ struct MapView: View {
                 if let recipe = viewModel.selectedRecipe, viewModel.showPopup {
                     ZStack {
                         Color.black.opacity(0.4)
-                            .ignoresSafeArea() // Cobre a tela toda, incluindo a TabBar
+                            .ignoresSafeArea()
                             .onTapGesture {
                                 viewModel.selectedRecipe = nil
                             }
@@ -34,7 +34,7 @@ struct MapView: View {
                         ))
                         .padding(.bottom, 50)
                     }
-                    .zIndex(1) // Força o popup a renderizar por cima da Camada Base
+                    .zIndex(01)
                 }
                 ZStack{
                     SpriteView(scene: viewModel.mapScene)

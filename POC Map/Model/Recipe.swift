@@ -10,7 +10,7 @@ final class Recipe{
     var time: Int
     var level: RecipeLevel
     var steps: [RecipeStep]
-    var ingredients: [Igredient]
+    var igredients: [Igredient]
     var tags: [RecipeTag]
     var category: RecipeCategory
     var id: Int
@@ -18,6 +18,7 @@ final class Recipe{
     var overlayImage: String
     var portions: String
     var meals: [Meal] = []
+    var recipeDescription: String
 
     init(
         name: String,
@@ -26,13 +27,14 @@ final class Recipe{
         time: Int,
         level: RecipeLevel,
         steps: [RecipeStep],
-        ingredients: [Igredient],
+        igredients: [Igredient],
         tags: [RecipeTag],
         category: RecipeCategory,
         id: Int,
         price: Int,
         overlayImage: String,
-        portions: String
+        portions: String,
+        recipeDescription: String
     ) {
         self.name = name
         self.status = status
@@ -40,13 +42,14 @@ final class Recipe{
         self.time = time
         self.level = level
         self.steps = steps
-        self.ingredients = ingredients
+        self.igredients = igredients
         self.tags = tags
         self.category = category
         self.id = id
         self.price = price
         self.overlayImage = overlayImage
         self.portions = portions
+        self.recipeDescription = recipeDescription
     }
     
 }
@@ -91,26 +94,31 @@ enum RecipeLevel: String, Codable {
     }
 }
 
-enum RecipeTag: String, Codable{
+enum RecipeTag: String, Codable {
     case vegetarian
     case vegan
-    case healthy
     case spicy
-    
+    case glutenFree
+    case lactoseFree
+    case containsNuts
+
     var displayName: String {
-        switch self{
-        case .healthy:
-            "Saudável"
+        switch self {
         case .spicy:
             "Picante"
         case .vegetarian:
             "Vegetariano"
         case .vegan:
             "Vegano"
+        case .glutenFree:
+            "Sem Glúten"
+        case .lactoseFree:
+            "Sem Lactose"
+        case .containsNuts:
+            "Contém Nozes"
         }
     }
 }
-
 enum RecipeCategory: String, Codable, CaseIterable, Identifiable {
     case sobremesa
     case pratoPrincipal
