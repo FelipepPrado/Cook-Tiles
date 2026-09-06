@@ -46,12 +46,8 @@ struct RecipeComponent: View {
                         .frame(width: 74, height: 74)
                         .cornerRadius(10)
                     HStack(spacing: 2){
-                        Text("\(recipe.price)")
+                        Text("Ver Mais")
                             .font(Font.custom("Hammersmith One", size: 17, relativeTo: .callout))
-                        Image("recipeCoin")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 20, height: 17)
                     }
                     .frame(width: 90, height: 30)
                     .background(.green500)

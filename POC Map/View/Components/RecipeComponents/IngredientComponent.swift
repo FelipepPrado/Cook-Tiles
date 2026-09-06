@@ -8,46 +8,97 @@
 import SwiftUI
 
 struct IngredientComponent: View {
+    
     let igredient: Igredient
+    let currentStatus: StatusColor
     
     var body: some View {
-        ZStack {
-            Losango()
-                .fill(Color.cream200)
-                .frame(width: 125, height: 125)
+        switch currentStatus {
             
-            ZStack {
-                
-                VStack{
-                    
-                    Text("\(igredient.quantity) \(igredient.unit)")
-                        .font(.callout
-                            .bold())
-                        .foregroundColor(.brown200)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.6)
-                    
-                    Text(igredient.name)
-                        .font(.caption2)
-                        .bold()
-                        .foregroundColor(.brown200)
-                        .multilineTextAlignment(.center)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.6)
-                        
-                }
-                .frame(width: 90, height: 80)
-            }
+        case .normal:
+            VStack(alignment: .center) {
+                Text("\(igredient.quantity) \(igredient.unit)")
+                    .font(.callout
+                        .bold())
+                    .foregroundColor(.brown200)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
 
-            Losango()
-                .stroke(Color.cream800, lineWidth: 4)
-                .frame(width: 125, height: 125)
+                
+                Text(igredient.name)
+                    .font(.caption2)
+                    .bold()
+                    .foregroundColor(.brown200)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .frame(minWidth: 100, minHeight: 80)
+            .background(.cream200)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.cream800, lineWidth: 5)
+            )
+            
+        case .green:
+            
+            VStack(alignment: .center) {
+                Text("\(igredient.quantity) \(igredient.unit)")
+                    .font(.callout
+                        .bold())
+                    .foregroundColor(.brown200)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                
+                Text(igredient.name)
+                    .font(.caption2)
+                    .bold()
+                    .foregroundColor(.brown200)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                    
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .frame(minWidth: 100 ,minHeight: 80)
+            .background(.cream200)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.green500, lineWidth: 5)
+            )
         }
+
+        
+//        ZStack {
+//            Losango()
+//                .fill(Color.cream200)
+//                .frame(width: 125, height: 125)
+//            
+//            ZStack {
+//                
+//                VStack{
+//                    
+//
+//                        
+//                }
+//                .frame(width: 90, height: 80)
+//            }
+//
+//            Losango()
+//                .stroke(Color.cream800, lineWidth: 4)
+//                .frame(width: 125, height: 125)
+//        }
     }
 }
 
 #Preview {
-    IngredientComponent(igredient: Igredient(name: "alho", quantity: "100", unit: "gramas", status: false))
+    IngredientComponent(igredient: Igredient(name: "alho", quantity: "100", unit: "gramas", status: false), currentStatus: .normal)
 }
 
 struct Losango: Shape {
@@ -69,4 +120,8 @@ struct Losango: Shape {
         
         return path
     }
+}
+
+enum StatusColor: CaseIterable {
+    case normal, green
 }

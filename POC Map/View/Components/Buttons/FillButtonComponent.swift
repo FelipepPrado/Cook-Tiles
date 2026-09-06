@@ -8,20 +8,18 @@
 import SwiftUI
 
 struct FillButtonComponent: View {
+    
     let recipe: Recipe
-    let text: String
+    let currentStatus: FillButton
+    
     var body: some View {
-        if recipe.status == .unlocked {
-            Text("Ver Mais")
-                .font(.hammersmith())
-                .padding(10)
-                .frame(width: 280, height: 48)
-                .background(Color.brown200)
-                .cornerRadius(10)
-                .foregroundStyle(Color.cream500)
-        }else if recipe.status == .locked{
+        
+        switch currentStatus {
+            
+        case .buy:
+            
             HStack(spacing: 3) {
-                Text("\(recipe.price)")
+                Text("Adquirir: \(recipe.price)")
                     .font(.hammersmith(fontStyle: .title3))
                 
                 Image("recipeCoin")
@@ -37,7 +35,18 @@ struct FillButtonComponent: View {
             .background(Color.green500)
             .cornerRadius(10)
             .foregroundStyle(Color.white)
+            
+        case .seeMore:
+            Text("Ver Mais")
+                .font(.hammersmith())
+                .padding(10)
+                .frame(width: 280, height: 48)
+                .background(Color.brown200)
+                .cornerRadius(10)
+                .foregroundStyle(Color.cream500)
+            
         }
+
     }
 }
 
@@ -45,3 +54,8 @@ struct FillButtonComponent: View {
 //#Preview {
 //    FillButtonComponent()
 //}
+
+enum FillButton: CaseIterable {
+    case buy
+    case seeMore
+}

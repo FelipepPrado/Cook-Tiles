@@ -44,6 +44,7 @@ struct DescriptionComponent: View {
             }
             .frame(minWidth: 280, maxHeight: 280)
             .background(Color.cream600)
+            .cornerRadius(10)
             
         case .recipeViewLocked:
             
@@ -57,8 +58,9 @@ struct DescriptionComponent: View {
                     .font(.hammersmith())
                     .foregroundStyle(Color.brown100)
             }
-            .frame(minWidth: 387, minHeight: 409)
+            .frame(minWidth: 360, minHeight: 380)
             .background(Color.cream600)
+            .cornerRadius(10)
         }
 
     }

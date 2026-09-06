@@ -74,7 +74,7 @@ struct RecipeDetailView: View {
                 
 
                 VStack(alignment: .center, spacing: 10) {
-                    ForEach(viewModel.recipe.tags.chunked(into: 2), id: \.self) { rowTags in
+                    ForEach(viewModel.recipe.tags.chunked(into: 3), id: \.self) { rowTags in
                         HStack(spacing: 10) {
                             ForEach(rowTags, id: \.rawValue) { tag in
                                 TagComponent(tag: tag)
@@ -98,7 +98,7 @@ struct RecipeDetailView: View {
                     Button {
                         viewModel.buyRecipe()
                     } label: {
-                        FillButtonComponent(recipe: viewModel.recipe, text: "Adquirir \(viewModel.recipe.price) P")
+                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .buy)
                     }
 
                 } else if viewModel.recipe.status == .unlocked{
@@ -108,7 +108,7 @@ struct RecipeDetailView: View {
                         viewModel.close()
 
                     } label: {
-                        FillButtonComponent(recipe: viewModel.recipe, text: "Ver Mais")
+                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .seeMore)
                             .padding(.bottom, 5)
                     
                     }
