@@ -9,7 +9,7 @@ struct StepsScreenComponent: View {
         ZStack{
             Rectangle()
                 .fill(.cream200)
-                .frame(maxWidth: 386, minHeight: 83)
+                .frame(maxWidth: 360, minHeight: 83)
                 .cornerRadius(10)
             
             HStack(alignment: .center, spacing: 15){
@@ -28,10 +28,12 @@ struct StepsScreenComponent: View {
                 Text("\(step.instruction)")
                     .font(Font.headline)
                     .foregroundStyle(.brown200)
+                    .padding(.vertical, 15)
+                    
                 
                 Spacer()
             }
-            .padding(.leading, 10)
+            .padding(.horizontal, 15)
            
         }
     }

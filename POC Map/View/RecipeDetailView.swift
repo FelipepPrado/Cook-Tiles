@@ -29,7 +29,6 @@ struct RecipeDetailView: View {
                         }
                         
                     }
-                    .padding(.leading, 25)
                     
                         Spacer()
                     
@@ -52,22 +51,24 @@ struct RecipeDetailView: View {
                                 .font(.hammersmith())
                         }
                     }
-                    .padding(.trailing, 20)
                     
                 }
-                .padding(.bottom, 3)
+                .padding(.bottom, 2)
                 
                 VStack(spacing:3){
                     
                     Text(viewModel.recipe.name)
                         .foregroundStyle(Color.brown700)
-                        .font(.jaini())
-                        .frame(maxWidth: 320)
+//                        .font(.jaini())
+                        .font(Font.custom("JainiPurva-Regular", size: 42, relativeTo: .largeTitle))
+                        .frame(maxWidth: 290)
                         .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+
                     
                     Rectangle()
                         .fill(.brown100)
-                        .frame(width: 280, height: 2)
+                        .frame(maxWidth: 280, maxHeight: 2)
 
                 }
                 .padding(.bottom, 10)
@@ -121,9 +122,9 @@ struct RecipeDetailView: View {
 
                 }
             }
-            .frame(maxWidth: 340, maxHeight: 560)
+            .frame(maxWidth: 290, maxHeight: 500)
         }
-        .frame(maxWidth: 350, minHeight: 650)
+        .frame(maxWidth: 310, minHeight: 590)
         .background(Image("popupBackground")
             .resizable()
             .scaledToFill()

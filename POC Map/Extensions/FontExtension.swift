@@ -12,8 +12,8 @@ extension Font{
         Font.custom("HammersmithOne-Regular", size: fontStyle.size, relativeTo: fontStyle)
     }
     
-    static func jaini() -> Font{
-        Font.custom("JainiPurva-Regular", size: 48, relativeTo: .largeTitle)
+    static func jaini(fontStyle: Font.TextStyle = .body)  -> Font{
+        Font.custom("JainiPurva-Regular", size: fontStyle.size, relativeTo: fontStyle)
     }
 }
 

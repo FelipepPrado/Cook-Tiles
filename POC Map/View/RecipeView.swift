@@ -14,6 +14,7 @@ struct RecipeView: View {
     
     var body: some View {
         ScrollView {
+            
             VStack(spacing: 0) {
                 headerSection
                 
@@ -26,7 +27,7 @@ struct RecipeView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 10)
-
+                    
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(viewModel.recipe.igredients, id: \.self) { igredient in
                             if igredient.status == false {
@@ -47,43 +48,63 @@ struct RecipeView: View {
                         }
                     }
                     .frame(maxWidth: 360)
-                    .padding(.bottom, 10)
+                    .padding(.bottom, 20)
+                    
+                    Text("Preparo")
+                        .bold()
+                        .foregroundStyle(Color.brown700)
+                        .font(.hammersmith(fontStyle: .title2))
+                        .padding(.bottom, 10)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 10)
+                    
+                    ForEach(viewModel.recipe.steps, id: \.self) { step in
+                        StepsScreenComponent(step: step)
+                            .padding(.bottom, 15)
+                    }
                     
                     
                 }else if viewModel.recipe.status == .locked {
                     DescriptionComponent(recipe: viewModel.recipe, currentStatus: .recipeViewLocked)
                         .padding(.bottom, 10)
                     
-                  
+                    
                 }
-
+                
             }
-
+            .background {
+                VStack(spacing: 0) {
+                    Color("\(viewModel.recipe.category.rawValue)")
+                        .frame(height: 200)
+                    Color.cream500
+                }
+            }
+            
         }
         .safeAreaInset(edge: .bottom) {
-
-                VStack {
-                    if viewModel.recipe.status == .unlocked {
-                        Button(action: {
-                            viewRouter.stepsView(recipe: viewModel.recipe)
-                        }, label: {
-                            FillButtonComponent(recipe: viewModel.recipe, currentStatus: .seeMore)
-                        })
-                    } else if viewModel.recipe.status == .locked {
-                        Button(action: {
-                            viewModel.buyRecipe(recipe: viewModel.recipe, mapViewModel: mapViewModel, player: player)
-                        }, label: {
-                            FillButtonComponent(recipe: viewModel.recipe, currentStatus: .buy)
-                        })
-                    }
+            
+            VStack {
+                if viewModel.recipe.status == .unlocked {
+                    Button(action: {
+                        viewRouter.stepsView(recipe: viewModel.recipe)
+                    }, label: {
+                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .seeMore)
+                    })
+                } else if viewModel.recipe.status == .locked {
+                    Button(action: {
+                        viewModel.buyRecipe(recipe: viewModel.recipe, mapViewModel: mapViewModel, player: player)
+                    }, label: {
+                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .buy)
+                    })
                 }
-                .padding(.bottom, 20)
-                .background(Color.clear)
             }
+            .padding(.bottom, 20)
+            .background(Color.clear)
+        }
         .background {
             VStack(spacing: 0) {
                 Color("\(viewModel.recipe.category.rawValue)")
-                    .frame(height: 200)
                 Color.cream500
             }
         }
@@ -143,7 +164,7 @@ struct RecipeView: View {
                 .frame(width: 360, height: 2)
         }
         .padding(.bottom, 10)
-      
+        
         VStack(alignment: .center, spacing: 10) {
             ForEach(viewModel.recipe.tags.chunked(into: 3), id: \.self) { rowTags in
                 HStack(spacing: 10) {
@@ -159,5 +180,5 @@ struct RecipeView: View {
         
     }
     
-
+    
 }

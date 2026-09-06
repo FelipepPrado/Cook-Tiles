@@ -71,7 +71,7 @@ enum RecipeStatus: String, Codable{
     }
 }
 
-struct RecipeStep: Codable{
+struct RecipeStep: Codable, Hashable{
     let order: Int
     let instruction: String
     let process: String
