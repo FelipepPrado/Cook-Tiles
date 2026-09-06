@@ -12,12 +12,18 @@ struct DescriptionComponent: View {
     
     var body: some View {
         if recipe.status == .unlocked {
-            Text(recipe.name)
-                .font(Font.callout.bold())
-                .multilineTextAlignment(.leading)
-                .frame(width: 280, height: 258)
-                .background(Color.cream600)
-                .foregroundStyle(Color.brown700)
+            VStack(alignment: .leading){
+                Text(recipe.recipeDescription)
+                    .font(Font.callout.bold())
+                    .multilineTextAlignment(.leading)
+                    .padding(.top, 5)
+                    .frame(maxWidth: 260, maxHeight: 260, alignment: .topLeading)
+                    .foregroundStyle(Color.brown700)
+            }
+            .frame(minWidth: 280, maxHeight: 280)
+            .background(Color.cream600)
+            .cornerRadius(10)
+            
             
         }else if recipe.status == .locked {
             VStack(alignment: .center, spacing: 10){
@@ -30,7 +36,7 @@ struct DescriptionComponent: View {
                     .font(Font.callout.bold())
                     .foregroundStyle(Color.brown100)
             }
-            .frame(width: 280, height: 280)
+            .frame(minWidth: 280, maxHeight: 280)
             .background(Color.cream600)
         }
     }
