@@ -18,7 +18,7 @@ struct AddRecipetoMealView: View {
                                 viewModel.addRecipe(recipe)
                                 dismiss()
                             }, label: {
-                                UnlockedRecipeComponent(recipe: recipe)
+                                RecipeComponent(recipe: recipe, currentStatus: .unlocked)
                                     .frame(width: 120 ,height: 145)
                             })
                         }

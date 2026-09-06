@@ -33,16 +33,16 @@ struct RecipeListView: View {
                             Button(action:{
                                 viewRouter.recipeView(recipe: recipe)
                             },label: {
-                                UnlockedRecipeComponent(recipe: recipe)
+                                RecipeComponent(recipe: recipe, currentStatus: .unlocked)
                             })
                         }else if recipe.status == .locked {
                             Button(action:{
                                 viewRouter.recipeView(recipe: recipe)
                             },label: {
-                                LockedRecipeComponent(recipe: recipe)
+                                RecipeComponent(recipe: recipe, currentStatus: .locked)
                             })
                         }else if recipe.status == .unavailable {
-                            UnavailableRecipeComponent()
+                            RecipeComponent(recipe: recipe, currentStatus: .unavailable)
                         }
                         
                     }
