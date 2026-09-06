@@ -59,8 +59,7 @@ struct RecipeDetailView: View {
                     
                     Text(viewModel.recipe.name)
                         .foregroundStyle(Color.brown700)
-//                        .font(.jaini())
-                        .font(Font.custom("JainiPurva-Regular", size: 42, relativeTo: .largeTitle))
+                        .font(Font.custom("JainiPurva-Regular", size: 48, relativeTo: .largeTitle))
                         .frame(maxWidth: 290)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)

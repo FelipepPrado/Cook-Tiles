@@ -265,6 +265,12 @@ final class MapScene: SKScene {
             container.position = CGPoint(x: 0, y: 100)
             container.zPosition = 1
         
+        let coinImage = SKSpriteNode(texture: .init(imageNamed: "recipeCoin"))
+        
+        coinImage.setScale(0.5)
+        coinImage.zPosition = 1.1
+        
+        
         let priceLabel = SKLabelNode(text:"\(price)")
         
         priceLabel.horizontalAlignmentMode = .center
@@ -273,21 +279,37 @@ final class MapScene: SKScene {
         priceLabel.fontName = "AvenirNext-Bold"
         priceLabel.fontColor = .white
         priceLabel.zPosition = 1.1
+            
+        let spacing: CGFloat = 5
+        let totalContentWidth = priceLabel.frame.width + spacing + coinImage.frame.width
         
-        let padding: CGFloat = 8
+        priceLabel.position = CGPoint(
+            x: -(totalContentWidth / 2) + (priceLabel.frame.width / 2),
+            y: 0
+        )
+        
+        
+        coinImage.position = CGPoint(
+            x: (totalContentWidth / 2) - (coinImage.frame.width / 2),
+            y: 0
+        )
+
+        let padding: CGFloat = 16
         let background = SKShapeNode(
             rectOf: CGSize(
-                width: priceLabel.frame.width + padding * 3,
-                height: priceLabel.frame.height + padding * 3
+                width: totalContentWidth + padding * 2,
+                height: max(priceLabel.frame.height, coinImage.frame.height) + padding
             ),
-            cornerRadius: 30
+            cornerRadius: 15
         )
+        
         background.fillColor = .green500
         background.strokeColor = .clear
         background.zPosition = 1
         
         container.addChild(background)
         container.addChild(priceLabel)
+        container.addChild(coinImage)
         
         return container
     }

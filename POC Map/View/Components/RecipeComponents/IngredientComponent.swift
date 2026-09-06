@@ -49,7 +49,6 @@ struct IngredientComponent: View {
                 Text("\(igredient.quantity) \(igredient.unit)")
                     .font(.callout
                         .bold())
-                    .foregroundColor(.brown200)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
 
