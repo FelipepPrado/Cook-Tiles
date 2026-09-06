@@ -21,7 +21,7 @@ struct RecipeListView: View {
         ScrollView {
             ForEach(RecipeCategory.allCases, id: \.displayName) { category in
                 Text(category.displayName)
-                    .font(.title2)
+                    .font(.hammersmith(fontStyle: .title2))
                     .padding(.bottom, 10)
                     .padding(.leading, 10)
                     .foregroundStyle(Color(.brown200))

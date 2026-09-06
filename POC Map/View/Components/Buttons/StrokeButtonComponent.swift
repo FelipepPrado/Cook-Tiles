@@ -13,7 +13,7 @@ struct StrokeButtonComponent: View {
     var body: some View {
         Text(text)
             .padding(10)
-            .font(Font.callout.bold())
+            .font(.hammersmith())
             .frame(width: 280, height: 48)
             .background(Color.cream500)
             .cornerRadius(10)

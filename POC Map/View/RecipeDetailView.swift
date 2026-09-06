@@ -15,17 +15,17 @@ struct RecipeDetailView: View {
                         Text("Preparo")
                             .bold()
                             .foregroundStyle(Color.brown100)
-                            .font(.callout)
+                            .font(.hammersmith(fontStyle: .caption))
                         if viewModel.recipe.status == .unlocked {
                             Text("\(viewModel.recipe.time) min")
                                 .foregroundStyle(Color.brown700)
                                 .bold()
-                                .font(.body)
+                                .font(.hammersmith())
                         }else if viewModel.recipe.status == .locked {
                             Text("???")
                                 .foregroundStyle(Color.brown700)
                                 .bold()
-                                .font(.body)
+                                .font(.hammersmith())
                         }
                         
                     }
@@ -37,19 +37,19 @@ struct RecipeDetailView: View {
                         Text("Porções")
                             .bold()
                             .foregroundStyle(Color.brown100)
-                            .font(.callout)
+                            .font(.hammersmith(fontStyle: .caption))
                         
                         if viewModel.recipe.status == .unlocked {
                             Text(viewModel.recipe.portions)
                                 .foregroundStyle(Color.brown700)
                                 .bold()
-                                .font(.body)
+                                .font(.hammersmith())
                         }
                         else if viewModel.recipe.status == .locked {
                             Text("???")
                                 .foregroundStyle(Color.brown700)
                                 .bold()
-                                .font(.body)
+                                .font(.hammersmith())
                         }
                     }
                     .padding(.trailing, 20)
@@ -61,8 +61,8 @@ struct RecipeDetailView: View {
                     
                     Text(viewModel.recipe.name)
                         .foregroundStyle(Color.brown700)
-                        .font(.largeTitle)
-                        .frame(maxWidth: 280)
+                        .font(.jaini())
+                        .frame(maxWidth: 320)
                         .multilineTextAlignment(.center)
                     
                     Rectangle()
@@ -82,7 +82,7 @@ struct RecipeDetailView: View {
                         }
                     }
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, 10)
                 
                 DescriptionComponent(recipe: viewModel.recipe)
                     .padding(.bottom, 8)

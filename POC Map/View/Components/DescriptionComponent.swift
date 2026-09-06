@@ -14,9 +14,9 @@ struct DescriptionComponent: View {
         if recipe.status == .unlocked {
             VStack(alignment: .leading){
                 Text(recipe.recipeDescription)
-                    .font(Font.callout.bold())
+                    .font(.hammersmith())
                     .multilineTextAlignment(.leading)
-                    .padding(.top, 5)
+                    .padding(.top, 10)
                     .frame(maxWidth: 260, maxHeight: 260, alignment: .topLeading)
                     .foregroundStyle(Color.brown700)
             }
@@ -33,7 +33,7 @@ struct DescriptionComponent: View {
                     .frame(width: 90, height:80)
                 Text("Adquira essa Receita para \nvisualizar mais informações")
                     .multilineTextAlignment(.center)
-                    .font(Font.callout.bold())
+                    .font(.hammersmith())
                     .foregroundStyle(Color.brown100)
             }
             .frame(minWidth: 280, maxHeight: 280)

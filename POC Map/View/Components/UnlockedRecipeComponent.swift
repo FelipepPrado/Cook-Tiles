@@ -21,7 +21,7 @@ struct UnlockedRecipeComponent: View {
 
                 
                 Text(recipe.name)
-                    .font(.body)
+                    .font(.hammersmith())
                     .foregroundColor(.brown200)
 //                    .padding(.bottom, 8)
                     .multilineTextAlignment(.center)

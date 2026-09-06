@@ -20,7 +20,7 @@ struct HistoryView: View {
                         .scaledToFit()
                         .frame(width: 173, height: 150)
                     Text("Você ainda não cadastrou nenhuma Refeição!")
-                        .font(.headline)
+                        .font(.hammersmith(fontStyle: .title2))
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.brown100)
                     Spacer()
@@ -34,11 +34,10 @@ struct HistoryView: View {
                         ForEach(viewModel.groupedMeals, id: \.date) { group in
                             VStack(
                                 alignment: .leading,
-                                spacing: 20
+                                spacing: 10
                             ) {
-                                Text(formattedDate(group.date))
-                                    .font(Font.custom("Hammersmith One", size: 16, relativeTo: .callout))
-                                    .bold()
+                                Text(formattedDate(group.date).uppercased())
+                                    .font(.hammersmith())
                                     .foregroundStyle(.brown200)
                                 
                                 ScrollView(
@@ -58,6 +57,7 @@ struct HistoryView: View {
                             }
                         }
                         .padding(.leading, 20)
+                        .padding(.top, 10)
                     }
                 }
             }

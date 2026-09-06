@@ -27,7 +27,7 @@ struct RecipeStepComponent: View {
                             .frame(width: 40, height: 75)
                             .padding(.bottom, 10)
                         Text("Passo \nAnterior")
-                            .font(.caption2.bold())
+                            .font(.hammersmith())
                             .foregroundStyle(.cream50)
                             .multilineTextAlignment(.center)
                         
@@ -47,7 +47,7 @@ struct RecipeStepComponent: View {
                             .frame(width: 40, height: 75)
                             .padding(.bottom, 10)
                         Text("Passo\nSeguinte")
-                            .font(.caption2.bold())
+                            .font(.hammersmith())
                             .foregroundStyle(.cream50)
                             .multilineTextAlignment(.center)
                         
@@ -71,7 +71,7 @@ struct RecipeStepComponent: View {
                     
                     VStack(spacing: 0){
                         Text("Etapa \(step.order)")
-                            .font(.body.bold())
+                            .font(.hammersmith())
                             .foregroundStyle(.brown200)
                             .frame(width: 100, height: 40)
                             .background(Color.cream50)
