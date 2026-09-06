@@ -1425,7 +1425,7 @@
     "category": "pratoPrincipal",
     "id": 4,
     "price": 20,
-    "overlayImage": "macarrao_carbonara",
+    "overlayImage": "macarrao_a_carbonara",
     "portions": "2",
     "meals": [],
     "recipeDescription": "Espaguete cremoso feito com ovos, gemas e parmesão, no calor da massa, com bacon dourado e um toque de vinho branco."
@@ -2696,7 +2696,7 @@
     "category": "guarnicao",
     "id": 2,
     "price": 30,
-    "overlayImage": "brócolis_assado",
+    "overlayImage": "brocolis_assado",
     "portions": "6",
     "meals": [],
     "recipeDescription": "Ramos de brócolis assados até tostarem, servidos com molho de manteiga e missô e sementes de girassol."
