@@ -9,7 +9,6 @@ struct NewMealView: View {
     @Query(sort: \Recipe.id, order: .forward) private var recipeModel: [Recipe]
     @Query private var players: [Player]
     
-    
     var player: Player {
         players.first ?? Player(coin: 100, banner: "Phoenix")
     }
@@ -22,30 +21,62 @@ struct NewMealView: View {
             ScrollView{
                 VStack(spacing: 30){
                     VStack{
-                        PhotosPicker(selection: $viewModel.pickerItem, matching: .images, photoLibrary: .shared()) {
-                            if viewModel.imageData != nil{
-                                Image(uiImage: UIImage(data: viewModel.newMeal.image) ?? UIImage())
-                                    .resizable()
-                                    .frame(width: 285, height: 260)
-                                    .scaledToFill()
-                                    .tint(.cream800)
-                                    .clipShape(RoundedRectangle(cornerRadius: 35))
+                        Button {
+                            viewRouter.cameraView { fotoCapturada in
+                                viewModel.imageData = fotoCapturada
+                                viewModel.newMeal.image = fotoCapturada
                             }
-                            
-                            else{
+                        } label: {
+                            if let imageData = viewModel.imageData,
+                               let image = UIImage(data: imageData) {
+
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 285, height: 260)
+                                    .clipShape(RoundedRectangle(cornerRadius: 35))
+
+                            } else {
                                 Image(systemName: "photo.badge.plus")
                                     .font(.system(size: 60))
-                                    .padding(90)
-                                    .tint(.cream800)
-                                    .overlay(
+                                    .frame(width: 285, height: 260)
+                                    .foregroundStyle(.cream800)
+                                    .overlay {
                                         RoundedRectangle(cornerRadius: 35)
                                             .stroke(
                                                 .cream800,
-                                                style: StrokeStyle(lineWidth: 5, dash: [31, 31])
+                                                style: StrokeStyle(
+                                                    lineWidth: 5,
+                                                    dash: [31, 31]
+                                                )
                                             )
-                                    )
+                                    }
                             }
                         }
+//                        PhotosPicker(selection: $viewModel.pickerItem, matching: .images, photoLibrary: .shared()) {
+//                            if viewModel.imageData != nil{
+//                                Image(uiImage: UIImage(data: viewModel.newMeal.image) ?? UIImage())
+//                                    .resizable()
+//                                    .frame(width: 285, height: 260)
+//                                    .scaledToFill()
+//                                    .tint(.cream800)
+//                                    .clipShape(RoundedRectangle(cornerRadius: 35))
+//                            }
+//                            
+//                            else{
+//                                Image(systemName: "photo.badge.plus")
+//                                    .font(.system(size: 60))
+//                                    .padding(90)
+//                                    .tint(.cream800)
+//                                    .overlay(
+//                                        RoundedRectangle(cornerRadius: 35)
+//                                            .stroke(
+//                                                .cream800,
+//                                                style: StrokeStyle(lineWidth: 5, dash: [31, 31])
+//                                            )
+//                                    )
+//                            }
+//                        }
                         
                         StarRatingInputComponent(rating: $viewModel.newMeal.stars, isInput: true)
                     }

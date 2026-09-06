@@ -2,7 +2,7 @@ import SwiftUI
 import Observation
 
 enum NameViews: Hashable{
-    case CameraView
+    case CameraView(request: CameraRequest)
     case HistoryView
     case MapView
     case NewMealView
@@ -27,8 +27,14 @@ class ViewRouter{
         self.clear()
     }
     
-    func cameraView(){
-        path.append(NameViews.CameraView)
+    func cameraView(
+        onPhoto: @escaping (Data) -> Void
+    ) {
+        let request = CameraRequest(onPhoto: onPhoto)
+
+        path.append(
+            NameViews.CameraView(request: request)
+        )
     }
     
     func historyView(){
@@ -61,8 +67,8 @@ enum ViewManagar {
     @ViewBuilder
     static func viewForDestination(_ destination: NameViews) -> some View {
         switch destination {
-        case .CameraView:
-            CameraView()
+        case .CameraView(let request):
+            CameraView(onPhoto: request.onPhoto)
         case .HistoryView:
             HistoryView()
         case .MapView:
