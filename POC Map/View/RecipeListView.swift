@@ -37,7 +37,7 @@ struct RecipeListView: View {
                             })
                         }else if recipe.status == .locked {
                             Button(action:{
-                                viewModel.buyRecipe(recipe: recipe, mapViewModel: mapViewModel, player: player)
+                                viewRouter.recipeView(recipe: recipe)
                             },label: {
                                 LockedRecipeComponent(recipe: recipe)
                             })

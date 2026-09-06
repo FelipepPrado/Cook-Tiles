@@ -31,5 +31,6 @@ struct POC_MapApp: App {
         }
         .modelContainer(container)
         .environment(ViewRouter())
+
     }
 }

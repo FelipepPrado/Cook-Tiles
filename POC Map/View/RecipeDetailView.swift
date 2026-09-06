@@ -84,8 +84,15 @@ struct RecipeDetailView: View {
                 }
                 .padding(.bottom, 10)
                 
-                DescriptionComponent(recipe: viewModel.recipe)
-                    .padding(.bottom, 8)
+                if viewModel.recipe.status == .locked {
+                    DescriptionComponent(recipe: viewModel.recipe, currentStatus: .detailViewLocked)
+                        .padding(.bottom, 8)
+                } else if viewModel.recipe.status == .unlocked{
+                    DescriptionComponent(recipe: viewModel.recipe, currentStatus: .detailViewUnlocked)
+                        .padding(.bottom, 8)
+                }
+                
+                
                 
                 if viewModel.recipe.status == .locked {
                     Button {

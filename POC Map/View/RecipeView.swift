@@ -8,15 +8,20 @@ struct RecipeView: View {
             VStack(spacing: 0) {
                 headerSection
                 
-                Text("Ingredientes")
-                    .bold()
-                    .foregroundStyle(Color.brown700)
-                    .font(.hammersmith(fontStyle: .title2))
-                    .padding(.bottom, 10)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-                
-                ingredientsGrid
+                if viewModel.recipe.status == .unlocked {
+                    Text("Ingredientes")
+                        .bold()
+                        .foregroundStyle(Color.brown700)
+                        .font(.hammersmith(fontStyle: .title2))
+                        .padding(.bottom, 10)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
+                    
+                    ingredientsGrid
+                }else if viewModel.recipe.status == .locked {
+                    DescriptionComponent(recipe: viewModel.recipe, currentStatus: .recipeViewLocked)
+                }
+
             }
         }
         .background {
@@ -91,7 +96,7 @@ struct RecipeView: View {
         }
         .frame(maxWidth: 360)
         .padding(.top, 10)
-        .padding(.bottom, 20)
+        .padding(.bottom, 10)
     }
     
     @ViewBuilder

@@ -87,6 +87,7 @@ struct MapView: View {
         }
         .environment(viewModel)
         .environment(player)
+
     }
     
 }
