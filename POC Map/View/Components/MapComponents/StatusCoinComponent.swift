@@ -25,13 +25,16 @@ struct HexagonShape: Shape {
 
 struct StatusCoinComponent: View {
     let coin: Int
+    
     var body: some View {
         HStack(spacing: 12) {
             Text("\(coin)")
-                .font(.system(size: 28, weight: .bold, design: .rounded))
+                .font(.hammersmith())
+                .font(.title3)
                 .foregroundColor(.cream300)
             
             Image("statusCoin")
+                .frame(width: 28, height: 28)
 
         }
         .padding(.horizontal, 24)

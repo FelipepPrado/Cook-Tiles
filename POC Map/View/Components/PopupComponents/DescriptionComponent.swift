@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct DescriptionComponent: View {
+    
     let recipe: Recipe
     
+    let currentStatus: EnumDescription
+    
     var body: some View {
-        if recipe.status == .unlocked {
+        
+        switch currentStatus{
+            
+        case .detailViewUnlocked:
             VStack(alignment: .leading){
                 Text(recipe.recipeDescription)
                     .font(.hammersmith())
@@ -23,9 +29,9 @@ struct DescriptionComponent: View {
             .frame(minWidth: 280, maxHeight: 280)
             .background(Color.cream600)
             .cornerRadius(10)
+        
+        case .detailViewLocked:
             
-            
-        }else if recipe.status == .locked {
             VStack(alignment: .center, spacing: 10){
                 Image("lockedRecipe")
                     .resizable()
@@ -38,10 +44,36 @@ struct DescriptionComponent: View {
             }
             .frame(minWidth: 280, maxHeight: 280)
             .background(Color.cream600)
+            .cornerRadius(10)
+            
+        case .recipeViewLocked:
+            
+            VStack(alignment: .center, spacing: 10){
+                Image("lockedRecipe")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 90, height:80)
+                Text("Adquira essa Receita para \nvisualizar mais informações")
+                    .multilineTextAlignment(.center)
+                    .font(.hammersmith())
+                    .foregroundStyle(Color.brown100)
+            }
+            .frame(minWidth: 360, minHeight: 380)
+            .background(Color.cream600)
+            .cornerRadius(10)
         }
+
     }
 }
 
 //#Preview {
 //    DescriptionComponent()
 //}
+
+enum EnumDescription: CaseIterable {
+    
+    case detailViewUnlocked
+    case detailViewLocked
+    case recipeViewLocked
+    
+}

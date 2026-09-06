@@ -32,43 +32,24 @@ struct MapView: View {
                         RecipeDetailView(viewModel: RecipeDetailViewModel(
                             recipe: recipe, mapViewModel: viewModel, player: player
                         ))
-                        .padding(.bottom, 50)
+                        .padding(.bottom, 35)
                     }
-                    .zIndex(01)
+                    .zIndex(1)
                 }
                 ZStack{
                     SpriteView(scene: viewModel.mapScene)
                         .ignoresSafeArea()
                     
                 }
-                
+                .overlay(alignment: .topLeading) {
+                    StatusCoinComponent(coin: player.coin)
+                        .padding()
+                        .zIndex(2)
+                }
                 .onAppear {
                     viewModel.initMap(recipes: recipeModel)
                     
                 }
-//                .overlay {
-//                    if let recipe = viewModel.selectedRecipe{
-//                        
-//                        if viewModel.showPopup {
-//                            ZStack {
-//                                
-//                                Color.black.opacity(0.4)
-//                                    .ignoresSafeArea()
-//                                    .onTapGesture {
-//                                        
-//                                        viewModel.selectedRecipe = nil
-//                                        
-//                                    }
-//                                    .transition(.opacity)
-//                                
-//                                RecipeDetailView(viewModel: RecipeDetailViewModel(
-//                                    recipe: recipe, mapViewModel: viewModel, player: player
-//                                ))
-//                                
-//                            }
-//                        }
-//                    }
-//                }
                 .navigationDestination(for: NameViews.self){
                     destination in
                     ViewManagar.viewForDestination(destination)
@@ -76,17 +57,18 @@ struct MapView: View {
                 .safeAreaInset(edge: .bottom, spacing: 0) {
                     TabBarComponent()
                 }
-                .toolbar{
-                    ToolbarItem(placement: .topBarLeading){
-                        VStack{
-                            Text("\(player.coin)")
-                        }
-                    }
-                }
+//                .toolbar{
+//                    ToolbarItem(placement: .topBarLeading){
+//                        VStack{
+//                            Text("\(player.coin)")
+//                        }
+//                    }
+//                }
             }
         }
         .environment(viewModel)
         .environment(player)
+
     }
     
 }

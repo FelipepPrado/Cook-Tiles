@@ -1,28 +1,110 @@
 import SwiftUI
 
 struct RecipeView: View {
+    
     var viewModel: RecipeViewModel
+    
+    @Environment(ViewRouter.self) var viewRouter
+    @Environment(MapViewModel.self) private var mapViewModel
+    @Environment(Player.self) private var player
+    
+    let columns = [
+        GridItem(.adaptive(minimum: 100))
+    ]
     
     var body: some View {
         ScrollView {
+            
             VStack(spacing: 0) {
                 headerSection
                 
-                Text("Ingredientes")
-                    .bold()
-                    .foregroundStyle(Color.brown700)
-                    .font(.hammersmith(fontStyle: .title2))
-                    .padding(.bottom, 10)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
+                if viewModel.recipe.status == .unlocked {
+                    Text("Ingredientes")
+                        .bold()
+                        .foregroundStyle(Color.brown700)
+                        .font(.hammersmith(fontStyle: .title2))
+                        .padding(.bottom, 10)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 10)
+                    
+                    LazyVGrid(columns: columns, spacing: 10) {
+                        ForEach(viewModel.recipe.igredients, id: \.self) { igredient in
+                            if igredient.status == false {
+                                Button(action: {
+                                    viewModel.toogleStatus(igredient: igredient)
+                                }, label: {
+                                    IngredientComponent(igredient: igredient, currentStatus: .normal)
+                                })
+                            } else if igredient.status == true {
+                                
+                                Button(action: {
+                                    viewModel.toogleStatus(igredient: igredient)
+                                }, label: {
+                                    IngredientComponent(igredient: igredient, currentStatus: .green)
+                                })
+                            }
+                            
+                        }
+                    }
+                    .frame(maxWidth: 360)
+                    .padding(.bottom, 20)
+                    
+                    Text("Preparo")
+                        .bold()
+                        .foregroundStyle(Color.brown700)
+                        .font(.hammersmith(fontStyle: .title2))
+                        .padding(.bottom, 10)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 10)
+                    
+                    ForEach(viewModel.recipe.steps, id: \.self) { step in
+                        StepsScreenComponent(step: step)
+                            .padding(.bottom, 15)
+                    }
+                    
+                    
+                }else if viewModel.recipe.status == .locked {
+                    DescriptionComponent(recipe: viewModel.recipe, currentStatus: .recipeViewLocked)
+                        .padding(.bottom, 10)
+                    
+                    
+                }
                 
-                ingredientsGrid
             }
+            .background {
+                VStack(spacing: 0) {
+                    Color("\(viewModel.recipe.category.rawValue)")
+                        .frame(height: 200)
+                    Color.cream500
+                }
+            }
+            
+        }
+        .safeAreaInset(edge: .bottom) {
+            
+            VStack {
+                if viewModel.recipe.status == .unlocked {
+                    Button(action: {
+                        viewRouter.stepsView(recipe: viewModel.recipe)
+                    }, label: {
+                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .seeMore)
+                    })
+                } else if viewModel.recipe.status == .locked {
+                    Button(action: {
+                        viewModel.buyRecipe(recipe: viewModel.recipe, mapViewModel: mapViewModel, player: player)
+                    }, label: {
+                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .buy)
+                    })
+                }
+            }
+            .padding(.bottom, 20)
+            .background(Color.clear)
         }
         .background {
             VStack(spacing: 0) {
                 Color("\(viewModel.recipe.category.rawValue)")
-                    .frame(height: 200)
                 Color.cream500
             }
         }
@@ -83,42 +165,20 @@ struct RecipeView: View {
         }
         .padding(.bottom, 10)
         
-        HStack(spacing: 10) {
-            ForEach(viewModel.recipe.tags, id: \.rawValue) { tag in
-                TagComponent(tag: tag)
+        VStack(alignment: .center, spacing: 10) {
+            ForEach(viewModel.recipe.tags.chunked(into: 3), id: \.self) { rowTags in
+                HStack(spacing: 10) {
+                    ForEach(rowTags, id: \.rawValue) { tag in
+                        TagComponent(tag: tag)
+                    }
+                }
             }
-            
         }
         .frame(maxWidth: 360)
         .padding(.top, 10)
-        .padding(.bottom, 20)
+        .padding(.bottom, 15)
+        
     }
     
-    @ViewBuilder
-    private var ingredientsGrid: some View {
-        VStack(spacing: -60) {
-            let linhas = viewModel.organizarEmLinhas(ingredientes: viewModel.recipe.igredients)
-            
-            ForEach(0..<linhas.count, id: \.self) { indexDaLinha in
-                HStack(spacing: 0) {
-                    ForEach(0..<linhas[indexDaLinha].count, id: \.self) { indexDoIngrediente in
-                        
-                        if let igredient = linhas[indexDaLinha][indexDoIngrediente] {
-
-                            IngredientComponent(igredient: igredient)
-                                .padding(2)
-                        } else {
- 
-                            Color.clear
-                                .frame(width: 125, height: 125)
-                                .padding(2)
-                        }
-                    }
-                }
-                .zIndex(Double(linhas.count - indexDaLinha))
-            }
-        }
-        .padding(.top, 10)
-    }
-
+    
 }

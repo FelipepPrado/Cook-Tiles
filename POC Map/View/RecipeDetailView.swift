@@ -29,7 +29,6 @@ struct RecipeDetailView: View {
                         }
                         
                     }
-                    .padding(.leading, 25)
                     
                         Spacer()
                     
@@ -52,29 +51,31 @@ struct RecipeDetailView: View {
                                 .font(.hammersmith())
                         }
                     }
-                    .padding(.trailing, 20)
                     
                 }
-                .padding(.bottom, 3)
+                .padding(.bottom, 2)
                 
                 VStack(spacing:3){
                     
                     Text(viewModel.recipe.name)
                         .foregroundStyle(Color.brown700)
-                        .font(.jaini())
-                        .frame(maxWidth: 320)
+//                        .font(.jaini())
+                        .font(Font.custom("JainiPurva-Regular", size: 42, relativeTo: .largeTitle))
+                        .frame(maxWidth: 290)
                         .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+
                     
                     Rectangle()
                         .fill(.brown100)
-                        .frame(width: 280, height: 2)
+                        .frame(maxWidth: 280, maxHeight: 2)
 
                 }
                 .padding(.bottom, 10)
                 
 
                 VStack(alignment: .center, spacing: 10) {
-                    ForEach(viewModel.recipe.tags.chunked(into: 2), id: \.self) { rowTags in
+                    ForEach(viewModel.recipe.tags.chunked(into: 3), id: \.self) { rowTags in
                         HStack(spacing: 10) {
                             ForEach(rowTags, id: \.rawValue) { tag in
                                 TagComponent(tag: tag)
@@ -84,14 +85,21 @@ struct RecipeDetailView: View {
                 }
                 .padding(.bottom, 10)
                 
-                DescriptionComponent(recipe: viewModel.recipe)
-                    .padding(.bottom, 8)
+                if viewModel.recipe.status == .locked {
+                    DescriptionComponent(recipe: viewModel.recipe, currentStatus: .detailViewLocked)
+                        .padding(.bottom, 8)
+                } else if viewModel.recipe.status == .unlocked{
+                    DescriptionComponent(recipe: viewModel.recipe, currentStatus: .detailViewUnlocked)
+                        .padding(.bottom, 8)
+                }
+                
+                
                 
                 if viewModel.recipe.status == .locked {
                     Button {
                         viewModel.buyRecipe()
                     } label: {
-                        FillButtonComponent(recipe: viewModel.recipe, text: "Adquirir \(viewModel.recipe.price) P")
+                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .buy)
                     }
 
                 } else if viewModel.recipe.status == .unlocked{
@@ -101,7 +109,7 @@ struct RecipeDetailView: View {
                         viewModel.close()
 
                     } label: {
-                        FillButtonComponent(recipe: viewModel.recipe, text: "Ver Mais")
+                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .seeMore)
                             .padding(.bottom, 5)
                     
                     }
@@ -114,9 +122,9 @@ struct RecipeDetailView: View {
 
                 }
             }
-            .frame(maxWidth: 340, maxHeight: 560)
+            .frame(maxWidth: 290, maxHeight: 500)
         }
-        .frame(maxWidth: 350, minHeight: 650)
+        .frame(maxWidth: 310, minHeight: 590)
         .background(Image("popupBackground")
             .resizable()
             .scaledToFill()

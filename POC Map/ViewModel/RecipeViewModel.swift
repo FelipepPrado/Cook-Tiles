@@ -6,36 +6,26 @@ internal import SpriteKit
 
 @Observable
 final class RecipeViewModel{
-    let recipe: Recipe
-
+    var recipe: Recipe
     
     init(recipe: Recipe) {
         self.recipe = recipe
 
     }
     
-    func organizarEmLinhas(ingredientes: [Igredient]) -> [[Igredient?]] {
-        var linhas: [[Igredient?]] = []
-        var indice = 0
-        var linhaDeTres = true
+    func buyRecipe(recipe: Recipe, mapViewModel: MapViewModel, player: Player) {
+        if player.coin >= recipe.price{
+            mapViewModel.unlockRecipe(recipe)
+            player.coin -= recipe.price
+        }
+    }
+    
+    func toogleStatus(igredient: Igredient){
         
-        while indice < ingredientes.count {
-            let limite = linhaDeTres ? 3 : 2
-            let fim = min(indice + limite, ingredientes.count)
-            
-            var linha: [Igredient?] = Array(ingredientes[indice..<fim])
-            
-            while linha.count < limite {
-                linha.append(nil)
-            }
-            
-            linhas.append(linha)
-            
-            indice += limite
-            linhaDeTres.toggle()
+        if let index = recipe.igredients.firstIndex(where: { $0.name == igredient.name }) {
+            recipe.igredients[index].status.toggle()
         }
         
-        return linhas
     }
-
+    
 }
