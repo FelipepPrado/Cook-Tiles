@@ -155,7 +155,7 @@ struct RecipeView: View {
             Text(viewModel.recipe.name)
                 .foregroundStyle(Color.brown700)
                 .bold()
-                .font(.jaini())
+                .font(Font.custom("JainiPurva-Regular", size: 44, relativeTo: .largeTitle))
                 .frame(maxWidth: 360)
                 .multilineTextAlignment(.center)
             
