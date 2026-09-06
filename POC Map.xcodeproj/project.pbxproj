@@ -15,9 +15,22 @@
 		55FA8256303DA74C004CA2E2 /* POC Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "POC Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		55965A88304DB1580082AC44 /* Exceptions for "POC Map" folder in "POC Map" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"POC-Map-Info.plist",
+			);
+			target = 55FA8255303DA74C004CA2E2 /* POC Map */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		55FA8258303DA74C004CA2E2 /* POC Map */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				55965A88304DB1580082AC44 /* Exceptions for "POC Map" folder in "POC Map" target */,
+			);
 			path = "POC Map";
 			sourceTree = "<group>";
 		};
@@ -263,6 +276,7 @@
 				DEVELOPMENT_TEAM = 9DZ7V9949Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "POC-Map-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Cooking Tiles";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Este aplicativo precisa acessar a sua câmera para identificar seus gestos manuais, permitindo que você avance os passos da receita sem precisar tocar (ou sujar) a tela.";
@@ -303,6 +317,7 @@
 				DEVELOPMENT_TEAM = 9DZ7V9949Y;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "POC-Map-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Cooking Tiles";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Este aplicativo precisa acessar a sua câmera para identificar seus gestos manuais, permitindo que você avance os passos da receita sem precisar tocar (ou sujar) a tela.";
