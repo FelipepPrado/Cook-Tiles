@@ -167,7 +167,12 @@ final class MapScene: SKScene {
             
             tileOverlay.anchorPoint = CGPoint(x: 0.5, y: 0)
             
-            tileOverlay.position = CGPoint(x: 0, y: 12)
+            if recipe.status == .locked || recipe.status == .unavailable {
+                tileOverlay.position = CGPoint(x: 0, y: 25)
+            } else {
+                tileOverlay.position = CGPoint(x: 0, y: 12)
+            }
+            
             tileOverlay.zPosition = 0.9
             
             let container: SKNode = {
