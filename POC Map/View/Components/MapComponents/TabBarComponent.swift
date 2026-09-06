@@ -17,9 +17,9 @@ struct TabBarComponent: View {
                             .frame(width: 132, height: 73)
                         
                         Text("Histórico")
-                            .font(Font.custom("Hammersmith One", size: 16, relativeTo: .callout))
-                            .padding(.top, 26)
-                            .foregroundStyle(Color.white)
+                            .font(.hammersmith())
+                            .padding(.top, 36)
+                            .foregroundStyle(Color.cream300)
                     }
                     
                 }).buttonStyle(.plain)
@@ -47,9 +47,9 @@ struct TabBarComponent: View {
                             .frame(width: 132, height: 73)
                         
                         Text("Receitas")
-                            .font(Font.custom("Hammersmith One", size: 16, relativeTo: .callout))
-                            .padding(.top, 26)
-                            .foregroundStyle(Color.white)
+                            .font(.hammersmith())
+                            .padding(.top, 36)
+                            .foregroundStyle(Color.cream300)
                     }
                 }).buttonStyle(.plain)
             }

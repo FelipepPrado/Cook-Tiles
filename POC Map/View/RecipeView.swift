@@ -11,7 +11,7 @@ struct RecipeView: View {
                 Text("Ingredientes")
                     .bold()
                     .foregroundStyle(Color.brown700)
-                    .font(.title2)
+                    .font(.hammersmith(fontStyle: .title2))
                     .padding(.bottom, 10)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
@@ -44,11 +44,11 @@ struct RecipeView: View {
                 Text("Preparo")
                     .bold()
                     .foregroundStyle(Color.brown100)
-                    .font(.callout)
+                    .font(.hammersmith(fontStyle: .caption))
                 Text("\(viewModel.recipe.time) min")
                     .foregroundStyle(Color.brown700)
                     .bold()
-                    .font(.body)
+                    .font(.hammersmith())
             }
             .padding(.leading, 25)
             
@@ -58,22 +58,22 @@ struct RecipeView: View {
                 Text("Porções")
                     .bold()
                     .foregroundStyle(Color.brown100)
-                    .font(.callout)
+                    .font(.hammersmith(fontStyle: .caption))
                 
                 Text(viewModel.recipe.portions)
                     .foregroundStyle(Color.brown700)
                     .bold()
-                    .font(.body)
+                    .font(.hammersmith())
             }
             .padding(.trailing, 20)
         }
         .padding(.bottom, 15)
         
-        VStack(spacing: 3) {
+        VStack(spacing: 0) {
             Text(viewModel.recipe.name)
                 .foregroundStyle(Color.brown700)
                 .bold()
-                .font(.largeTitle)
+                .font(.jaini())
                 .frame(maxWidth: 360)
                 .multilineTextAlignment(.center)
             
@@ -87,7 +87,10 @@ struct RecipeView: View {
             ForEach(viewModel.recipe.tags, id: \.rawValue) { tag in
                 TagComponent(tag: tag)
             }
+            
         }
+        .frame(maxWidth: 360)
+        .padding(.top, 10)
         .padding(.bottom, 20)
     }
     
