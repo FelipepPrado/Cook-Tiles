@@ -8,10 +8,6 @@ struct RecipeView: View {
     @Environment(MapViewModel.self) private var mapViewModel
     @Environment(Player.self) private var player
     
-    let columns = [
-        GridItem(.adaptive(minimum: 100))
-    ]
-    
     var body: some View {
         ScrollView {
             
@@ -28,7 +24,7 @@ struct RecipeView: View {
                         .padding(.horizontal, 20)
                         .padding(.bottom, 10)
                     
-                    LazyVGrid(columns: columns, spacing: 10) {
+                    IngredientFlowLayout(horizontalSpacing: 10, verticalSpacing: 10) {
                         ForEach(viewModel.recipe.igredients, id: \.self) { igredient in
                             if igredient.status == false {
                                 Button(action: {
