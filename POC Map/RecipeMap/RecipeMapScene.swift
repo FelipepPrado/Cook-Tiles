@@ -24,6 +24,11 @@ final class MapScene: SKScene {
     
     var isDragging = false
     
+    
+    private var pinchGesture: UIPinchGestureRecognizer?
+    private let minCameraScale: CGFloat = 0.5
+    private let maxCameraScale: CGFloat = 3.5
+    
     override func didMove(to view: SKView) {
         
         backgroundColor = .systemMint
@@ -32,6 +37,14 @@ final class MapScene: SKScene {
             x: 0.5,
             y: 0.5
         )
+        
+        let pinch = UIPinchGestureRecognizer(
+            target: self,
+            action: #selector(handlePinch(_:))
+        )
+
+        view.addGestureRecognizer(pinch)
+        pinchGesture = pinch
         
         createCamera()
     }
@@ -608,5 +621,29 @@ final class MapScene: SKScene {
         
         previousTouchPosition = nil
         isDragging = false
+    }
+    
+    @objc private func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+        guard gesture.state == .began ||
+              gesture.state == .changed else { return }
+
+        isDragging = true
+        previousTouchPosition = nil
+
+        let newScale = mapCamera.xScale / gesture.scale
+
+        mapCamera.setScale(
+            min(max(newScale, minCameraScale), maxCameraScale)
+        )
+
+        gesture.scale = 1
+    }
+
+    override func willMove(from view: SKView) {
+        if let pinchGesture {
+            view.removeGestureRecognizer(pinchGesture)
+        }
+
+        pinchGesture = nil
     }
 }

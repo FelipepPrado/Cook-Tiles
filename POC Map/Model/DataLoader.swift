@@ -58,7 +58,7 @@ struct DataLoader {
                     return
                 }
 
-                let player = Player(coin: 1300, banner: "Loba")
+                let player = Player(coin: 0, banner: "Loba")
 
                 context.insert(player)
 
