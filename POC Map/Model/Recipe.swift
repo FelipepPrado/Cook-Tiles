@@ -101,6 +101,13 @@ enum RecipeTag: String, Codable {
     case glutenFree
     case lactoseFree
     case containsNuts
+    case chicken
+    case beef
+    case pork
+    case noOven
+    case easy
+    case medium
+    case hard
 
     var displayName: String {
         switch self {
@@ -116,6 +123,20 @@ enum RecipeTag: String, Codable {
             "Sem Lactose"
         case .containsNuts:
             "Contém Nozes"
+        case .chicken:
+            "Frango"
+        case .beef:
+            "Boi"
+        case .pork:
+            "Porco"
+        case .noOven:
+            "Sem Forno"
+        case .easy:
+            "Fácil"
+        case .medium:
+            "Médio"
+        case .hard:
+            "Difícil"
         }
     }
 }
@@ -140,4 +161,3 @@ enum RecipeCategory: String, Codable, CaseIterable, Identifiable {
         }
     }
 }
-
