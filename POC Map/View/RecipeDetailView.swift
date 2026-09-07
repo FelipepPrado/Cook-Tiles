@@ -55,7 +55,7 @@ struct RecipeDetailView: View {
                 }
                 .padding(.bottom, 2)
                 
-                VStack(spacing:3){
+                VStack(spacing:-3){
                     
                     Text(viewModel.recipe.name)
                         .foregroundStyle(Color.brown700)
