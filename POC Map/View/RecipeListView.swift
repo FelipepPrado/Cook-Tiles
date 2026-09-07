@@ -50,6 +50,17 @@ struct RecipeListView: View {
             }
         }
         .background(Color(.cream500))
+        
+        .navigationTitle("Receitas")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Receitas")
+                    .fontWeight(.bold)
+                    .foregroundStyle(.brown200)
+                    .blendMode(.plusDarker)
+            }
+        }
     }
 }
 
