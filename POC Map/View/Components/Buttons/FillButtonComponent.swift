@@ -11,6 +11,7 @@ struct FillButtonComponent: View {
     
     let recipe: Recipe
     let currentStatus: FillButton
+    var canAfford: Bool = true
     
     var body: some View {
         
@@ -32,7 +33,7 @@ struct FillButtonComponent: View {
             }
             .padding(10)
             .frame(width: 280, height: 48)
-            .background(Color.green500)
+            .background(canAfford ? Color.green500 : Color.brown100)
             .cornerRadius(10)
             .foregroundStyle(Color.white)
             

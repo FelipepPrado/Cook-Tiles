@@ -71,6 +71,14 @@ struct HistoryView: View {
         }
         .navigationTitle("Histórico de Refeições")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Histórico de Refeições")
+                    .fontWeight(.bold)
+                    .foregroundStyle(.brown200)
+                    .blendMode(.plusDarker)
+            }
+        }
     }
     
     private func formattedDate(_ date: Date) -> String {
@@ -82,6 +90,7 @@ struct HistoryView: View {
                 .year()
                 .locale(Locale(identifier: "pt_BR"))
         )
+        .replacingOccurrences(of: ".", with: "")
     }
 }
 

@@ -14,7 +14,7 @@ final class RecipeViewModel{
     }
     
     func buyRecipe(recipe: Recipe, mapViewModel: MapViewModel, player: Player) {
-        if player.coin >= recipe.price{
+        if recipe.status == .locked, player.coin >= recipe.price {
             mapViewModel.unlockRecipe(recipe)
             player.coin -= recipe.price
         }

@@ -26,7 +26,7 @@ struct MealView: View {
                         
                         HStack(alignment: .center, spacing: 25){
                             ForEach(meal.recipes){ recipe in
-                                VStack(alignment: .center, spacing: 9){
+                                VStack(spacing: 9){
                                     DiamondComponent(recipe: recipe)
                                         .frame(width: 62, height: 62)
                                     
@@ -36,15 +36,32 @@ struct MealView: View {
                                         .frame(maxWidth: 100)
                                         .multilineTextAlignment(.center)
                                 }
+                                .frame(alignment: .top)
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
+                        
+                        if !meal.comment.isEmpty{
+                            Text("Comentários")
+                                .font(Font.custom("Hammersmith One", size: 24, relativeTo: .title2))
+                                .multilineTextAlignment(.leading)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundStyle(.brown200)
+                            
+                            Text(meal.comment)
+                                .font(.custom("Hammersmith One", size: 16, relativeTo: .body))
+                                .foregroundStyle(.brown200)
+                                .multilineTextAlignment(.leading)
+                                .frame(maxWidth: .infinity, minHeight: 52)
+                                .padding(16)
+                                .background(.cream600, in: RoundedRectangle(cornerRadius: 10))
+                        }
                     }
                 }
+                .padding(.horizontal, 36)
+                .padding(.top, 60)
             }
         }
-        .padding(.horizontal, 36)
-        .padding(.top, 60)
         .background(.cream500)
     }
 }
