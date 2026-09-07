@@ -19,7 +19,22 @@ struct MapView: View {
         @Bindable var path = viewRouter
         NavigationStack(path: $path.path) {
             
-            ZStack{
+            ZStack {
+                
+                
+                Image("Home Map")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+                
+                
+                SpriteView(scene: viewModel.mapScene, options: [.allowsTransparency])
+                    .ignoresSafeArea()
+                    .overlay(alignment: .topLeading) {
+                        StatusCoinComponent(coin: player.coin)
+                            .padding()
+                    }
+                
                 if let recipe = viewModel.selectedRecipe, viewModel.showPopup {
                     ZStack {
                         Color.black.opacity(0.4)
@@ -36,35 +51,25 @@ struct MapView: View {
                     }
                     .zIndex(1)
                 }
-                ZStack{
-                    SpriteView(scene: viewModel.mapScene)
-                        .ignoresSafeArea()
-                    
-                }
-                .overlay(alignment: .topLeading) {
-                    StatusCoinComponent(coin: player.coin)
-                        .padding()
-                        .zIndex(2)
-                }
-                .onAppear {
-                    viewModel.mapScene.coinBalance = player.coin
-                    viewModel.initMap(recipes: recipeModel)
-                    
-                }
-                .onChange(of: player.coin, initial: true) { _, balance in
-                    viewModel.mapScene.coinBalance = balance
-                }
-                .navigationDestination(for: NameViews.self){
-                    destination in
-                    ViewManagar.viewForDestination(destination)
-                }
-                .safeAreaInset(edge: .bottom, spacing: 0) {
-                    TabBarComponent()
-                        .padding(.horizontal, 30)
-                }
-                .navigationTitle("Mapa de Receitas")
-                .toolbar(.hidden, for: .navigationBar)
+                
             }
+            
+            .onAppear {
+                viewModel.mapScene.coinBalance = player.coin
+                viewModel.initMap(recipes: recipeModel)
+            }
+            .onChange(of: player.coin, initial: true) { _, balance in
+                viewModel.mapScene.coinBalance = balance
+            }
+            .navigationDestination(for: NameViews.self) { destination in
+                ViewManagar.viewForDestination(destination)
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                TabBarComponent()
+                    .padding(.horizontal, 30)
+            }
+            .navigationTitle("Mapa de Receitas")
+            .toolbar(.hidden, for: .navigationBar)
         }
         .environment(viewModel)
         .environment(player)
