@@ -27,17 +27,18 @@ struct StatusCoinComponent: View {
     let coin: Int
     
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 3) {
             Text("\(coin)")
-                .font(.hammersmith())
+                .font(Font.custom("Hammersmith One", size: 19, relativeTo: .headline))
                 .foregroundColor(.cream300)
             
             Image("statusCoin")
                 .frame(width: 28, height: 28)
 
         }
+        .frame(minWidth: 85)
         .padding(.horizontal, 24)
-        .padding(.top, 11)
+        .padding(.top, 10)
         .padding(.bottom, 10)
         .background(
             HexagonShape()

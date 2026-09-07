@@ -20,12 +20,10 @@ final class RecipeViewModel{
         }
     }
     
-    func toogleStatus(igredient: Igredient){
-        
-        if let index = recipe.igredients.firstIndex(where: { $0.name == igredient.name }) {
-            recipe.igredients[index].status.toggle()
-        }
-        
+
+    func toogleStatus(at index: Int) {
+
+        recipe.igredients[index].status.toggle()
     }
     
 }
