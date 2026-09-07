@@ -39,7 +39,7 @@ final class MapScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        backgroundColor = .systemMint
+        backgroundColor = .clear
         
         anchorPoint = CGPoint(
             x: 0.5,
@@ -206,9 +206,6 @@ final class MapScene: SKScene {
             
             addChild(tile)
             
-            // MUDOU:
-            // agora guardamos a coordenada
-            // lógica do tile.
             let recipeTile = RecipeTile(
                 recipe: recipe,
                 tile: tile,
@@ -225,9 +222,7 @@ final class MapScene: SKScene {
             recipeIndex += 1
         }
         
-        // NOVO:
-        // depois que todos existem,
-        // calculamos os estados.
+
         refreshTileStates()
     }
     
