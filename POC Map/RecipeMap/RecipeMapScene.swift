@@ -9,6 +9,14 @@ final class MapScene: SKScene {
         height: 270.8
     )
     
+    var coinBalance: Int = 0 {
+        didSet {
+            for recipeTile in recipeTiles {
+                updatePriceColor(for: recipeTile)
+            }
+        }
+    }
+
     var recipes: [Recipe] = []
     
     var recipeTiles: [RecipeTile] = []
@@ -316,7 +324,9 @@ final class MapScene: SKScene {
             cornerRadius: 15
         )
         
-        background.fillColor = .green500
+        background.name = "priceBackground"
+        background.alpha = 0.8
+        background.fillColor = coinBalance >= price ? .green500 : .brown100
         background.strokeColor = .clear
         background.zPosition = 1
         
@@ -377,7 +387,13 @@ final class MapScene: SKScene {
     
     // MARK: - Tile Visual
     
+    private func updatePriceColor(for recipeTile: RecipeTile) {
+        let background = recipeTile.priceTag.childNode(withName: "priceBackground") as? SKShapeNode
+        background?.fillColor = coinBalance >= recipeTile.recipe.price ? .green500 : .brown100
+    }
+
     func updateVisual(for recipeTile: RecipeTile) {
+        updatePriceColor(for: recipeTile)
         
         recipeTile.tile.alpha = 1
         recipeTile.tile.colorBlendFactor = 0

@@ -9,16 +9,18 @@ import SwiftUI
 
 struct TagComponent: View {
     let tag: RecipeTag
+    var isHidden: Bool = false
     var body: some View {
-        Text(tag.displayName)
-            .foregroundStyle(.green500)
+        Text(isHidden ? "???" : tag.displayName)
+            .foregroundStyle(isHidden ? Color.brown100 : Color.green500)
             .font(.hammersmith(fontStyle: .caption))
             .bold()
+            .accessibilityLabel(isHidden ? "Tag bloqueada" : tag.displayName)
             .padding(.vertical, 5)
             .padding(.horizontal, 15)
             .overlay(
                 RoundedRectangle(cornerRadius: 57)
-                    .stroke(Color.green500, lineWidth: 2)
+                    .stroke(isHidden ? Color.brown100 : Color.green500, lineWidth: 2)
             )
     }
 }

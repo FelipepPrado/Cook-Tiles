@@ -91,7 +91,7 @@ struct RecipeView: View {
                     Button(action: {
                         viewModel.buyRecipe(recipe: viewModel.recipe, mapViewModel: mapViewModel, player: player)
                     }, label: {
-                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .buy)
+                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .buy, canAfford: player.coin >= viewModel.recipe.price)
                     })
                 }
             }
@@ -167,7 +167,8 @@ struct RecipeView: View {
                 .font(Font.custom("JainiPurva-Regular", size: 44, relativeTo: .largeTitle))
                 .frame(maxWidth: 360)
                 .multilineTextAlignment(.center)
-            
+                .modifier(LockedRecipeTitleModifier(isLocked: viewModel.recipe.status != .unlocked))
+
             Rectangle()
                 .fill(.brown100)
                 .frame(width: 360, height: 2)
@@ -175,10 +176,10 @@ struct RecipeView: View {
         .padding(.bottom, 10)
         
         VStack(alignment: .center, spacing: 10) {
-            ForEach(viewModel.recipe.tags.chunked(into: 3), id: \.self) { rowTags in
+            ForEach(Array(viewModel.recipe.tags.indices).chunked(into: 3), id: \.self) { rowTags in
                 HStack(spacing: 10) {
-                    ForEach(rowTags, id: \.rawValue) { tag in
-                        TagComponent(tag: tag)
+                    ForEach(rowTags, id: \.self) { index in
+                        TagComponent(tag: viewModel.recipe.tags[index], isHidden: viewModel.recipe.status != .unlocked && index >= 2)
                     }
                 }
             }
