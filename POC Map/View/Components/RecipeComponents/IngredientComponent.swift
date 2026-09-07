@@ -18,8 +18,8 @@ struct IngredientComponent: View {
         case .normal:
             VStack(alignment: .center) {
                 Text("\(igredient.quantity) \(igredient.unit)")
-                    .font(.callout
-                        .bold())
+                    .font(Font.custom("Hammersmith One", size: 16, relativeTo: .callout))
+                    .bold()
                     .foregroundColor(.brown200)
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
@@ -27,7 +27,7 @@ struct IngredientComponent: View {
 
                 
                 Text(igredient.name)
-                    .font(.caption2)
+                    .font(Font.custom("Hammersmith One", size: 12, relativeTo: .callout))
                     .bold()
                     .foregroundColor(.brown200)
                     .multilineTextAlignment(.center)
@@ -49,15 +49,16 @@ struct IngredientComponent: View {
             
             VStack(alignment: .center) {
                 Text("\(igredient.quantity) \(igredient.unit)")
-                    .font(.callout
-                        .bold())
+                    .font(Font.custom("Hammersmith One", size: 16, relativeTo: .callout))
+                    .bold()
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
                     .fixedSize(horizontal: true, vertical: true)
+                    .foregroundStyle(.green500)
 
                 
                 Text(igredient.name)
-                    .font(.caption2)
+                    .font(Font.custom("Hammersmith One", size: 12, relativeTo: .caption))
                     .bold()
                     .foregroundColor(.brown200)
                     .multilineTextAlignment(.center)

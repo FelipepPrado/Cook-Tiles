@@ -125,36 +125,52 @@ struct CameraView: View {
         VStack(spacing: 18) {
             
             //Parte do zoom, caso for implementado depois
-            HStack(spacing: 12) {
-                let zoom = model.displayedZoom
-                
-                let activeFactor = model.zoomPresets.last {
-                    $0 <= zoom
-                } ?? model.zoomPresets.first ?? 1
-                
-                ForEach(model.zoomPresets, id: \.self) { factor in
-                    let isActive = factor == activeFactor
-                    
+            let presets = model.zoomPresets.sorted()
+            let zoom = model.displayedZoom
+
+            let activeIndex = presets.lastIndex {
+                $0 <= zoom
+            } ?? presets.startIndex
+
+            ZStack {
+                ForEach(Array(presets.enumerated()), id: \.element) { index, factor in
+                    let isActive = index == activeIndex
+                    let displayedFactor = isActive ? zoom : factor
+
                     Button {
                         model.setZoom(factor)
                     } label: {
                         Text(
-                            isActive
-                            ? "\(zoom.formatted(.number.precision(.fractionLength(0...1))))×"
-                            : "\(factor.formatted(.number.precision(.fractionLength(0...1))))×"
+                            "\(displayedFactor.formatted(.number.precision(.fractionLength(0...1))))×"
                         )
                         .font(.subheadline.weight(.semibold))
+                        .monospacedDigit()
                         .foregroundStyle(isActive ? .yellow : .white)
                         .frame(width: 44, height: 44)
                         .background(
-                            .white.opacity(0.12),
+                            .white.opacity(isActive ? 0.22 : 0),
                             in: Circle()
                         )
+                        .contentShape(Circle())
                     }
+                    .buttonStyle(.plain)
+                    .scaleEffect(isActive ? 1.12 : 1)
+                    .offset(x: CGFloat(index - activeIndex) * 56)
+                    .animation(
+                        .spring(response: 0.3, dampingFraction: 0.85),
+                        value: activeIndex
+                    )
+                    .transition(.identity)
                     .accessibilityLabel("Selecionar zoom \(factor) vezes")
                 }
             }
+            .frame(maxWidth: .infinity)
+            .frame(height: 56)
+            .clipped()
             .disabled(!model.canTakePhoto)
+            .opacity(model.state.isFront ? 0 : 1)
+            .allowsHitTesting(!model.state.isFront)
+            .accessibilityHidden(model.state.isFront)
             
             HStack {
                 Color.clear.frame(width: 52, height: 52)

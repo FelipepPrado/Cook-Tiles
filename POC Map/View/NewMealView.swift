@@ -37,7 +37,7 @@ struct NewMealView: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 35))
                                 
                             } else {
-                                Image(systemName: "photo.badge.plus")
+                                Image(systemName: "photo.badge.plus.fill")
                                     .font(.system(size: 60))
                                     .frame(width: 285, height: 260)
                                     .foregroundStyle(.cream800)
@@ -53,30 +53,6 @@ struct NewMealView: View {
                                     }
                             }
                         }
-                        //                        PhotosPicker(selection: $viewModel.pickerItem, matching: .images, photoLibrary: .shared()) {
-                        //                            if viewModel.imageData != nil{
-                        //                                Image(uiImage: UIImage(data: viewModel.newMeal.image) ?? UIImage())
-                        //                                    .resizable()
-                        //                                    .frame(width: 285, height: 260)
-                        //                                    .scaledToFill()
-                        //                                    .tint(.cream800)
-                        //                                    .clipShape(RoundedRectangle(cornerRadius: 35))
-                        //                            }
-                        //
-                        //                            else{
-                        //                                Image(systemName: "photo.badge.plus")
-                        //                                    .font(.system(size: 60))
-                        //                                    .padding(90)
-                        //                                    .tint(.cream800)
-                        //                                    .overlay(
-                        //                                        RoundedRectangle(cornerRadius: 35)
-                        //                                            .stroke(
-                        //                                                .cream800,
-                        //                                                style: StrokeStyle(lineWidth: 5, dash: [31, 31])
-                        //                                            )
-                        //                                    )
-                        //                            }
-                        //                        }
                         
                         StarRatingInputComponent(rating: $viewModel.newMeal.stars, isInput: true)
                     }
@@ -88,7 +64,7 @@ struct NewMealView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .foregroundStyle(.brown200)
                         
-                        //Trocar essa lógica talvez
+                        //Trocar essa lógica talvez (Deixar melhor e mais responsivo)
                         VStack(alignment: .center, spacing: 20){
                             HStack(spacing: 20){
                                 ForEach(RecipeCategory.allCases) { category in
@@ -107,7 +83,6 @@ struct NewMealView: View {
                                                         .font(Font.custom("Hammersmith One", size: 12, relativeTo: .caption))
                                                         .foregroundStyle(.brown200)
                                                 }
-                                                //
                                             }
                                             else{
                                                 VStack(alignment: .center){
@@ -159,36 +134,69 @@ struct NewMealView: View {
                             })
                             .frame(maxWidth: 88, maxHeight: 112)
                         }
+                        
+                        Text("Comentários")
+                            .font(Font.custom("Hammersmith One", size: 24, relativeTo: .title2))
+                            .multilineTextAlignment(.leading)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundStyle(.brown200)
+                        
+                        TextField("",
+                                  text: $viewModel.newMeal.comment,
+                                  prompt: Text("Descreva seus comentários...")
+                            .foregroundStyle(.brown200),
+                                  axis: .vertical
+                        )
+                        .font(.custom("Hammersmith One", size: 16, relativeTo: .body))
+                        .foregroundStyle(.brown200)
+                        .lineLimit(1...4)
+                        .padding(16)
+                        //                        .padding(.vertical, 16)
+                        .frame(maxWidth: .infinity, minHeight: 52)
+                        .background(.cream600, in: RoundedRectangle(cornerRadius: 10))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10)
+                                .strokeBorder(.cream800, lineWidth: 3)
+                                .allowsHitTesting(false)
+                        }
                     }
                 }
                 
-                //Fazer a lógica de comentário depois
-            }
-            .padding(.horizontal, 32)
-            .toolbar{
-                ToolbarItem(placement: .navigationBarTrailing){
-                    Button(role: .confirm){
-                        viewModel.addMeal(context: modelContext, player)
-                        viewRouter.removeLast()
+                .padding(.horizontal, 32)
+                .toolbar{
+                    ToolbarItem(placement: .navigationBarTrailing){
+                        Button(role: .confirm){
+                            viewModel.addMeal(context: modelContext, player)
+                            viewRouter.removeLast()
+                        }
+                        .tint(.green500)
+                        .disabled(viewModel.newMeal.image == Data() || viewModel.recipesDic.isEmpty)
                     }
-                    .tint(.green500)
-                    .disabled(viewModel.newMeal.image == Data() || viewModel.recipesDic.isEmpty)
+                }
+                .sheet(item: $viewModel.recipeCategory) { category in
+                    AddRecipetoMealView(
+                        viewModel: AddRecipetoMealViewModel(
+                            viewModel: viewModel,
+                            recipes: recipeModel.filter { recipe in
+                                recipe.category == category && recipe.status == .unlocked
+                            }
+                        )
+                    )
+                }
+                
+                .navigationTitle("Cadastrar Refeição")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text("Cadastrar Refeição")
+                            .fontWeight(.bold)
+                            .foregroundStyle(.brown200)
+                            .blendMode(.plusDarker)
+                    }
                 }
             }
+            .scrollDismissesKeyboard(.interactively)
         }
-        .sheet(item: $viewModel.recipeCategory) { category in
-            AddRecipetoMealView(
-                viewModel: AddRecipetoMealViewModel(
-                    viewModel: viewModel,
-                    recipes: recipeModel.filter { recipe in
-                        recipe.category == category && recipe.status == .unlocked
-                    }
-                )
-            )
-        }
-        
-        .navigationTitle("Cadastrar Refeição")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

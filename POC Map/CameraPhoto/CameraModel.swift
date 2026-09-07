@@ -55,9 +55,7 @@ final class CameraModel: ObservableObject {
         let candidates = [
             state.minimumZoom,
             1.0,
-            2.0,
-            3.0,
-            5.0
+            2.0
         ]
         
         var result: [Double] = []

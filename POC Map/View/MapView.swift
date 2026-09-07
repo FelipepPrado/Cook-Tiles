@@ -58,6 +58,8 @@ struct MapView: View {
                     TabBarComponent()
                         .padding(.horizontal, 30)
                 }
+                .navigationTitle("Mapa de Receitas")
+                .toolbar(.hidden, for: .navigationBar)
             }
         }
         .environment(viewModel)

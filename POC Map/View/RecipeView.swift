@@ -105,7 +105,17 @@ struct RecipeView: View {
             }
         }
         .ignoresSafeArea(edges: .all)
+        
         .navigationTitle(viewModel.recipe.name)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(viewModel.recipe.name)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.white)
+                    .blendMode(.plusLighter)
+            }
+        }
     }
     
     // MARK: - Sub-views
