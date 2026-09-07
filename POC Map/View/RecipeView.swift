@@ -85,7 +85,7 @@ struct RecipeView: View {
                     Button(action: {
                         viewRouter.stepsView(recipe: viewModel.recipe)
                     }, label: {
-                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .seeMore)
+                        BrownButtonComponent(recipe: viewModel.recipe, currentButton: .largefill)
                     })
                 } else if viewModel.recipe.status == .locked {
                     Button(action: {
