@@ -63,8 +63,8 @@ struct RecipeDetailView: View {
                         .frame(maxWidth: 290)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
+                        .modifier(LockedRecipeTitleModifier(isLocked: viewModel.recipe.status != .unlocked))
 
-                    
                     Rectangle()
                             .fill(Color.brown100)
                             .frame(height: 2)
@@ -76,10 +76,10 @@ struct RecipeDetailView: View {
                 
 
                 VStack(alignment: .center, spacing: 10) {
-                    ForEach(viewModel.recipe.tags.chunked(into: 3), id: \.self) { rowTags in
+                    ForEach(Array(viewModel.recipe.tags.indices).chunked(into: 3), id: \.self) { rowTags in
                         HStack(spacing: 10) {
-                            ForEach(rowTags, id: \.rawValue) { tag in
-                                TagComponent(tag: tag)
+                            ForEach(rowTags, id: \.self) { index in
+                                TagComponent(tag: viewModel.recipe.tags[index], isHidden: viewModel.recipe.status != .unlocked && index >= 2)
                             }
                         }
                     }
@@ -100,7 +100,7 @@ struct RecipeDetailView: View {
                     Button {
                         viewModel.buyRecipe()
                     } label: {
-                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .buy)
+                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .buy, canAfford: viewModel.player.coin >= viewModel.recipe.price)
                     }
 
                 } else if viewModel.recipe.status == .unlocked{
@@ -131,6 +131,7 @@ struct RecipeDetailView: View {
                 .resizable()
                 .scaledToFill()
         }
+
         .overlay(alignment: .top) {
             DiamondComponent(recipe: viewModel.recipe, hasStroke: true, strokeWidth: 10)
                 .frame(width: 120, height: 120)
@@ -140,6 +141,86 @@ struct RecipeDetailView: View {
     }
     
 
+}
+
+/// Recreates fragmented lettering without requiring a separate Metal shader file.
+struct LockedRecipeTitleModifier: ViewModifier {
+    let isLocked: Bool
+
+    func body(content: Content) -> some View {
+        if isLocked {
+            content
+                .mask {
+                    Canvas { context, size in
+                        context.fill(Path(CGRect(origin: .zero, size: size)), with: .color(.white))
+
+                        // Stable randomness prevents the cutouts from jumping on redraw.
+                        var seed: UInt64 = 7391
+                        func nextRandom() -> CGFloat {
+                            seed = seed &* 6364136223846793005 &+ 1442695040888963407
+                            return CGFloat(seed >> 32) / CGFloat(UInt32.max)
+                        }
+                        var cutouts: Path = Path()
+                        var occupied: [(center: CGPoint, radius: CGFloat)] = []
+                        let targetCount = Int(ceil(size.width * size.height / 360))
+                        // Keep centers apart while allowing edges to meet for denser cutouts.
+                        for _ in 0..<(targetCount * 60) {
+                            if occupied.count >= targetCount { break }
+                            let isLarge = nextRandom() < 0.45
+                            let width = isLarge ? 24 + nextRandom() * 22 : 8 + nextRandom() * 18
+                            let height = isLarge ? 17 + nextRandom() * 17 : 6 + nextRandom() * 15
+                            let radius = hypot(width, height) / 2
+                            let center = CGPoint(x: nextRandom() * size.width,
+                                                 y: nextRandom() * size.height)
+                            guard occupied.allSatisfy({
+                                hypot(center.x - $0.center.x, center.y - $0.center.y) >= max(12, (radius + $0.radius) * 0.5)
+                            }) else { continue }
+
+                            let rect = CGRect(x: -width / 2, y: -height / 2, width: width, height: height)
+                            var shape: Path
+                            switch Int(nextRandom() * 3) {
+                            case 0:
+                                shape = Path(ellipseIn: rect)
+                            case 1:
+                                shape = Path(roundedRect: rect, cornerRadius: min(width, height) * 0.25)
+                            default:
+                                // An asymmetric curved patch, mixed with ovals and rounded slits.
+                                shape = Path { path in
+                                    path.move(to: CGPoint(x: rect.minX, y: 0))
+                                    path.addCurve(to: CGPoint(x: width * 0.15, y: rect.minY),
+                                                  control1: CGPoint(x: rect.minX, y: rect.minY),
+                                                  control2: CGPoint(x: 0, y: -height * 0.2))
+                                    path.addCurve(to: CGPoint(x: rect.maxX, y: height * 0.2),
+                                                  control1: CGPoint(x: rect.maxX, y: rect.minY),
+                                                  control2: CGPoint(x: width * 0.25, y: 0))
+                                    path.addCurve(to: CGPoint(x: rect.minX, y: 0),
+                                                  control1: CGPoint(x: rect.maxX, y: rect.maxY),
+                                                  control2: CGPoint(x: -width * 0.4, y: rect.maxY))
+                                    path.closeSubpath()
+                                }
+                            }
+                            let rotation = CGAffineTransform(rotationAngle: nextRandom() * .pi * 2)
+                            let translation = CGAffineTransform(translationX: center.x, y: center.y)
+                            cutouts.addPath(shape, transform: rotation.concatenating(translation))
+                            occupied.append((center, radius))
+                        }
+
+                        // Blur only the holes in the alpha mask; the original text stays sharp.
+                        context.blendMode = .destinationOut
+                        context.drawLayer { holes in
+                            holes.blendMode = .normal
+                            holes.addFilter(.blur(radius: 1.2))
+                            holes.fill(cutouts, with: .color(.white))
+                        }
+                    }
+                    .allowsHitTesting(false)
+                }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Receita bloqueada")
+        } else {
+            content
+        }
+    }
 }
 
 extension Array {

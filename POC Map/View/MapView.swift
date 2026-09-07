@@ -47,8 +47,12 @@ struct MapView: View {
                         .zIndex(2)
                 }
                 .onAppear {
+                    viewModel.mapScene.coinBalance = player.coin
                     viewModel.initMap(recipes: recipeModel)
                     
+                }
+                .onChange(of: player.coin, initial: true) { _, balance in
+                    viewModel.mapScene.coinBalance = balance
                 }
                 .navigationDestination(for: NameViews.self){
                     destination in
