@@ -28,10 +28,16 @@ struct DiamondComponent: View {
                 }
             }
             .overlay {
-                Image("\(recipe.name + " icon")")
-                    .resizable()
-                    .scaledToFit()
-                    .scaleEffect(0.5)
+                if recipe.status == .unlocked{
+                    Image("\(recipe.name + " icon")")
+                        .resizable()
+                        .scaledToFit()
+                        .scaleEffect(0.5)
+                }
+                else{
+                    Text("?")
+                        .font(.custom("HammersmithOne-Regular", size: 72))
+                }
             }
             .aspectRatio(1, contentMode: .fit)
     }

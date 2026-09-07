@@ -58,13 +58,6 @@ struct MapView: View {
                     TabBarComponent()
                         .padding(.horizontal, 30)
                 }
-//                .toolbar{
-//                    ToolbarItem(placement: .topBarLeading){
-//                        VStack{
-//                            Text("\(player.coin)")
-//                        }
-//                    }
-//                }
             }
         }
         .environment(viewModel)

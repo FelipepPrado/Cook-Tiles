@@ -124,10 +124,16 @@ struct RecipeDetailView: View {
             .frame(maxWidth: 290, maxHeight: 500)
         }
         .frame(maxWidth: 310, minHeight: 590)
-        .background(Image("popupBackground")
-            .resizable()
-            .scaledToFill()
-            .ignoresSafeArea() )
+        .background {
+            Image("popupBackground")
+                .resizable()
+                .scaledToFill()
+        }
+        .overlay(alignment: .top) {
+            DiamondComponent(recipe: viewModel.recipe, hasStroke: true, strokeWidth: 10)
+                .frame(width: 120, height: 120)
+                .offset(y: -40)
+        }
         
     }
     
