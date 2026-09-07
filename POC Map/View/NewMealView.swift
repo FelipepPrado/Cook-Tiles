@@ -29,13 +29,13 @@ struct NewMealView: View {
                         } label: {
                             if let imageData = viewModel.imageData,
                                let image = UIImage(data: imageData) {
-
+                                
                                 Image(uiImage: image)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 285, height: 260)
                                     .clipShape(RoundedRectangle(cornerRadius: 35))
-
+                                
                             } else {
                                 Image(systemName: "photo.badge.plus")
                                     .font(.system(size: 60))
@@ -53,30 +53,30 @@ struct NewMealView: View {
                                     }
                             }
                         }
-//                        PhotosPicker(selection: $viewModel.pickerItem, matching: .images, photoLibrary: .shared()) {
-//                            if viewModel.imageData != nil{
-//                                Image(uiImage: UIImage(data: viewModel.newMeal.image) ?? UIImage())
-//                                    .resizable()
-//                                    .frame(width: 285, height: 260)
-//                                    .scaledToFill()
-//                                    .tint(.cream800)
-//                                    .clipShape(RoundedRectangle(cornerRadius: 35))
-//                            }
-//                            
-//                            else{
-//                                Image(systemName: "photo.badge.plus")
-//                                    .font(.system(size: 60))
-//                                    .padding(90)
-//                                    .tint(.cream800)
-//                                    .overlay(
-//                                        RoundedRectangle(cornerRadius: 35)
-//                                            .stroke(
-//                                                .cream800,
-//                                                style: StrokeStyle(lineWidth: 5, dash: [31, 31])
-//                                            )
-//                                    )
-//                            }
-//                        }
+                        //                        PhotosPicker(selection: $viewModel.pickerItem, matching: .images, photoLibrary: .shared()) {
+                        //                            if viewModel.imageData != nil{
+                        //                                Image(uiImage: UIImage(data: viewModel.newMeal.image) ?? UIImage())
+                        //                                    .resizable()
+                        //                                    .frame(width: 285, height: 260)
+                        //                                    .scaledToFill()
+                        //                                    .tint(.cream800)
+                        //                                    .clipShape(RoundedRectangle(cornerRadius: 35))
+                        //                            }
+                        //
+                        //                            else{
+                        //                                Image(systemName: "photo.badge.plus")
+                        //                                    .font(.system(size: 60))
+                        //                                    .padding(90)
+                        //                                    .tint(.cream800)
+                        //                                    .overlay(
+                        //                                        RoundedRectangle(cornerRadius: 35)
+                        //                                            .stroke(
+                        //                                                .cream800,
+                        //                                                style: StrokeStyle(lineWidth: 5, dash: [31, 31])
+                        //                                            )
+                        //                                    )
+                        //                            }
+                        //                        }
                         
                         StarRatingInputComponent(rating: $viewModel.newMeal.stars, isInput: true)
                     }
@@ -101,6 +101,7 @@ struct NewMealView: View {
                                                     Image("diamondInput")
                                                         .resizable()
                                                         .scaledToFill()
+                                                        .frame(width: 80, height: 80)
                                                     
                                                     Text(category.displayName)
                                                         .font(Font.custom("Hammersmith One", size: 12, relativeTo: .caption))
@@ -110,10 +111,10 @@ struct NewMealView: View {
                                             }
                                             else{
                                                 VStack(alignment: .center){
-                                                    Image("diamondRecipe")
-                                                        .resizable()
-                                                        .scaledToFill()
-                                                        .foregroundStyle(Color(category.rawValue))
+                                                    if let recipe = viewModel.recipesDic[category] {
+                                                        DiamondComponent(recipe: recipe)
+                                                            .frame(width: 80, height: 80)
+                                                    }
                                                     Spacer()
                                                     Text(viewModel.recipesDic[category]?.name ?? "Sem nome")
                                                         .font(Font.custom("Hammersmith One", size: 12, relativeTo: .caption))
@@ -135,6 +136,7 @@ struct NewMealView: View {
                                         Image("diamondInput")
                                             .resizable()
                                             .scaledToFill()
+                                            .frame(width: 80, height: 80)
                                         
                                         Text(RecipeCategory.sobremesa.displayName)
                                             .font(Font.custom("Hammersmith One", size: 12, relativeTo: .caption))
@@ -143,10 +145,10 @@ struct NewMealView: View {
                                 }
                                 else{
                                     VStack(alignment: .center, spacing: 9){
-                                        Image("diamondRecipe")
-                                            .resizable()
-                                            .scaledToFill()
-                                            .foregroundStyle(.sobremesa)
+                                        if let recipe = viewModel.recipesDic[.sobremesa] {
+                                            DiamondComponent(recipe: recipe)
+                                                .frame(width: 80, height: 80)
+                                        }
                                         
                                         Text(viewModel.recipesDic[.sobremesa]?.name ?? "Sem nome")
                                             .font(Font.custom("Hammersmith One", size: 12, relativeTo: .caption))

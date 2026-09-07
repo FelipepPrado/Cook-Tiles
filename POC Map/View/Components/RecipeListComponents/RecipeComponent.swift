@@ -17,13 +17,8 @@ struct RecipeComponent: View {
                     .frame(maxWidth: 110, minHeight: 145)
                 
                 VStack(spacing: 10){
-                    Image("diamondRecipe")
-                        .resizable()
-                        .scaledToFill()
+                    DiamondComponent(recipe: recipe)
                         .frame(width: 74, height: 74)
-    //                    .padding(.bottom, 10)
-                        .foregroundStyle(Color("\(recipe.category.rawValue)"))
-
                     
                     Text(recipe.name)
                         .font(.hammersmith())
@@ -32,6 +27,7 @@ struct RecipeComponent: View {
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                 }
+                .frame(maxHeight: .infinity, alignment: .top)
                 .padding(15)
             }
             

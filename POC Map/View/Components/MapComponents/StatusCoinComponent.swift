@@ -30,7 +30,6 @@ struct StatusCoinComponent: View {
         HStack(spacing: 12) {
             Text("\(coin)")
                 .font(.hammersmith())
-                .font(.title3)
                 .foregroundColor(.cream300)
             
             Image("statusCoin")
