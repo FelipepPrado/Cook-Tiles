@@ -66,10 +66,12 @@ struct RecipeDetailView: View {
 
                     
                     Rectangle()
-                        .fill(.brown100)
-                        .frame(maxWidth: 280, maxHeight: 2)
+                            .fill(Color.brown100)
+                            .frame(height: 2)
+                            .frame(maxWidth: .infinity)
 
                 }
+                .padding(.horizontal, 20)
                 .padding(.bottom, 10)
                 
 
@@ -121,7 +123,7 @@ struct RecipeDetailView: View {
 
                 }
             }
-            .frame(maxWidth: 290, maxHeight: 500)
+            .frame(maxWidth: 290, maxHeight: 520)
         }
         .frame(maxWidth: 310, minHeight: 590)
         .background {
