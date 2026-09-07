@@ -13,8 +13,8 @@ struct RecipeComponent: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.cream200)
                     .stroke(.cream800, lineWidth: 3)
-                    .padding(3)
-                    .frame(maxWidth: 120, minHeight: 145)
+//                    .padding(3)
+                    .frame(maxWidth: 110, minHeight: 145)
                 
                 VStack(spacing: 10){
                     Image("diamondRecipe")
@@ -40,11 +40,13 @@ struct RecipeComponent: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.cream600)
                     .stroke(.cream800, lineWidth: 3)
-                    .frame(width: 120, height: 140)
+                    .frame(width: 110, height: 145)
+                
                 VStack(spacing: 10){
                     Image("padlockSymbol")
                         .frame(width: 74, height: 74)
                         .cornerRadius(10)
+                    
                     HStack(spacing: 2){
                         Text("Ver Mais")
                             .font(Font.custom("Hammersmith One", size: 17, relativeTo: .callout))
@@ -61,7 +63,7 @@ struct RecipeComponent: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.brown100)
                     .stroke(.brown100, lineWidth: 3)
-                    .frame(width: 120, height: 145)
+                    .frame(width: 110, height: 145)
                 
                 Image("unavailableSymbol")
                     .frame(width: 42.5, height: 72.5)
