@@ -12,9 +12,7 @@ struct RecipeListView: View {
     @State private var viewModel = RecipeListViewModel()
     
     let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.adaptive(minimum: 110), spacing: 3)
     ]
     
     var body: some View {
@@ -23,10 +21,10 @@ struct RecipeListView: View {
                 Text(category.displayName)
                     .font(.hammersmith(fontStyle: .title2))
                     .padding(.bottom, 10)
-                    .padding(.leading, 10)
+                    .padding(.leading, 16)
                     .foregroundStyle(Color(.brown200))
                     .frame(maxWidth: .infinity, alignment: .leading)
-                LazyVGrid(columns: columns, spacing: 16) {
+                LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(recipes.filter { $0.category == category }, id: \.self) { recipe in
            
                         if recipe.status == .unlocked {
@@ -47,6 +45,7 @@ struct RecipeListView: View {
                         
                     }
                 }
+                .padding(.horizontal, 15)
                 .padding(.bottom, 20)
             }
         }
