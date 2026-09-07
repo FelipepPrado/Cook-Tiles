@@ -31,8 +31,9 @@ struct HistoryRecipeComponent: View {
                 if let uiImage = UIImage(data: meal.image){
                     Image(uiImage: uiImage)
                         .resizable()
-                        .scaledToFit()
+                        .scaledToFill()
                         .frame(width: 115, height: 115)
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
                 }
                 else{
                     Image("arrozFrito")

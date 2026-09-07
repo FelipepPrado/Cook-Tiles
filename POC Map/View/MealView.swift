@@ -11,7 +11,8 @@ struct MealView: View {
                         Image(uiImage: UIImage(data: meal.image) ?? UIImage())
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 285, height: 260)
+                            .clipShape(RoundedRectangle(cornerRadius: 35))
+                            .padding(.horizontal, 30)
                         
                         StarRatingInputComponent(rating: .constant(meal.stars), isInput: false)
                     }
@@ -39,6 +40,7 @@ struct MealView: View {
                                 }
                             }
                         }
+                        .frame(maxWidth: .infinity, alignment: .center)
                     }
                 }
             }

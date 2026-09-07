@@ -46,7 +46,7 @@ struct StarRatingInputComponent: View {
                     }
                 }
             }
-            .padding(.top, 14)
+            .padding(.top, 16)
             .padding(.bottom, 24)
             .padding(.horizontal, 45)
             .background(.green500)

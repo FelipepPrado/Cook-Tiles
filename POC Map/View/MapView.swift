@@ -56,6 +56,7 @@ struct MapView: View {
                 }
                 .safeAreaInset(edge: .bottom, spacing: 0) {
                     TabBarComponent()
+                        .padding(.horizontal, 30)
                 }
 //                .toolbar{
 //                    ToolbarItem(placement: .topBarLeading){
