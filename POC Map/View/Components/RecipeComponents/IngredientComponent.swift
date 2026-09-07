@@ -22,7 +22,8 @@ struct IngredientComponent: View {
                         .bold())
                     .foregroundColor(.brown200)
                     .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: true)
 
                 
                 Text(igredient.name)
@@ -30,12 +31,13 @@ struct IngredientComponent: View {
                     .bold()
                     .foregroundColor(.brown200)
                     .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: true)
 
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
-            .frame(minWidth: 100, minHeight: 80)
+            .frame(minHeight: 80)
             .background(.cream200)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay(
@@ -50,7 +52,8 @@ struct IngredientComponent: View {
                     .font(.callout
                         .bold())
                     .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: true)
 
                 
                 Text(igredient.name)
@@ -58,13 +61,14 @@ struct IngredientComponent: View {
                     .bold()
                     .foregroundColor(.brown200)
                     .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: true)
 
                     
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
-            .frame(minWidth: 100 ,minHeight: 80)
+            .frame(minHeight: 80)
             .background(.cream200)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay(
