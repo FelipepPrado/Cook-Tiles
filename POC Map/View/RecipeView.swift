@@ -112,11 +112,14 @@ struct RecipeView: View {
     
     @ViewBuilder
     private var headerSection: some View {
-        Rectangle()
-            .fill(Color.clear)
+        Color.clear
             .frame(height: 200)
+            .overlay(alignment: .bottom) {
+                DiamondComponent(recipe: viewModel.recipe, hasStroke: true, strokeWidth: 10)
+                    .frame(width: 140, height: 140)
+                    .offset(y: 70)
+            }
             .padding(.bottom, 20)
-        
         HStack {
             VStack(alignment: .center) {
                 Text("Preparo")

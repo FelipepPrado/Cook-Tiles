@@ -27,11 +27,9 @@ struct MealView: View {
                         HStack(alignment: .center, spacing: 25){
                             ForEach(meal.recipes){ recipe in
                                 VStack(alignment: .center, spacing: 9){
-                                    Image("diamondRecipe")
-                                        .resizable()
-                                        .scaledToFill()
-                                        .foregroundStyle(Color(recipe.category.rawValue))
+                                    DiamondComponent(recipe: recipe)
                                         .frame(width: 62, height: 62)
+                                    
                                     Text(recipe.name)
                                         .font(Font.custom("Hammersmith One", size: 12, relativeTo: .caption))
                                         .foregroundStyle(.brown200)
