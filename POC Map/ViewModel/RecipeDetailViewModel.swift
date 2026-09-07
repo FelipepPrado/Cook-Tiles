@@ -22,7 +22,7 @@ final class RecipeDetailViewModel{
    
     
     func buyRecipe() {
-        if player.coin >= recipe.price{
+        if  recipe.status == .locked, player.coin >= recipe.price{
             mapViewModel.unlockRecipe(recipe)
             player.coin -= recipe.price
         }
