@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 extension Font{
     static func hammersmith(fontStyle: Font.TextStyle = .body) -> Font{
@@ -37,3 +38,4 @@ extension Font.TextStyle {
     }
     
 }
+

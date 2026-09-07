@@ -100,7 +100,7 @@ struct RecipeDetailView: View {
                     Button {
                         viewModel.buyRecipe()
                     } label: {
-                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .buy, canAfford: viewModel.player.coin >= viewModel.recipe.price)
+                        BrownButtonComponent(recipe: viewModel.recipe, currentButton: .smallFill, canAfford: viewModel.player.coin >= viewModel.recipe.price)
                     }
 
                 } else if viewModel.recipe.status == .unlocked{
@@ -110,7 +110,7 @@ struct RecipeDetailView: View {
                         viewModel.close()
 
                     } label: {
-                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .seeMore)
+                        BrownButtonComponent(recipe: viewModel.recipe, currentButton: .smallFill, canAfford: viewModel.player.coin >= viewModel.recipe.price)
                             .padding(.bottom, 5)
                     
                     }
@@ -118,7 +118,7 @@ struct RecipeDetailView: View {
                         viewRouter.stepsView(recipe: viewModel.recipe)
                         viewModel.close()
                     } label: {
-                        StrokeButtonComponent(text: "Iniciar Receita")
+                        BrownButtonComponent(recipe: viewModel.recipe, currentButton: .smallStroke, canAfford: viewModel.player.coin >= viewModel.recipe.price)
                     }
 
                 }

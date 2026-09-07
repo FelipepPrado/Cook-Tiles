@@ -8,16 +8,16 @@
 import SwiftUI
 
 enum BrownButtonStyle: CaseIterable {
-    case largefill, smallstroke, smallfill
+    case largeFill, smallStroke, smallFill
     
     var frameSize: CGSize {
-            switch self {
-            case .smallfill, .smallstroke:
-                return CGSize(width: 289, height: 48)
-            case .largefill:
-                return CGSize(width: 391, height: 55)
-            }
+        switch self {
+        case .smallFill, .smallStroke:
+            return CGSize(width: 280, height: 48)
+        case .largeFill:
+            return CGSize(width: 360, height: 55)
         }
+    }
 }
 
 struct HexagonButtonShape: Shape {
@@ -42,20 +42,32 @@ struct BrownButtonComponent: View{
     
     let recipe: Recipe
     let currentButton: BrownButtonStyle
+    var canAfford: Bool = true
     
     var body: some View {
         
         switch currentButton {
             
-        case .smallfill:
-            HStack(spacing: 8) {
-                if recipe.status == .unlocked {
+        case .smallFill:
+            
+            
+            if recipe.status == .unlocked {
+                HStack(spacing: 8){
                     Text("Ver Mais")
                         .font(Font.custom("Hammersmith One", size: 17, relativeTo: .callout))
                         .foregroundColor(.cream500)
-                } else {
+                }
+                .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
+                .background(
+                    HexagonButtonShape()
+                        .fill(Color.brown200)
+                )
+                
+            } else if recipe.status == .locked {
+                
+                HStack(spacing: 8){
                     Text("Adquirir: \(recipe.price)")
-                        .font(Font.custom("Hammersmith One", size: 17, relativeTo: .callout))
+                        .font(Font.custom("Hammersmith One", size: 17, relativeTo: .headline))
                         .foregroundColor(.cream500)
                     
                     Image("recipeCoin")
@@ -64,17 +76,21 @@ struct BrownButtonComponent: View{
                         .frame(width: 20, height: 17)
                         .foregroundStyle(.cream500)
                 }
+                .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
+                .background(
+                    HexagonButtonShape()
+                        .fill(canAfford ? Color.green500 : Color.brown100)
+                )
+                
             }
-            .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
-            .background(
-                HexagonButtonShape()
-                    .fill(.brown200)
-            )
             
-        case .smallstroke:
+            
+            
+        case .smallStroke:
+            
             VStack{
                 Text("Iniciar Receita")
-                    .font(Font.custom("Hammersmith One", size: 17, relativeTo: .callout))
+                    .font(Font.custom("Hammersmith One", size: 17, relativeTo: .headline))
                     .foregroundColor(.brown200)
             }
             .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
@@ -87,17 +103,42 @@ struct BrownButtonComponent: View{
                     )
             )
             
-        case .largefill:
-            VStack{
-                Text("Botão")
-                    .font(Font.custom("Hammersmith One", size: 17, relativeTo: .callout))
-                    .foregroundColor(.cream300)
+        case .largeFill:
+            
+            if recipe.status == .unlocked {
+                
+                VStack{
+                    Text("Iniciar Receita")
+                        .font(Font.custom("Hammersmith One", size: 17, relativeTo: .headline))
+                        .foregroundColor(.cream300)
+                }
+                .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
+                .background(
+                    HexagonButtonShape()
+                        .fill(.brown700.opacity(0.7))
+                )
+                
+            } else if recipe.status == .locked {
+                
+                HStack(spacing: 8){
+                    Text("Adquirir: \(recipe.price)")
+                        .font(Font.custom("Hammersmith One", size: 17, relativeTo: .headline))
+                        .foregroundColor(.cream500)
+                    
+                    Image("recipeCoin")
+                        .resizable()
+                        .renderingMode(.template)
+                        .frame(width: 20, height: 17)
+                        .foregroundStyle(.cream500)
+                }
+                .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
+                .background(
+                    HexagonButtonShape()
+                        .fill(canAfford ? Color.green500 : Color.brown100)
+                )
+                
             }
-            .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
-            .background(
-                HexagonButtonShape()
-                    .fill(.brown700.opacity(0.7))
-            )
+            
         }
     }
 }

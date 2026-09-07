@@ -92,6 +92,15 @@ enum RecipeLevel: String, Codable {
             "Difícil"
         }
     }
+    
+    var sortWeight: Int {
+            switch self {
+            case .easy: return 0
+            case .medium: return 1
+            case .hard: return 2
+            }
+        }
+    
 }
 
 enum RecipeTag: String, Codable {

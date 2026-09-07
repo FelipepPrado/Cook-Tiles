@@ -25,24 +25,31 @@ struct RecipeListView: View {
                     .foregroundStyle(Color(.brown200))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 LazyVGrid(columns: columns, spacing: 10) {
-                    ForEach(recipes.filter { $0.category == category }, id: \.self) { recipe in
-           
+            
+                    ForEach(recipes
+                                .filter { $0.category == category }
+                                .sorted { $0.level.sortWeight < $1.level.sortWeight },
+                            id: \.self) { recipe in
+                        
                         if recipe.status == .unlocked {
-                            Button(action:{
+                            Button(action: {
                                 viewRouter.recipeView(recipe: recipe)
-                            },label: {
+                            }, label: {
                                 RecipeComponent(recipe: recipe, currentStatus: .unlocked)
                             })
-                        }else if recipe.status == .locked {
-                            Button(action:{
+                            .buttonStyle(.plain)
+                            
+                        } else if recipe.status == .locked {
+                            Button(action: {
                                 viewRouter.recipeView(recipe: recipe)
-                            },label: {
+                            }, label: {
                                 RecipeComponent(recipe: recipe, currentStatus: .locked)
                             })
-                        }else if recipe.status == .unavailable {
+                            .buttonStyle(.plain)
+                            
+                        } else if recipe.status == .unavailable {
                             RecipeComponent(recipe: recipe, currentStatus: .unavailable)
                         }
-                        
                     }
                 }
                 .padding(.horizontal, 15)

@@ -17,6 +17,7 @@ struct NewMealView: View {
     
     var body: some View {
         ZStack{
+            
             Color(.cream500).ignoresSafeArea()
             ScrollView{
                 VStack(spacing: 30){
@@ -77,24 +78,27 @@ struct NewMealView: View {
                                                     Image("diamondInput")
                                                         .resizable()
                                                         .scaledToFill()
-                                                        .frame(width: 80, height: 80)
+                                                        .frame(width: 70, height: 70)
                                                     
                                                     Text(category.displayName)
                                                         .font(Font.custom("Hammersmith One", size: 12, relativeTo: .caption))
                                                         .foregroundStyle(.brown200)
                                                 }
+                                               
                                             }
                                             else{
                                                 VStack(alignment: .center){
                                                     if let recipe = viewModel.recipesDic[category] {
                                                         DiamondComponent(recipe: recipe)
-                                                            .frame(width: 80, height: 80)
+                                                            .frame(width: 70, height: 70)
                                                     }
                                                     Spacer()
                                                     Text(viewModel.recipesDic[category]?.name ?? "Sem nome")
                                                         .font(Font.custom("Hammersmith One", size: 12, relativeTo: .caption))
                                                         .foregroundStyle(.brown200)
                                                         .frame(maxWidth: 100)
+                                                        .multilineTextAlignment(.center)
+                                                    
                                                 }
                                             }
                                         })
@@ -111,7 +115,7 @@ struct NewMealView: View {
                                         Image("diamondInput")
                                             .resizable()
                                             .scaledToFill()
-                                            .frame(width: 80, height: 80)
+                                            .frame(width: 70, height: 70)
                                         
                                         Text(RecipeCategory.sobremesa.displayName)
                                             .font(Font.custom("Hammersmith One", size: 12, relativeTo: .caption))
@@ -122,13 +126,14 @@ struct NewMealView: View {
                                     VStack(alignment: .center, spacing: 9){
                                         if let recipe = viewModel.recipesDic[.sobremesa] {
                                             DiamondComponent(recipe: recipe)
-                                                .frame(width: 80, height: 80)
+                                                .frame(width: 70, height: 70)
                                         }
                                         
                                         Text(viewModel.recipesDic[.sobremesa]?.name ?? "Sem nome")
                                             .font(Font.custom("Hammersmith One", size: 12, relativeTo: .caption))
                                             .foregroundStyle(.brown200)
-                                            .frame(minHeight: 20)
+                                            .frame(maxWidth: 100)
+                                            .multilineTextAlignment(.center)
                                     }
                                 }
                             })
@@ -151,7 +156,6 @@ struct NewMealView: View {
                         .foregroundStyle(.brown200)
                         .lineLimit(1...4)
                         .padding(16)
-                        //                        .padding(.vertical, 16)
                         .frame(maxWidth: .infinity, minHeight: 52)
                         .background(.cream600, in: RoundedRectangle(cornerRadius: 10))
                         .overlay {

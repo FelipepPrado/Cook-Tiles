@@ -25,22 +25,23 @@ struct RecipeView: View {
                         .padding(.bottom, 10)
                     
                     IngredientFlowLayout(horizontalSpacing: 10, verticalSpacing: 10) {
-                        ForEach(viewModel.recipe.igredients, id: \.self) { igredient in
+                        ForEach(viewModel.recipe.igredients.indices, id: \.self) { index in
+                            
+                            let igredient = viewModel.recipe.igredients[index]
+                            
                             if igredient.status == false {
                                 Button(action: {
-                                    viewModel.toogleStatus(igredient: igredient)
+                                    viewModel.toogleStatus(at: index)
                                 }, label: {
                                     IngredientComponent(igredient: igredient, currentStatus: .normal)
                                 })
-                            } else if igredient.status == true {
-                                
+                            } else {
                                 Button(action: {
-                                    viewModel.toogleStatus(igredient: igredient)
+                                    viewModel.toogleStatus(at: index)
                                 }, label: {
                                     IngredientComponent(igredient: igredient, currentStatus: .green)
                                 })
                             }
-                            
                         }
                     }
                     .frame(maxWidth: 360)
@@ -85,13 +86,13 @@ struct RecipeView: View {
                     Button(action: {
                         viewRouter.stepsView(recipe: viewModel.recipe)
                     }, label: {
-                        BrownButtonComponent(recipe: viewModel.recipe, currentButton: .largefill)
+                        BrownButtonComponent(recipe: viewModel.recipe, currentButton: .largeFill, canAfford: player.coin >= viewModel.recipe.price)
                     })
                 } else if viewModel.recipe.status == .locked {
                     Button(action: {
                         viewModel.buyRecipe(recipe: viewModel.recipe, mapViewModel: mapViewModel, player: player)
                     }, label: {
-                        FillButtonComponent(recipe: viewModel.recipe, currentStatus: .buy, canAfford: player.coin >= viewModel.recipe.price)
+                        BrownButtonComponent(recipe: viewModel.recipe, currentButton: .largeFill, canAfford: player.coin >= viewModel.recipe.price)
                     })
                 }
             }
@@ -164,7 +165,7 @@ struct RecipeView: View {
             Text(viewModel.recipe.name)
                 .foregroundStyle(Color.brown700)
                 .bold()
-                .font(Font.custom("JainiPurva-Regular", size: 44, relativeTo: .largeTitle))
+                .font(Font.custom("JainiPurva-Regular", size: 48, relativeTo: .largeTitle))
                 .frame(maxWidth: 360)
                 .multilineTextAlignment(.center)
                 .modifier(LockedRecipeTitleModifier(isLocked: viewModel.recipe.status != .unlocked))
