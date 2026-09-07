@@ -37,6 +37,7 @@ struct DiamondComponent: View {
                 else{
                     Text("?")
                         .font(.custom("HammersmithOne-Regular", size: 72))
+                        .foregroundStyle(.cream500)
                 }
             }
             .aspectRatio(1, contentMode: .fit)
