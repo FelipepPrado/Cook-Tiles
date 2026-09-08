@@ -43,6 +43,10 @@ struct IngredientComponent: View {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.cream800, lineWidth: 5)
             )
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("\(igredient.name), \(igredient.quantity) \(igredient.unit)")
+            .accessibilityValue("Nao selecionado")
+            .accessibilityHint("Toque duas vezes para marcar")
             
         case .green:
             
@@ -74,28 +78,13 @@ struct IngredientComponent: View {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.green500, lineWidth: 5)
             )
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("\(igredient.name), \(igredient.quantity) \(igredient.unit)")
+            .accessibilityValue("Selecionado")
+            .accessibilityHint("Toque duas vezes para desmarcar")
+
         }
 
-        
-//        ZStack {
-//            Losango()
-//                .fill(Color.cream200)
-//                .frame(width: 125, height: 125)
-//            
-//            ZStack {
-//                
-//                VStack{
-//                    
-//
-//                        
-//                }
-//                .frame(width: 90, height: 80)
-//            }
-//
-//            Losango()
-//                .stroke(Color.cream800, lineWidth: 4)
-//                .frame(width: 125, height: 125)
-//        }
     }
 }
 

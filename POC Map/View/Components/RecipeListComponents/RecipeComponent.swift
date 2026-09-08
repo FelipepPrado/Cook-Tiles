@@ -30,6 +30,10 @@ struct RecipeComponent: View {
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(15)
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("\(recipe.name), desbloqueada")
+            .accessibilityHint("Toque duas vezes para ver detalhes")
+
             
         case .locked:
             ZStack(){
@@ -53,6 +57,10 @@ struct RecipeComponent: View {
                     .foregroundStyle(.white)
                 }
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Receita bloqueada")
+            .accessibilityHint("Toque duas vezes para ver mais informacoes")
+
             
         case .unavailable:
             ZStack(){
@@ -64,6 +72,9 @@ struct RecipeComponent: View {
                 Image("unavailableSymbol")
                     .frame(width: 42.5, height: 72.5)
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Receita indisponivel")
+
         }
         
     }

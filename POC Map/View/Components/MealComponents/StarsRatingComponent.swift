@@ -21,6 +21,9 @@ struct StarsRatingComponent: View {
         .padding(.top, 8.6)
         .padding(.bottom, 14.6)
         .background(.green500)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Avaliacao: \(stars) de 5 estrelas")
+
     }
 }
 

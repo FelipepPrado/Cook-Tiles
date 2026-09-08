@@ -139,5 +139,16 @@ struct RecipeStepComponent: View {
             }
         }
         .frame(maxHeight: .infinity)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Etapa \(step.order) de \(totalSteps): \(step.instruction)")
+        .accessibilityValue("Progresso: etapa \(step.order) de \(totalSteps)")
+        .accessibilityHint(
+            isLastStep
+                ? "Ultima etapa. Faca gesto de pedra para voltar."
+                : isFirstStep
+                    ? "Primeira etapa. Faca gesto de tesoura para avancar."
+                    : "Faca gesto de tesoura para avancar ou pedra para voltar."
+        )
+
     }
 }

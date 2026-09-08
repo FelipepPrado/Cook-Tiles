@@ -88,12 +88,19 @@ struct RecipeView: View {
                     }, label: {
                         BrownButtonComponent(recipe: viewModel.recipe, currentButton: .largeFill, canAfford: player.coin >= viewModel.recipe.price)
                     })
+                    .accessibilityLabel("Iniciar receita \(viewModel.recipe.name)")
+                    
                 } else if viewModel.recipe.status == .locked {
                     Button(action: {
                         viewModel.buyRecipe(recipe: viewModel.recipe, mapViewModel: mapViewModel, player: player)
                     }, label: {
                         BrownButtonComponent(recipe: viewModel.recipe, currentButton: .largeFill, canAfford: player.coin >= viewModel.recipe.price)
                     })
+                    .accessibilityLabel("Adquirir receita por \(viewModel.recipe.price) moedas")
+                    .accessibilityHint(player.coin >= viewModel.recipe.price
+                        ? "Voce tem moedas suficientes"
+                        : "Voce nao tem moedas suficientes")
+
                 }
             }
             .padding(.bottom, 20)
@@ -143,6 +150,9 @@ struct RecipeView: View {
                     .font(.hammersmith())
             }
             .padding(.leading, 25)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Tempo de preparo: \(viewModel.recipe.time) minutos")
+
             
             Spacer()
             
@@ -158,6 +168,9 @@ struct RecipeView: View {
                     .font(.hammersmith())
             }
             .padding(.trailing, 20)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Porcoes: \(viewModel.recipe.portions)")
+
         }
         .padding(.bottom, 15)
         
@@ -173,6 +186,7 @@ struct RecipeView: View {
             Rectangle()
                 .fill(.brown100)
                 .frame(width: 360, height: 2)
+                .accessibilityHidden(true)
         }
         .padding(.bottom, 10)
         

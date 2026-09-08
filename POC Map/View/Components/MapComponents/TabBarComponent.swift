@@ -17,6 +17,8 @@ struct TabBarComponent: View {
                         scale: scale
                     )
                 }
+                .accessibilityLabel("Historico")
+                .accessibilityHint("Abre o historico de refeicoes")
 
                 Button {
                     viewRouter.newMealView()
@@ -30,6 +32,7 @@ struct TabBarComponent: View {
                         )
                 }
                 .accessibilityLabel("Nova Refeição")
+                .accessibilityHint("Cadastrar uma nova refeicao")
 
                 Button {
                     viewRouter.recipeListView()
@@ -40,6 +43,9 @@ struct TabBarComponent: View {
                         scale: scale
                     )
                 }
+                .accessibilityLabel("Receitas")
+                .accessibilityHint("Abre a lista de receitas")
+
             }
             .buttonStyle(.plain)
         }

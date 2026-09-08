@@ -54,6 +54,11 @@ struct NewMealView: View {
                                     }
                             }
                         }
+                        .accessibilityLabel(viewModel.imageData != nil
+                            ? "Foto da refeicao capturada"
+                            : "Adicionar foto da refeicao")
+                        .accessibilityHint("Toque duas vezes para abrir a camera")
+
                         
                         StarRatingInputComponent(rating: $viewModel.newMeal.stars, isInput: true)
                     }
@@ -103,6 +108,11 @@ struct NewMealView: View {
                                             }
                                         })
                                         .frame(maxWidth: 88, maxHeight: 112)
+                                        .accessibilityLabel(viewModel.recipesDic[category] != nil
+                                            ? "\(category.displayName): \(viewModel.recipesDic[category]?.name ?? "")"
+                                            : "Selecionar \(category.displayName)")
+                                        .accessibilityHint("Toque duas vezes para escolher uma receita de \(category.displayName)")
+
                                     }
                                 }
                             }
@@ -138,6 +148,7 @@ struct NewMealView: View {
                                 }
                             })
                             .frame(maxWidth: 88, maxHeight: 112)
+                            
                         }
                         
                         Text("Comentários")
@@ -152,6 +163,8 @@ struct NewMealView: View {
                             .foregroundStyle(.brown200),
                                   axis: .vertical
                         )
+                        .accessibilityLabel("Comentarios")
+                        .accessibilityHint("Digite seus comentarios sobre a refeicao")
                         .font(.custom("Hammersmith One", size: 16, relativeTo: .body))
                         .foregroundStyle(.brown200)
                         .lineLimit(1...4)
@@ -189,6 +202,9 @@ struct NewMealView: View {
                         .buttonStyle(.borderedProminent)
                         .tint(.green500)
                         .disabled(viewModel.newMeal.image == Data() || viewModel.recipesDic.isEmpty)
+                        .accessibilityLabel("Confirmar refeicao")
+                        .accessibilityHint("Toque duas vezes para salvar a refeicao")
+
                     }
                     
                 }

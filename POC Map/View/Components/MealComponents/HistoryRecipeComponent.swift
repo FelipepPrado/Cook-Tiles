@@ -26,6 +26,7 @@ struct HistoryRecipeComponent: View {
             .frame(width: 200)
             .padding(.top, 165)
             .padding(.bottom, 50)
+            .accessibilityHidden(true)
             
             VStack(spacing: 70){
                 if let uiImage = UIImage(data: meal.image){
@@ -68,6 +69,10 @@ struct HistoryRecipeComponent: View {
                 .frame(width: 172, height: 40)
                 .padding(.top, 95)
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Refeicao com \(meal.recipes.count) receita\(meal.recipes.count > 1 ? "s" : ""), \(meal.stars) de 5 estrelas")
+        .accessibilityHint("Toque duas vezes para ver detalhes")
+
     }
 }
 #Preview {

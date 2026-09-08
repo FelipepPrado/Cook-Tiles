@@ -19,6 +19,8 @@ struct HistoryView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 170, height: 130)
+                        .accessibilityHidden(true)
+                    
                     Text("Você ainda não cadastrou nenhuma Refeição!")
                         .font(.hammersmith(fontStyle: .title2))
                         .multilineTextAlignment(.center)
@@ -51,6 +53,9 @@ struct HistoryView: View {
                                             }, label:{
                                                 HistoryRecipeComponent(meal: meal)
                                             })
+                                            .accessibilityLabel("Refeicao com \(meal.recipes.count) receita\(meal.recipes.count > 1 ? "s" : ""), \(meal.stars) estrelas")
+                                            .accessibilityHint("Toque duas vezes para ver detalhes")
+
                                         }
                                     }
                                 }

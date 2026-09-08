@@ -13,6 +13,7 @@ struct MealView: View {
                             .scaledToFit()
                             .clipShape(RoundedRectangle(cornerRadius: 35))
                             .padding(.horizontal, 30)
+                            .accessibilityLabel("Foto da refeicao")
                         
                         StarRatingInputComponent(rating: .constant(meal.stars), isInput: false)
                     }
@@ -37,6 +38,9 @@ struct MealView: View {
                                         .multilineTextAlignment(.center)
                                 }
                                 .frame(alignment: .top)
+                                .accessibilityElement(children: .ignore)
+                                .accessibilityLabel("Receita: \(recipe.name)")
+
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
