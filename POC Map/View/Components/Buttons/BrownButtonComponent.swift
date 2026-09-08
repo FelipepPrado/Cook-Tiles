@@ -113,9 +113,11 @@ struct BrownButtonComponent: View{
                         .foregroundColor(.cream300)
                 }
                 .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
-                .background(
-                    HexagonButtonShape()
-                        .fill(.brown700.opacity(0.7))
+                .glassEffect(
+                    .clear
+                        .tint(Color.brown700.opacity(0.7))
+                        .interactive(),
+                    in: HexagonButtonShape()
                 )
                 
             } else if recipe.status == .locked {
@@ -132,13 +134,15 @@ struct BrownButtonComponent: View{
                         .foregroundStyle(.cream500)
                 }
                 .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
-                .background(
-                    HexagonButtonShape()
-                        .fill(canAfford ? Color.green500 : Color.brown100)
+                .glassEffect(
+                    .clear
+                        .tint(
+                            (canAfford ? Color.green500 : Color.brown100)
+                        )
+                        .interactive(),
+                    in: HexagonButtonShape()
                 )
-                
             }
-            
         }
     }
 }
