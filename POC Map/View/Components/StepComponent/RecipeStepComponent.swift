@@ -36,6 +36,8 @@ struct RecipeStepComponent: View {
                                 .frame(width: 50)
                         }
                     }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Faça o gesto de mão fechada para voltar para o passo anterior")
                     
                     Spacer()
                     
@@ -57,6 +59,8 @@ struct RecipeStepComponent: View {
                                 .frame(width: 50)
                         }
                     }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Faça o gesto de v  para passar para o passo seguinte")
                 }
                 .padding(.horizontal, 30)
                 
@@ -76,6 +80,7 @@ struct RecipeStepComponent: View {
                                     currentButton: .smallFill
                                 )
                             }
+                            .accessibilityLabel("Finalizar receita \(recipe.name)")
                             
                             Button(action: onRegister) {
                                 BrownButtonComponent(
@@ -84,6 +89,7 @@ struct RecipeStepComponent: View {
                                     currentButton: .smallStroke
                                 )
                             }
+                            .accessibilityLabel("Registrar receita \(recipe.name)")
                         }
                         .padding(.bottom, 20)
                         .buttonStyle(.plain)
