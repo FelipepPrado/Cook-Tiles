@@ -41,6 +41,11 @@ struct DiamondComponent: View {
                 }
             }
             .aspectRatio(1, contentMode: .fit)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(recipe.status == .unlocked
+                                ? "Icone da receita \(recipe.name)"
+                                : "Receita bloqueada")
+
     }
 }
 

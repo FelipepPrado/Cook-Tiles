@@ -48,6 +48,8 @@ struct StatusCoinComponent: View {
             HexagonShape()
                 .fill(.brown900)
         )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(coin) moedas")
     }
 }
 

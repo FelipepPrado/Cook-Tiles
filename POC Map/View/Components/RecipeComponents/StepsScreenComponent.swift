@@ -36,6 +36,9 @@ struct StepsScreenComponent: View {
             .padding(.horizontal, 15)
            
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Etapa \(step.order): \(step.instruction)")
+
     }
 }
     

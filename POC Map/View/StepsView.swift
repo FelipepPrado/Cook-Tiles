@@ -21,6 +21,7 @@ struct StepsView: View {
                     // Overlay escuro para legibilidade
                     Color.black.opacity(0.4)
                         .edgesIgnoringSafeArea(.all)
+                        .accessibilityHidden(true)
                     
                     // Conteúdo da receita
                     VStack(spacing: 16) {
@@ -53,6 +54,9 @@ struct StepsView: View {
                                 .background(.ultraThinMaterial)
                                 .clipShape(Capsule())
                                 .transition(.scale.combined(with: .opacity))
+                                .accessibilityLabel(message)
+                                .accessibilityAddTraits(.updatesFrequently)
+
                         }
                         
                         Spacer()
@@ -60,6 +64,7 @@ struct StepsView: View {
                 }
             } else {
                 ProgressView("Ligando câmera...")
+                    .accessibilityLabel("Carregando camera, por favor aguarde")
             }
         }
         .onReceive(timer) { _ in
@@ -71,31 +76,30 @@ struct StepsView: View {
     
     private func checkGesture() {
         let detected = viewModel.cameraManager.handAnalyzer.detectedPose
-        
-        // Só processa tesoura (avançar) e pedra (voltar)
+    
         let isActionGesture = (detected == .passar || detected == .voltar)
         
-        // Se está em cooldown, não faz nada
+
         if viewModel.isInCooldown { return }
         
         if isActionGesture && detected == viewModel.currentGesture {
-            // Mesmo gesto sendo mantido — calcula progresso
+          
             if let start = viewModel.gestureHoldStart {
                 let elapsed = Date.now.timeIntervalSince(start)
                 viewModel.holdProgress = min(elapsed / viewModel.holdDuration, 1.0)
                 
                 if elapsed >= viewModel.holdDuration {
-                    // Gesto mantido tempo suficiente — executa ação
+                   
                     executeGestureAction(detected)
                 }
             }
         } else if isActionGesture {
-            // Novo gesto detectado — começa a contar
+          
             viewModel.currentGesture = detected
             viewModel.gestureHoldStart = Date.now
             viewModel.holdProgress = 0.0
         } else {
-            // Gesto não reconhecido ou mão ausente — reseta
+         
             resetGesture()
         }
     }
@@ -124,11 +128,11 @@ struct StepsView: View {
             break
         }
         
-        // Reseta e entra em cooldown
+     
         resetGesture()
         viewModel.isInCooldown = true
         
-        // Remove feedback e cooldown após um tempo
+   
         DispatchQueue.main.asyncAfter(deadline: .now() + viewModel.cooldownDuration) {
             viewModel.isInCooldown = false
             viewModel.feedbackMessage = nil

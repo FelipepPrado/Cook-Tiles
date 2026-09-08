@@ -37,6 +37,8 @@ struct DescriptionComponent: View {
                     .resizable()
                     .scaledToFill()
                     .frame(width: 90, height:80)
+                    .accessibilityHidden(true)
+                
                 Text("Adquira essa Receita para \nvisualizar mais informações")
                     .multilineTextAlignment(.center)
                     .font(.hammersmith())

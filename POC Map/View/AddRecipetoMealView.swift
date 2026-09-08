@@ -23,6 +23,9 @@ struct AddRecipetoMealView: View {
                             }, label: {
                                 RecipeComponent(recipe: recipe, currentStatus: .unlocked)
                             })
+                            .accessibilityLabel("Selecionar \(recipe.name)")
+                            .accessibilityHint("Toque duas vezes para adicionar esta receita a refeicao")
+
                         }
                     }
                 }

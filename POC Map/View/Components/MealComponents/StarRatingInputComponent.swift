@@ -24,6 +24,8 @@ struct StarRatingInputComponent: View {
                     .scaleEffect(x: -1, y: 1)
             }
             .padding(.top, 25)
+            .accessibilityHidden(true)
+            
             HStack (alignment: .center, spacing: 15) {
                 ForEach(1..<maximumRating + 1, id: \.self) { number in
                     if isInput{
@@ -36,13 +38,19 @@ struct StarRatingInputComponent: View {
                                 .foregroundStyle(number <= rating ? .white : .green700)
                                 .animation(.linear, value:  rating)
                         }
+                        .accessibilityLabel("\(number) estrela\(number > 1 ? "s" : "")")
+                        .accessibilityValue(number <= rating ? "Selecionada" : "Nao selecionada")
+                        .accessibilityHint("Toque duas vezes para avaliar com \(number) estrela\(number > 1 ? "s" : "")")
+
                     }
+                    
                     else{
                         Image(systemName: "star.fill")
                             .resizable()
                             .scaledToFit()
                             .foregroundStyle(number <= rating ? .white : .green700)
                             .animation(.linear, value:  rating)
+                            .accessibilityHidden(true)
                     }
                 }
             }
@@ -51,6 +59,9 @@ struct StarRatingInputComponent: View {
             .padding(.horizontal, 45)
             .background(.green500)
             .padding(.horizontal, 28)
+            .accessibilityElement(children: isInput ? .contain : .ignore)
+            .accessibilityLabel(isInput ? "Avaliacao" : "Avaliacao: \(rating) de \(maximumRating) estrelas")
+
         }
     }
 }

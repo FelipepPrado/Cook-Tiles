@@ -28,6 +28,9 @@ struct MapView: View {
                                        viewModel.selectedRecipe = nil
                                    }
                                    .transition(.opacity)
+                                   .accessibilityLabel("Fechar popup")
+                                   .accessibilityHint("Toque duas vezes para fechar os detalhes da receita")
+
                                
                                RecipeDetailView(viewModel: RecipeDetailViewModel(
                                    recipe: recipe, mapViewModel: viewModel, player: player
@@ -39,6 +42,8 @@ struct MapView: View {
                        ZStack{
                            SpriteView(scene: viewModel.mapScene, options: [.allowsTransparency])
                                .ignoresSafeArea()
+                               .accessibilityLabel("Mapa de receitas")
+                               .accessibilityHint("Navegue pelo mapa para encontrar receitas")
                                .background(
                                 Image("Home Map")
                                     .resizable()

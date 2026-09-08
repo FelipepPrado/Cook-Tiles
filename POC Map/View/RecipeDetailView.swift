@@ -29,8 +29,13 @@ struct RecipeDetailView: View {
                         }
                         
                     }
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(viewModel.recipe.status == .unlocked
+                        ? "Tempo de preparo: \(viewModel.recipe.time) minutos"
+                        : "Tempo de preparo: informacao bloqueada")
+
                     
-                        Spacer()
+                    Spacer()
                     
                     VStack(alignment: .center) {
                         Text("Porções")
@@ -51,7 +56,11 @@ struct RecipeDetailView: View {
                                 .font(.hammersmith())
                         }
                     }
-                    
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(viewModel.recipe.status == .unlocked
+                        ? "Porcoes: \(viewModel.recipe.portions)"
+                        : "Porcoes: informacao bloqueada")
+
                 }
                 .padding(.bottom, 2)
                 
@@ -69,6 +78,7 @@ struct RecipeDetailView: View {
                             .fill(Color.brown100)
                             .frame(height: 2)
                             .frame(maxWidth: .infinity)
+                            .accessibilityHidden(true)
 
                 }
                 .padding(.horizontal, 20)
@@ -102,6 +112,7 @@ struct RecipeDetailView: View {
                     } label: {
                         BrownButtonComponent(recipe: viewModel.recipe, currentButton: .smallFill, canAfford: viewModel.player.coin >= viewModel.recipe.price)
                     }
+                    .accessibilityLabel("Adquirir receita por \(viewModel.recipe.price) moedas")
 
                 } else if viewModel.recipe.status == .unlocked{
 
@@ -114,12 +125,15 @@ struct RecipeDetailView: View {
                             .padding(.bottom, 5)
                     
                     }
+                    .accessibilityLabel("Ver mais sobre \(viewModel.recipe.name)")
+                    
                     Button {
                         viewRouter.stepsView(recipe: viewModel.recipe)
                         viewModel.close()
                     } label: {
                         BrownButtonComponent(recipe: viewModel.recipe, currentButton: .smallStroke, canAfford: viewModel.player.coin >= viewModel.recipe.price)
                     }
+                    .accessibilityLabel("Iniciar receita \(viewModel.recipe.name)")
 
                 }
             }
@@ -130,6 +144,7 @@ struct RecipeDetailView: View {
             Image("popupBackground")
                 .resizable()
                 .scaledToFill()
+                .accessibilityHidden(true)
         }
 
         .overlay(alignment: .top) {

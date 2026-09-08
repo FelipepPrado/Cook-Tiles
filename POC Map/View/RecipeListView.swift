@@ -38,6 +38,9 @@ struct RecipeListView: View {
                                 RecipeComponent(recipe: recipe, currentStatus: .unlocked)
                             })
                             .buttonStyle(.plain)
+                            .accessibilityLabel("\(recipe.name), desbloqueada")
+                            .accessibilityHint("Toque duas vezes para abrir a receita")
+
                             
                         } else if recipe.status == .locked {
                             Button(action: {
@@ -46,9 +49,13 @@ struct RecipeListView: View {
                                 RecipeComponent(recipe: recipe, currentStatus: .locked)
                             })
                             .buttonStyle(.plain)
+                            .accessibilityLabel("Receita bloqueada")
+                            .accessibilityHint("Toque duas vezes para ver mais informacoes")
+
                             
                         } else if recipe.status == .unavailable {
                             RecipeComponent(recipe: recipe, currentStatus: .unavailable)
+                                .accessibilityLabel("Receita Indisponivel")
                         }
                     }
                 }
