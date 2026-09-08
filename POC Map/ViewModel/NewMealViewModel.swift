@@ -20,6 +20,14 @@ final class NewMealViewModel{
     var imageData: Data?
     var recipeCategory: RecipeCategory?
     var recipesDic: [RecipeCategory: Recipe] = [:]
+    var actualScore: Int {
+        var actualScore = 0
+        for recipe in recipesDic.values{
+            actualScore += recipe.reward
+        }
+        
+        return actualScore
+    }
     
     init(newMeal: Meal = Meal(image: Data(), stars: 3, recipes: [], score: 0, comment: "", date: Date.now)) {
         self.newMeal = newMeal
@@ -28,12 +36,13 @@ final class NewMealViewModel{
     func addMeal(context: ModelContext, _ player: Player){
         do{
             for recipe in recipesDic.values{
-                newMeal.score += recipe.reward
                 newMeal.recipes.append(recipe)
             }
-            player.coin += newMeal.score
+            newMeal.score = actualScore
+            player.coin += actualScore
             newMeal.date = Date.now
             context.insert(newMeal)
+            print(player.coin)
             try context.save()
         } catch{
             print(error)
