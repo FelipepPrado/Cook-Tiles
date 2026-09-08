@@ -42,15 +42,14 @@ struct MapView: View {
                        ZStack{
                            SpriteView(scene: viewModel.mapScene, options: [.allowsTransparency])
                                .ignoresSafeArea()
-                               .accessibilityLabel("Mapa de receitas")
-                               .accessibilityHint("Navegue pelo mapa para encontrar receitas")
+                               .accessibilityHidden(true)
                                .background(
                                 Image("Home Map")
                                     .resizable()
                                     .scaledToFill()
                                     .ignoresSafeArea()
                                )
-                           
+                           MapAccessibilityOverlay(viewModel: viewModel)
                        }
                        .overlay(alignment: .topLeading) {
                            StatusCoinComponent(coin: player.coin)
@@ -64,6 +63,9 @@ struct MapView: View {
                        }
                        .onChange(of: player.coin, initial: true) { _, balance in
                            viewModel.mapScene.coinBalance = balance
+                       }
+                       .onChange(of: viewModel.mapScene.recipeTiles.count) {
+                           viewModel.updateAccessibleTiles()
                        }
                        .navigationDestination(for: NameViews.self){
                            destination in
@@ -85,6 +87,41 @@ struct MapView: View {
     
 }
 
+private struct MapAccessibilityOverlay: View {
+    var viewModel: MapViewModel
+    
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                ForEach(viewModel.accessibleTiles) { tileInfo in
+                    Color.clear
+                        .frame(width: 120, height: 100)
+                        .contentShape(Rectangle())
+                        .position(
+                            x: tileInfo.normalizedPosition.x * geometry.size.width,
+                            y: tileInfo.normalizedPosition.y * geometry.size.height
+                        )
+                        .accessibilityLabel(tileInfo.label)
+                        .accessibilityValue(tileInfo.value)
+                        .accessibilityHint(tileInfo.hint)
+                        .accessibilityAddTraits(.isButton)
+                        .accessibilityRemoveTraits(
+                            tileInfo.isInteractable ? [] : .isButton
+                        )
+                        .onTapGesture {
+                            if tileInfo.isInteractable {
+                                viewModel.selectedRecipe = tileInfo.recipe
+                                viewModel.showPopup = true
+                            }
+                        }
+                }
+            }
+        }
+        .allowsHitTesting(false)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Mapa de receitas")
+    }
+}
 
 #Preview {
     MapView()

@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 internal import Combine
 
 struct StepsView: View {
@@ -107,18 +108,39 @@ struct StepsView: View {
             if !viewModel.isCompleted {
                 if viewModel.isLastStep {
                     viewModel.isCompleted = true
+                    viewModel.feedbackMessage = "Receita completa"
+                    UIAccessibility.post(
+                        notification: .announcement,
+                        argument: "Receita completa! Você pode finalizar ou registrar a receita."
+                    )
                 } else {
                     viewModel.nextStep()
                     viewModel.feedbackMessage = "Próxima etapa"
+                    let step = viewModel.currentStep
+                    UIAccessibility.post(
+                        notification: .announcement,
+                        argument: "Etapa \(step.order) de \(viewModel.totalSteps): \(step.instruction)"
+                    )
                 }
             }
 
         case .voltar:
             if viewModel.isCompleted {
                 viewModel.isCompleted = false
+                let step = viewModel.currentStep
+                UIAccessibility.post(
+                    notification: .announcement,
+                    argument: "Voltou para etapa \(step.order) de \(viewModel.totalSteps): \(step.instruction)"
+                )
+                viewModel.feedbackMessage = "Etapa anterior"
             } else if !viewModel.isFirstStep {
                 viewModel.previousStep()
                 viewModel.feedbackMessage = "Etapa anterior"
+                let step = viewModel.currentStep
+                UIAccessibility.post(
+                    notification: .announcement,
+                    argument: "Etapa \(step.order) de \(viewModel.totalSteps): \(step.instruction)"
+                )
             }
 
         default:

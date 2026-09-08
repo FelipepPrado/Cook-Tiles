@@ -16,7 +16,9 @@ final class MapScene: SKScene {
             }
         }
     }
-
+    
+    var onCameraDidMove: (() -> Void)?
+    
     var recipes: [Recipe] = []
     
     var recipeTiles: [RecipeTile] = []
@@ -377,6 +379,22 @@ final class MapScene: SKScene {
         }
     }
     
+    func tileScreenPositions() -> [(recipeTile: RecipeTile, screenPoint: CGPoint)] {
+        guard let view = self.view else { return [] }
+
+        return recipeTiles.map { recipeTile in
+            let scenePoint = recipeTile.tile.position
+            let viewPoint = convertPoint(toView: scenePoint)
+
+            let normalized = CGPoint(
+                x: viewPoint.x / view.bounds.width,
+                y: viewPoint.y / view.bounds.height
+            )
+
+            return (recipeTile: recipeTile, screenPoint: normalized)
+        }
+    }
+    
     // MARK: - Tile Visual
     
     private func updatePriceColor(for recipeTile: RecipeTile) {
@@ -560,6 +578,8 @@ final class MapScene: SKScene {
         
         self.previousTouchPosition =
         currentTouchPosition
+        
+        onCameraDidMove?()
     }
     
     override func touchesEnded(
@@ -621,6 +641,8 @@ final class MapScene: SKScene {
         )
 
         gesture.scale = 1
+        
+        onCameraDidMove?()
     }
 
     override func willMove(from view: SKView) {
