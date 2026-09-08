@@ -135,7 +135,7 @@ struct BrownButtonComponent: View{
                 }
                 .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
                 .glassEffect(
-                    .identity
+                    .clear
                         .tint(
                             (canAfford ? Color.green500 : Color.brown100)
                         )
