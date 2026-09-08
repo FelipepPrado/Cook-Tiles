@@ -37,7 +37,9 @@ struct RecipeStepComponent: View {
                         }
                     }
                     .accessibilityElement(children: .ignore)
-                    .accessibilityLabel("Faça o gesto de mão fechada para voltar para o passo anterior")
+                    .accessibilityLabel("Passo anterior")
+                    .accessibilityValue(isFirstStep && !isCompleted ? "Indisponível, você está na primeira etapa" : "Disponível")
+                    .accessibilityHint("Faça o gesto de mão fechada para voltar")
                     
                     Spacer()
                     
@@ -60,7 +62,9 @@ struct RecipeStepComponent: View {
                         }
                     }
                     .accessibilityElement(children: .ignore)
-                    .accessibilityLabel("Faça o gesto de v  para passar para o passo seguinte")
+                    .accessibilityLabel("Passo seguinte")
+                    .accessibilityValue(isLastStep || isCompleted ? "Indisponível" : "Disponível")
+                    .accessibilityHint("Faça o gesto de V com a mão para avançar")
                 }
                 .padding(.horizontal, 30)
                 
@@ -98,6 +102,7 @@ struct RecipeStepComponent: View {
                             .font(.body)
                             .foregroundStyle(.brown200)
                             .multilineTextAlignment(.center)
+                            .accessibilityLabel("Etapa \(step.order) de \(totalSteps): \(step.instruction)")
                         
                         VStack(spacing: 0) {
                             Text("Etapa \(step.order)")
@@ -125,6 +130,8 @@ struct RecipeStepComponent: View {
                             .background(Color.cream50)
                             .cornerRadius(25)
                         }
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel("Progresso: etapa \(step.order) de \(totalSteps)")
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -145,16 +152,6 @@ struct RecipeStepComponent: View {
             }
         }
         .frame(maxHeight: .infinity)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Etapa \(step.order) de \(totalSteps): \(step.instruction)")
-        .accessibilityValue("Progresso: etapa \(step.order) de \(totalSteps)")
-        .accessibilityHint(
-            isLastStep
-                ? "Ultima etapa. Faca gesto de pedra para voltar."
-                : isFirstStep
-                    ? "Primeira etapa. Faca gesto de tesoura para avancar."
-                    : "Faca gesto de tesoura para avancar ou pedra para voltar."
-        )
 
     }
 }

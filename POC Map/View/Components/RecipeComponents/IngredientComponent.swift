@@ -79,7 +79,6 @@ struct IngredientComponent: View {
                     .stroke(Color.green500, lineWidth: 5)
             )
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("\(igredient.name), \(igredient.quantity) \(igredient.unit)")
             .accessibilityValue("Selecionado")
             .accessibilityHint("Toque duas vezes para desmarcar")
 
