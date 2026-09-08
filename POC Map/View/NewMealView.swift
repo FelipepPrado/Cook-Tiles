@@ -169,13 +169,28 @@ struct NewMealView: View {
                 .padding(.horizontal, 32)
                 .toolbar{
                     ToolbarItem(placement: .navigationBarTrailing){
-                        Button(role: .confirm){
+                        Button(action: {
                             viewModel.addMeal(context: modelContext, player)
                             viewRouter.removeLast()
-                        }
+                        }, label: {
+                            HStack(spacing: 4){
+                                Text("+\(viewModel.actualScore)")
+                                    .fontWeight(.medium)
+                                    .foregroundStyle(.white)
+                                
+                                Image("recipeCoin")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20, height: 17)
+                            }
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 6)
+                        })
+                        .buttonStyle(.borderedProminent)
                         .tint(.green500)
                         .disabled(viewModel.newMeal.image == Data() || viewModel.recipesDic.isEmpty)
                     }
+                    
                 }
                 .sheet(item: $viewModel.recipeCategory) { category in
                     AddRecipetoMealView(
