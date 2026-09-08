@@ -6,12 +6,7 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		3EB0663B304BA5AD00A196C4 /* icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 3EB0663A304BA5AD00A196C4 /* icon.icon */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
-		3EB0663A304BA5AD00A196C4 /* icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = icon.icon; sourceTree = "<group>"; };
 		55FA8256303DA74C004CA2E2 /* POC Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "POC Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -39,7 +34,6 @@
 			children = (
 				55FA8258303DA74C004CA2E2 /* POC Map */,
 				55FA8257303DA74C004CA2E2 /* Products */,
-				3EB0663A304BA5AD00A196C4 /* icon.icon */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,11 +86,12 @@
 				};
 			};
 			buildConfigurationList = 55FA8251303DA74C004CA2E2 /* Build configuration list for PBXProject "POC Map" */;
-			developmentRegion = en;
+			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = 55FA824D303DA74C004CA2E2;
 			minimizedProjectReferenceProxies = 1;
@@ -115,7 +110,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EB0663B304BA5AD00A196C4 /* icon.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +253,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = icon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = D7F8PF8M37;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -300,7 +294,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = icon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = D7F8PF8M37;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
