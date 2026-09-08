@@ -26,20 +26,24 @@ struct HexagonShape: Shape {
 struct StatusCoinComponent: View {
     let coin: Int
     
+    private var formattedCoin: String {
+        coin.formatted(.number.notation(.compactName))
+    }
+    
     var body: some View {
         HStack(spacing: 3) {
-            Text("\(coin)")
+            Text(formattedCoin)
                 .font(Font.custom("Hammersmith One", size: 19, relativeTo: .headline))
                 .foregroundColor(.cream300)
+                .lineLimit(1)
             
             Image("statusCoin")
-                .frame(width: 28, height: 28)
+                .frame(width: 29, height: 24)
 
         }
-        .frame(minWidth: 85)
-        .padding(.horizontal, 24)
-        .padding(.top, 10)
-        .padding(.bottom, 10)
+        .frame(minWidth: 42)
+        .padding(.horizontal, 20)
+        .padding(.vertical, 10)
         .background(
             HexagonShape()
                 .fill(.brown900)
@@ -48,5 +52,5 @@ struct StatusCoinComponent: View {
 }
 
 #Preview {
-    StatusCoinComponent(coin: 100)
+    StatusCoinComponent(coin: 10000)
 }
