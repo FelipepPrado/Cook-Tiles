@@ -20,91 +20,110 @@ struct MapView: View {
     var body: some View {
         @Bindable var path = viewRouter
         NavigationStack(path: $path.path) {
-            
-            ZStack{
-                if let recipe = viewModel.selectedRecipe, viewModel.showPopup {
-                    ZStack {
-                        Color.black.opacity(0.4)
-                            .ignoresSafeArea()
-                            .onTapGesture {
-                                viewModel.selectedRecipe = nil
-                            }
-                            .transition(.opacity)
-                            .accessibilityLabel("Fechar popup")
-                            .accessibilityHint("Toque duas vezes para fechar os detalhes da receita")
-                        
-                        
-                        RecipeDetailView(viewModel: RecipeDetailViewModel(
-                            recipe: recipe, mapViewModel: viewModel, player: player
-                        ))
-                        .padding(.bottom, 35)
-                    }
-                    .zIndex(1)
-                }
-                ZStack{
-                    SpriteView(scene: viewModel.mapScene, options: [.allowsTransparency])
-                        .ignoresSafeArea()
-                        .accessibilityLabel("Mapa de receitas")
-                        .accessibilityHint("Navegue pelo mapa para encontrar receitas")
-                        .background(
-                            Image("Home Map")
-                                .resizable()
-                                .scaledToFill()
-                                .ignoresSafeArea()
-                        )
-                    
-                }
-                .overlay(alignment: .topLeading) {
-                    StatusCoinComponent(coin: player.coin)
-                        .padding()
-                        .zIndex(2)
-                }
-                .onAppear {
-                    viewModel.mapScene.coinBalance = player.coin
-                    viewModel.initMap(recipes: recipeModel)
+                   
+                   ZStack{
+                       if let recipe = viewModel.selectedRecipe, viewModel.showPopup {
+                           ZStack {
+                               Color.black.opacity(0.4)
+                                   .ignoresSafeArea()
+                                   .onTapGesture {
+                                       viewModel.selectedRecipe = nil
+                                   }
+                                   .transition(.opacity)
+                                   .accessibilityLabel("Fechar popup")
+                                   .accessibilityHint("Toque duas vezes para fechar os detalhes da receita")
 
-                    if !hasCompletedOnboarding && viewRouter.sheet == nil {
-                        viewRouter.initialSheet()
-                    }
-                }
-                .onChange(of: player.coin, initial: true) { _, balance in
-                    viewModel.mapScene.coinBalance = balance
-                }
-                .navigationDestination(for: NameViews.self){
-                    destination in
-                    ViewManagar.viewForDestination(destination)
-                }
-                .sheet(
-                    isPresented: Binding(
-                        get: { viewRouter.sheet != nil },
-                        set: { isPresented in
-                            if !isPresented {
-                                viewRouter.dismissSheet()
-                            }
-                        }
-                    )
-                ) {
-                    OnBoardingSheetView()
-                        .interactiveDismissDisabled()
-                        .presentationDragIndicator(.hidden)
-                        .presentationBackground(Color.cream500)
-                }
-                .safeAreaInset(edge: .bottom, spacing: 0) {
-                    TabBarComponent()
-                        .padding(.horizontal, 30)
-                }
-                .navigationTitle("Mapa de Receitas")
-                .toolbar(.hidden, for: .navigationBar)
-            }
-            
-        }
-        .environment(viewModel)
-        .environment(player)
+                               
+                               RecipeDetailView(viewModel: RecipeDetailViewModel(
+                                   recipe: recipe, mapViewModel: viewModel, player: player
+                               ))
+                               .padding(.bottom, 35)
+                           }
+                           .zIndex(1)
+                       }
+                       ZStack{
+                           SpriteView(scene: viewModel.mapScene, options: [.allowsTransparency])
+                               .ignoresSafeArea()
+                               .accessibilityHidden(true)
+                               .background(
+                                Image("Home Map")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .ignoresSafeArea()
+                               )
+                           MapAccessibilityOverlay(viewModel: viewModel)
+                       }
+                       .overlay(alignment: .topLeading) {
+                           StatusCoinComponent(coin: player.coin)
+                               .padding()
+                               .zIndex(2)
+                       }
+                       .onAppear {
+                           viewModel.mapScene.coinBalance = player.coin
+                           viewModel.initMap(recipes: recipeModel)
+                           
+                       }
+                       .onChange(of: player.coin, initial: true) { _, balance in
+                           viewModel.mapScene.coinBalance = balance
+                       }
+                       .onChange(of: viewModel.mapScene.recipeTiles.count) {
+                           viewModel.updateAccessibleTiles()
+                       }
+                       .navigationDestination(for: NameViews.self){
+                           destination in
+                           ViewManagar.viewForDestination(destination)
+                       }
+                       .safeAreaInset(edge: .bottom, spacing: 0) {
+                           TabBarComponent()
+                               .padding(.horizontal, 30)
+                       }
+                       .navigationTitle("Mapa de Receitas")
+                       .toolbar(.hidden, for: .navigationBar)
+                   }
+    
+               }
+               .environment(viewModel)
+               .environment(player)
         
     }
     
 }
 
+private struct MapAccessibilityOverlay: View {
+    var viewModel: MapViewModel
+    
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                ForEach(viewModel.accessibleTiles) { tileInfo in
+                    Color.clear
+                        .frame(width: 120, height: 100)
+                        .contentShape(Rectangle())
+                        .position(
+                            x: tileInfo.normalizedPosition.x * geometry.size.width,
+                            y: tileInfo.normalizedPosition.y * geometry.size.height
+                        )
+                        .accessibilityLabel(tileInfo.label)
+                        .accessibilityValue(tileInfo.value)
+                        .accessibilityHint(tileInfo.hint)
+                        .accessibilityAddTraits(.isButton)
+                        .accessibilityRemoveTraits(
+                            tileInfo.isInteractable ? [] : .isButton
+                        )
+                        .onTapGesture {
+                            if tileInfo.isInteractable {
+                                viewModel.selectedRecipe = tileInfo.recipe
+                                viewModel.showPopup = true
+                            }
+                        }
+                }
+            }
+        }
+        .allowsHitTesting(false)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Mapa de receitas")
+    }
+}
 
 #Preview {
     MapView()
