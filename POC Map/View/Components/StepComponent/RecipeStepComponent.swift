@@ -22,7 +22,7 @@ struct RecipeStepComponent: View {
                         Image("anterior")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 40, height: 75)
+                            .frame(width: 40, height: 60)
                             .padding(.bottom, 10)
                         
                         Text("Passo\nAnterior")
