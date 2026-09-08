@@ -2,6 +2,7 @@ import SwiftUI
 internal import Combine
 
 struct StepsView: View {
+    @Environment(ViewRouter.self) private var viewRouter
     
     var viewModel: StepsViewModel
     let timer = Timer.publish(every: 0.3, on: .main, in: .common).autoconnect()
@@ -26,12 +27,20 @@ struct StepsView: View {
                         Spacer()
                         
                         RecipeStepComponent(
+                            recipe: viewModel.recipe,
                             step: viewModel.currentStep,
                             totalSteps: viewModel.totalSteps,
                             detectedGesture: viewModel.currentGesture,
                             holdProgress: viewModel.holdProgress,
                             isFirstStep: viewModel.isFirstStep,
-                            isLastStep: viewModel.isLastStep
+                            isLastStep: viewModel.isLastStep,
+                            isCompleted: viewModel.isCompleted,
+                            onFinish: {
+                                viewRouter.removeLast()
+                            },
+                            onRegister: {
+                                viewRouter.newMealView()
+                            }
                         )
                         
                         // Feedback de navegação
@@ -94,15 +103,23 @@ struct StepsView: View {
     private func executeGestureAction(_ gesture: StepsEnum) {
         switch gesture {
         case .passar:
-            if !viewModel.isLastStep {
-                viewModel.nextStep()
-                viewModel.feedbackMessage = "Próxima etapa"
+            if !viewModel.isCompleted {
+                if viewModel.isLastStep {
+                    viewModel.isCompleted = true
+                } else {
+                    viewModel.nextStep()
+                    viewModel.feedbackMessage = "Próxima etapa"
+                }
             }
+
         case .voltar:
-            if !viewModel.isFirstStep {
+            if viewModel.isCompleted {
+                viewModel.isCompleted = false
+            } else if !viewModel.isFirstStep {
                 viewModel.previousStep()
                 viewModel.feedbackMessage = "Etapa anterior"
             }
+
         default:
             break
         }

@@ -39,7 +39,7 @@ struct HexagonButtonShape: Shape {
 }
 
 struct BrownButtonComponent: View{
-    
+    var title: String? = nil
     let recipe: Recipe
     let currentButton: BrownButtonStyle
     var canAfford: Bool = true
@@ -53,7 +53,7 @@ struct BrownButtonComponent: View{
             
             if recipe.status == .unlocked {
                 HStack(spacing: 8){
-                    Text("Ver Mais")
+                    Text(title ?? "Ver Mais")
                         .font(Font.custom("Hammersmith One", size: 17, relativeTo: .callout))
                         .foregroundColor(.cream500)
                 }
@@ -89,7 +89,7 @@ struct BrownButtonComponent: View{
         case .smallStroke:
             
             VStack{
-                Text("Iniciar Receita")
+                Text(title ?? "Iniciar Receita")
                     .font(Font.custom("Hammersmith One", size: 17, relativeTo: .headline))
                     .foregroundColor(.brown200)
             }

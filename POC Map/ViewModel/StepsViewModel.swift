@@ -31,6 +31,8 @@ final class StepsViewModel{
     
     var currentStepIndex: Int = 0
     
+    var isCompleted = false
+    
     var currentStep: RecipeStep {
         steps[currentStepIndex]
     }
