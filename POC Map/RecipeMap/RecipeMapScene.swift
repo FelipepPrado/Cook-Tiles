@@ -593,30 +593,6 @@ final class MapScene: SKScene {
             return
         }
         
-        print(
-            "Recipe:",
-            recipeTile.recipe.name
-        )
-        
-        print(
-            "Status:",
-            recipeTile.recipe.status
-        )
-        
-        print(
-            "Position:",
-            recipeTile.row,
-            recipeTile.col
-        )
-        print(
-            "Category:",
-            recipeTile.recipe.category.rawValue
-        )
-        print(
-            "level:",
-            recipeTile.recipe.level
-        )
-        
         onRecipeTapped?(
             recipeTile.recipe
         )

@@ -56,7 +56,7 @@ struct MealView: View {
                                 .font(.custom("Hammersmith One", size: 16, relativeTo: .body))
                                 .foregroundStyle(.brown200)
                                 .multilineTextAlignment(.leading)
-                                .frame(maxWidth: .infinity, minHeight: 52)
+                                .frame(maxWidth: .infinity, minHeight: 52, alignment: .topLeading)
                                 .padding(16)
                                 .background(.cream600, in: RoundedRectangle(cornerRadius: 10))
                         }
