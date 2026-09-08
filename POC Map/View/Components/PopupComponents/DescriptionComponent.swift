@@ -33,7 +33,7 @@ struct DescriptionComponent: View {
         case .detailViewLocked:
             
             VStack(alignment: .center, spacing: 10){
-                Image("lockedRecipe")
+                Image("NoRecipe")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 90, height:80)
@@ -49,7 +49,7 @@ struct DescriptionComponent: View {
         case .recipeViewLocked:
             
             VStack(alignment: .center, spacing: 10){
-                Image("lockedRecipe")
+                Image("NoRecipe")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 90, height:80)

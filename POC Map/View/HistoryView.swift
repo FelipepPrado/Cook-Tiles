@@ -15,10 +15,10 @@ struct HistoryView: View {
             if viewModel.groupedMeals.isEmpty{
                 VStack(spacing: 25){
                     Spacer()
-                    Image("NoRecipe")
+                    Image("lockedRecipe")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 173, height: 150)
+                        .frame(width: 170, height: 130)
                     Text("Você ainda não cadastrou nenhuma Refeição!")
                         .font(.hammersmith(fontStyle: .title2))
                         .multilineTextAlignment(.center)
@@ -107,46 +107,46 @@ struct HistoryView: View {
     
     let calendar = Calendar.current
     
-    container.mainContext.insert(
-        Meal(
-            image: Data(),
-            stars: 5,
-            recipes: [],
-            score: 100,
-            comment: "Muito bom!",
-            date: .now
-        )
-    )
-    
-    container.mainContext.insert(
-        Meal(
-            image: Data(),
-            stars: 4,
-            recipes: [],
-            score: 80,
-            comment: "Gostei bastante.",
-            date: calendar.date(
-                byAdding: .hour,
-                value: -2,
-                to: .now
-            )!
-        )
-    )
-    
-    container.mainContext.insert(
-        Meal(
-            image: Data(),
-            stars: 3,
-            recipes: [],
-            score: 60,
-            comment: "Ficou razoável.",
-            date: calendar.date(
-                byAdding: .day,
-                value: -1,
-                to: .now
-            )!
-        )
-    )
+//    container.mainContext.insert(
+//        Meal(
+//            image: Data(),
+//            stars: 5,
+//            recipes: [],
+//            score: 100,
+//            comment: "Muito bom!",
+//            date: .now
+//        )
+//    )
+//    
+//    container.mainContext.insert(
+//        Meal(
+//            image: Data(),
+//            stars: 4,
+//            recipes: [],
+//            score: 80,
+//            comment: "Gostei bastante.",
+//            date: calendar.date(
+//                byAdding: .hour,
+//                value: -2,
+//                to: .now
+//            )!
+//        )
+//    )
+//    
+//    container.mainContext.insert(
+//        Meal(
+//            image: Data(),
+//            stars: 3,
+//            recipes: [],
+//            score: 60,
+//            comment: "Ficou razoável.",
+//            date: calendar.date(
+//                byAdding: .day,
+//                value: -1,
+//                to: .now
+//            )!
+//        )
+//    )
     
     return HistoryView()
         .modelContainer(container)
