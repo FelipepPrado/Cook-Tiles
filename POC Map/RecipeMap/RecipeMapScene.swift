@@ -266,10 +266,7 @@ final class MapScene: SKScene {
                 - recipeTile.col
             )
             
-            return
-            rowDifference
-            + colDifference
-            == 1
+            return rowDifference + colDifference == 1
         }
     }
     

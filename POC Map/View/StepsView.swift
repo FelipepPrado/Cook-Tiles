@@ -25,6 +25,20 @@ struct StepsView: View {
                     
                     // Conteúdo da receita
                     VStack(spacing: 16) {
+                        if let message = viewModel.feedbackMessage {
+                            Text(message)
+                                .font(.headline)
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 8)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Capsule())
+                                .transition(.scale.combined(with: .opacity))
+                                .accessibilityLabel(message)
+                                .accessibilityAddTraits(.updatesFrequently)
+
+                        }
+                        
                         Spacer()
                         
                         RecipeStepComponent(
@@ -43,23 +57,6 @@ struct StepsView: View {
                                 viewRouter.newMealView()
                             }
                         )
-                        
-                        // Feedback de navegação
-                        if let message = viewModel.feedbackMessage {
-                            Text(message)
-                                .font(.headline)
-                                .foregroundStyle(.white)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 8)
-                                .background(.ultraThinMaterial)
-                                .clipShape(Capsule())
-                                .transition(.scale.combined(with: .opacity))
-                                .accessibilityLabel(message)
-                                .accessibilityAddTraits(.updatesFrequently)
-
-                        }
-                        
-                        Spacer()
                     }
                 }
             } else {

@@ -196,6 +196,7 @@ struct NewMealView: View {
                                     .scaledToFit()
                                     .frame(width: 20, height: 17)
                             }
+                            .animation(.easeIn, value: viewModel.actualScore)
                             .padding(.vertical, 8)
                             .padding(.horizontal, 6)
                         })

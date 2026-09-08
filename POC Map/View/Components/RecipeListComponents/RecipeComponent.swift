@@ -4,6 +4,7 @@ struct RecipeComponent: View {
     
     let recipe: Recipe
     let currentStatus: recipeComponent
+    var isSelected: Bool = false
 
     var body: some View {
         
@@ -12,7 +13,7 @@ struct RecipeComponent: View {
             ZStack{
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.cream200)
-                    .stroke(.cream800, lineWidth: 3)
+                    .stroke(isSelected ? .green500 : .cream800, lineWidth: 3)
 //                    .padding(3)
                     .frame(maxWidth: 110, minHeight: 145)
                 

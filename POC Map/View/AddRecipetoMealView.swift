@@ -18,10 +18,15 @@ struct AddRecipetoMealView: View {
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(viewModel.recipes){ recipe in
                             Button(action: {
-                                viewModel.addRecipe(recipe)
+                                if viewModel.viewModel.recipesDic.values.contains(recipe) {
+                                    viewModel.viewModel.recipesDic.removeValue(forKey: recipe.category)
+                                }
+                                else{
+                                    viewModel.addRecipe(recipe)
+                                }
                                 dismiss()
                             }, label: {
-                                RecipeComponent(recipe: recipe, currentStatus: .unlocked)
+                                RecipeComponent(recipe: recipe, currentStatus: .unlocked, isSelected: viewModel.viewModel.recipesDic.values.contains(recipe))
                             })
                             .accessibilityLabel("Selecionar \(recipe.name)")
                             .accessibilityHint("Toque duas vezes para adicionar esta receita a refeicao")
