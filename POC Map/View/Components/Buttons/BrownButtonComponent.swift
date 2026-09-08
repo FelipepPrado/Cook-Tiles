@@ -110,12 +110,12 @@ struct BrownButtonComponent: View{
                 VStack{
                     Text("Iniciar Receita")
                         .font(Font.custom("Hammersmith One", size: 17, relativeTo: .headline))
-                        .foregroundColor(.cream300)
+                        .foregroundColor(.white)
                 }
                 .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
                 .glassEffect(
                     .clear
-                        .tint(Color.brown700.opacity(0.7))
+                        .tint(Color.green700.opacity(0.85))
                         .interactive(),
                     in: HexagonButtonShape()
                 )

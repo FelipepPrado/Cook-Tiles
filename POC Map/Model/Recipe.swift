@@ -150,10 +150,10 @@ enum RecipeTag: String, Codable {
     }
 }
 enum RecipeCategory: String, Codable, CaseIterable, Identifiable {
-    case sobremesa
-    case pratoPrincipal
     case entrada
+    case pratoPrincipal
     case guarnicao
+    case sobremesa
 
     var id: String { rawValue }
 

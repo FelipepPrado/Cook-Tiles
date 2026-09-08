@@ -3,6 +3,8 @@ internal import SpriteKit
 import SwiftData
 
 struct MapView: View {
+    @AppStorage("hasCompletedOnboarding")
+    private var hasCompletedOnboarding = false
     
     @Environment(ViewRouter.self) var viewRouter
     @Query(sort: \Recipe.id, order: .forward) private var recipeModel: [Recipe]
@@ -60,12 +62,30 @@ struct MapView: View {
                            viewModel.mapScene.coinBalance = player.coin
                            viewModel.initMap(recipes: recipeModel)
                            
+                           if !hasCompletedOnboarding && viewRouter.sheet == nil {
+                               viewRouter.initialSheet()
+                           }
                        }
                        .onChange(of: player.coin, initial: true) { _, balance in
                            viewModel.mapScene.coinBalance = balance
                        }
                        .onChange(of: viewModel.mapScene.recipeTiles.count) {
                            viewModel.updateAccessibleTiles()
+                       }
+                       .sheet(
+                           isPresented: Binding(
+                               get: { viewRouter.sheet != nil },
+                               set: { isPresented in
+                                   if !isPresented {
+                                       viewRouter.dismissSheet()
+                                   }
+                               }
+                           )
+                       ) {
+                           OnBoardingSheetView()
+                               .interactiveDismissDisabled()
+                               .presentationDragIndicator(.hidden)
+                               .presentationBackground(Color.cream500)
                        }
                        .navigationDestination(for: NameViews.self){
                            destination in
