@@ -40,18 +40,26 @@ struct CameraView: View {
             .toolbar {
                 if let data = model.photoData {
                     ToolbarItem(placement: .topBarLeading) {
-                        Button(role: .cancel) {
+                        Button {
                             model.retake()
+                        } label: {
+                            Image(systemName: "xmark")
                         }
+                        .accessibilityLabel("Refazer")
                     }
-                    
+
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button(role: .confirm) {
+                        Button {
                             onPhoto(data)
                             dismiss()
+                        } label: {
+                            Image(systemName: "checkmark")
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.white)
                         }
-                        .fontWeight(.semibold)
+                        .buttonStyle(.borderedProminent)
                         .tint(.green500)
+                        .accessibilityLabel("Usar foto")
                     }
                 }
             }
@@ -68,7 +76,7 @@ struct CameraView: View {
                 Image(systemName: model.flash.icon)
                     .foregroundStyle(model.flash == .off ? .white : .yellow)
             })
-            .buttonStyle(.glassProminent)
+            .buttonStyle(.borderedProminent)
             .tint(.clear)
             .disabled(!model.state.supportsFlash || !model.canTakePhoto)
             .opacity(model.state.supportsFlash && model.photoData == nil ? 1 : 0)
