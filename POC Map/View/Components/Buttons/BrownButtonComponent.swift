@@ -107,41 +107,69 @@ struct BrownButtonComponent: View{
             
             if recipe.status == .unlocked {
                 
-                VStack{
-                    Text("Iniciar Receita")
-                        .font(Font.custom("Hammersmith One", size: 17, relativeTo: .headline))
-                        .foregroundColor(.white)
+                if #available(iOS 26.0, *) {
+                    VStack{
+                        Text("Iniciar Receita")
+                            .font(Font.custom("Hammersmith One", size: 17, relativeTo: .headline))
+                            .foregroundColor(.white)
+                    }
+                    .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
+                    .glassEffect(
+                        .clear
+                            .tint(Color.green700.opacity(0.85))
+                            .interactive(),
+                        in: HexagonButtonShape()
+                    )
                 }
-                .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
-                .glassEffect(
-                    .clear
-                        .tint(Color.green700.opacity(0.85))
-                        .interactive(),
-                    in: HexagonButtonShape()
-                )
+                else{
+                    VStack{
+                        Text("Iniciar Receita")
+                            .font(Font.custom("Hammersmith One", size: 17, relativeTo: .headline))
+                            .foregroundColor(.white)
+                    }
+                    .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
+                    .background(Color.green700.opacity(0.85), in: HexagonButtonShape())
+                }
                 
             } else if recipe.status == .locked {
                 
-                HStack(spacing: 8){
-                    Text("Adquirir: \(recipe.price)")
-                        .font(Font.custom("Hammersmith One", size: 17, relativeTo: .headline))
-                        .foregroundColor(.cream500)
-                    
-                    Image("recipeCoin")
-                        .resizable()
-                        .renderingMode(.template)
-                        .frame(width: 20, height: 17)
-                        .foregroundStyle(.cream500)
+                if #available(iOS 26.0, *) {
+                    HStack(spacing: 8){
+                        Text("Adquirir: \(recipe.price)")
+                            .font(Font.custom("Hammersmith One", size: 17, relativeTo: .headline))
+                            .foregroundColor(.cream500)
+                        
+                        Image("recipeCoin")
+                            .resizable()
+                            .renderingMode(.template)
+                            .frame(width: 20, height: 17)
+                            .foregroundStyle(.cream500)
+                    }
+                    .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
+                    .glassEffect(
+                        .clear
+                            .tint(
+                                (canAfford ? Color.green500 : Color.brown100)
+                            )
+                            .interactive(),
+                        in: HexagonButtonShape()
+                    )
                 }
-                .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
-                .glassEffect(
-                    .clear
-                        .tint(
-                            (canAfford ? Color.green500 : Color.brown100)
-                        )
-                        .interactive(),
-                    in: HexagonButtonShape()
-                )
+                else{
+                    HStack(spacing: 8){
+                        Text("Adquirir: \(recipe.price)")
+                            .font(Font.custom("Hammersmith One", size: 17, relativeTo: .headline))
+                            .foregroundColor(.cream500)
+                        
+                        Image("recipeCoin")
+                            .resizable()
+                            .renderingMode(.template)
+                            .frame(width: 20, height: 17)
+                            .foregroundStyle(.cream500)
+                    }
+                    .frame(width: currentButton.frameSize.width, height: currentButton.frameSize.height)
+                    .background(canAfford ? Color.green500 : Color.brown100, in: HexagonButtonShape())
+                }
             }
         }
     }

@@ -57,18 +57,9 @@ struct InitialSheet: View {
             }
         }
         .padding(.bottom, 30)
-        .toolbar{
-            ToolbarItem(placement: .topBarLeading) {
-                Button(action: {
-                    
-                }, label: {
-                    Text("a")
-                        .foregroundStyle(Color.clear)
-                })
-                .tint(.clear)
-            }
-            .sharedBackgroundVisibility(.hidden)
-        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
     }
 }
 

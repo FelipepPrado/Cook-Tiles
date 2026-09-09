@@ -47,7 +47,7 @@ struct HistoryView: View {
                                     showsIndicators: false
                                 ) {
                                     LazyHStack(spacing: 20) {
-                                        ForEach(group.meals) { meal in
+                                        ForEach(group.meals.sorted(by: { $0.date > $1.date})) { meal in
                                             Button(action: {
                                                 viewModel.selectedMeal = meal
                                             }, label:{
