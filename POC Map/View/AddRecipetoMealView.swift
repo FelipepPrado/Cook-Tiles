@@ -3,6 +3,9 @@ import SwiftUI
 struct AddRecipetoMealView: View {
     @Environment(\.dismiss) var dismiss
     let viewModel: AddRecipetoMealViewModel
+    let columns = [
+        GridItem(.adaptive(minimum: 110), spacing: 3)
+    ]
     
     var body: some View {
         NavigationStack{
@@ -12,15 +15,22 @@ struct AddRecipetoMealView: View {
                         .font(Font.custom("Hammersmith One", size: 24, relativeTo: .title2))
                         .foregroundColor(.brown700)
                     
-                    LazyVGrid(columns: [GridItem(spacing: 9), GridItem(spacing: 9), GridItem()], spacing: 20) {
+                    LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(viewModel.recipes){ recipe in
                             Button(action: {
-                                viewModel.addRecipe(recipe)
+                                if viewModel.viewModel.recipesDic.values.contains(recipe) {
+                                    viewModel.viewModel.recipesDic.removeValue(forKey: recipe.category)
+                                }
+                                else{
+                                    viewModel.addRecipe(recipe)
+                                }
                                 dismiss()
                             }, label: {
-                                UnlockedRecipeComponent(recipe: recipe)
-                                    .frame(width: 120 ,height: 145)
+                                RecipeComponent(recipe: recipe, currentStatus: .unlocked, isSelected: viewModel.viewModel.recipesDic.values.contains(recipe))
                             })
+                            .accessibilityLabel("Selecionar \(recipe.name)")
+                            .accessibilityHint("Toque duas vezes para adicionar esta receita a refeicao")
+
                         }
                     }
                 }

@@ -1,7 +1,9 @@
 import SwiftUI
+import UIKit
 internal import Combine
 
 struct StepsView: View {
+    @Environment(ViewRouter.self) private var viewRouter
     
     var viewModel: StepsViewModel
     let timer = Timer.publish(every: 0.3, on: .main, in: .common).autoconnect()
@@ -20,21 +22,10 @@ struct StepsView: View {
                     // Overlay escuro para legibilidade
                     Color.black.opacity(0.4)
                         .edgesIgnoringSafeArea(.all)
+                        .accessibilityHidden(true)
                     
                     // Conteúdo da receita
                     VStack(spacing: 16) {
-                        Spacer()
-                        
-                        RecipeStepComponent(
-                            step: viewModel.currentStep,
-                            totalSteps: viewModel.totalSteps,
-                            detectedGesture: viewModel.currentGesture,
-                            holdProgress: viewModel.holdProgress,
-                            isFirstStep: viewModel.isFirstStep,
-                            isLastStep: viewModel.isLastStep
-                        )
-                        
-                        // Feedback de navegação
                         if let message = viewModel.feedbackMessage {
                             Text(message)
                                 .font(.headline)
@@ -44,13 +35,34 @@ struct StepsView: View {
                                 .background(.ultraThinMaterial)
                                 .clipShape(Capsule())
                                 .transition(.scale.combined(with: .opacity))
+                                .accessibilityLabel(message)
+                                .accessibilityAddTraits(.updatesFrequently)
+
                         }
                         
                         Spacer()
+                        
+                        RecipeStepComponent(
+                            recipe: viewModel.recipe,
+                            step: viewModel.currentStep,
+                            totalSteps: viewModel.totalSteps,
+                            detectedGesture: viewModel.currentGesture,
+                            holdProgress: viewModel.holdProgress,
+                            isFirstStep: viewModel.isFirstStep,
+                            isLastStep: viewModel.isLastStep,
+                            isCompleted: viewModel.isCompleted,
+                            onFinish: {
+                                viewRouter.removeLast()
+                            },
+                            onRegister: {
+                                viewRouter.newMealView()
+                            }
+                        )
                     }
                 }
             } else {
                 ProgressView("Ligando câmera...")
+                    .accessibilityLabel("Carregando camera, por favor aguarde")
             }
         }
         .onReceive(timer) { _ in
@@ -62,31 +74,30 @@ struct StepsView: View {
     
     private func checkGesture() {
         let detected = viewModel.cameraManager.handAnalyzer.detectedPose
-        
-        // Só processa tesoura (avançar) e pedra (voltar)
+    
         let isActionGesture = (detected == .passar || detected == .voltar)
         
-        // Se está em cooldown, não faz nada
+
         if viewModel.isInCooldown { return }
         
         if isActionGesture && detected == viewModel.currentGesture {
-            // Mesmo gesto sendo mantido — calcula progresso
+          
             if let start = viewModel.gestureHoldStart {
                 let elapsed = Date.now.timeIntervalSince(start)
                 viewModel.holdProgress = min(elapsed / viewModel.holdDuration, 1.0)
                 
                 if elapsed >= viewModel.holdDuration {
-                    // Gesto mantido tempo suficiente — executa ação
+                   
                     executeGestureAction(detected)
                 }
             }
         } else if isActionGesture {
-            // Novo gesto detectado — começa a contar
+          
             viewModel.currentGesture = detected
             viewModel.gestureHoldStart = Date.now
             viewModel.holdProgress = 0.0
         } else {
-            // Gesto não reconhecido ou mão ausente — reseta
+         
             resetGesture()
         }
     }
@@ -94,24 +105,53 @@ struct StepsView: View {
     private func executeGestureAction(_ gesture: StepsEnum) {
         switch gesture {
         case .passar:
-            if !viewModel.isLastStep {
-                viewModel.nextStep()
-                viewModel.feedbackMessage = "Próxima etapa"
+            if !viewModel.isCompleted {
+                if viewModel.isLastStep {
+                    viewModel.isCompleted = true
+                    viewModel.feedbackMessage = "Receita completa"
+                    UIAccessibility.post(
+                        notification: .announcement,
+                        argument: "Receita completa! Você pode finalizar ou registrar a receita."
+                    )
+                } else {
+                    viewModel.nextStep()
+                    viewModel.feedbackMessage = "Próxima etapa"
+                    let step = viewModel.currentStep
+                    UIAccessibility.post(
+                        notification: .announcement,
+                        argument: "Etapa \(step.order) de \(viewModel.totalSteps): \(step.instruction)"
+                    )
+                }
             }
+
         case .voltar:
-            if !viewModel.isFirstStep {
+            if viewModel.isCompleted {
+                viewModel.isCompleted = false
+                let step = viewModel.currentStep
+                UIAccessibility.post(
+                    notification: .announcement,
+                    argument: "Voltou para etapa \(step.order) de \(viewModel.totalSteps): \(step.instruction)"
+                )
+                viewModel.feedbackMessage = "Etapa anterior"
+            } else if !viewModel.isFirstStep {
                 viewModel.previousStep()
                 viewModel.feedbackMessage = "Etapa anterior"
+                let step = viewModel.currentStep
+                UIAccessibility.post(
+                    notification: .announcement,
+                    argument: "Etapa \(step.order) de \(viewModel.totalSteps): \(step.instruction)"
+                )
             }
+
         default:
             break
         }
         
-        // Reseta e entra em cooldown
+     
         resetGesture()
         viewModel.isInCooldown = true
         
-        // Remove feedback e cooldown após um tempo
+   
         DispatchQueue.main.asyncAfter(deadline: .now() + viewModel.cooldownDuration) {
             viewModel.isInCooldown = false
             viewModel.feedbackMessage = nil

@@ -1,8 +1,16 @@
 import SwiftUI
 import Observation
 
+enum NameSheets: Hashable, Identifiable{
+    case InitialSheet
+    case DetailsSheet
+    case FinalSheet
+    
+    var id: Self { self }
+}
+
 enum NameViews: Hashable{
-    case CameraView
+    case CameraView(request: CameraRequest)
     case HistoryView
     case MapView
     case NewMealView
@@ -14,6 +22,8 @@ enum NameViews: Hashable{
 @Observable
 class ViewRouter{
     var path = NavigationPath()
+    var sheet: NameSheets?
+    var sheetPath: [NameSheets] = []
     
     func clear(){
         path = .init()
@@ -27,8 +37,14 @@ class ViewRouter{
         self.clear()
     }
     
-    func cameraView(){
-        path.append(NameViews.CameraView)
+    func cameraView(
+        onPhoto: @escaping (Data) -> Void
+    ) {
+        let request = CameraRequest(onPhoto: onPhoto)
+        
+        path.append(
+            NameViews.CameraView(request: request)
+        )
     }
     
     func historyView(){
@@ -54,6 +70,24 @@ class ViewRouter{
     func stepsView(recipe: Recipe){
         path.append(NameViews.StepsView(recipe: recipe))
     }
+    
+    func initialSheet() {
+        sheetPath.removeAll()
+        sheet = .InitialSheet
+    }
+
+    func detailsSheet() {
+        sheetPath.append(.DetailsSheet)
+    }
+
+    func finalSheet() {
+        sheetPath.append(.FinalSheet)
+    }
+
+    func dismissSheet() {
+        sheet = nil
+        sheetPath.removeAll()
+    }
 }
 
 
@@ -61,8 +95,8 @@ enum ViewManagar {
     @ViewBuilder
     static func viewForDestination(_ destination: NameViews) -> some View {
         switch destination {
-        case .CameraView:
-            CameraView()
+        case .CameraView(let request):
+            CameraView(onPhoto: request.onPhoto)
         case .HistoryView:
             HistoryView()
         case .MapView:
@@ -75,6 +109,20 @@ enum ViewManagar {
             RecipeView(viewModel: RecipeViewModel(recipe: recipe))
         case .StepsView(let recipe):
             StepsView(viewModel: StepsViewModel(recipe: recipe))
+        }
+    }
+    
+    @ViewBuilder
+    static func viewForSheet(_ destination: NameSheets) -> some View {
+        switch destination {
+        case .InitialSheet:
+            InitialSheet()
+
+        case .DetailsSheet:
+            DetailsSheet()
+
+        case .FinalSheet:
+            FinalSheet()
         }
     }
 }

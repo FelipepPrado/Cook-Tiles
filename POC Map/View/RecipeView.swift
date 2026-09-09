@@ -1,97 +1,74 @@
 import SwiftUI
 
 struct RecipeView: View {
+    
     var viewModel: RecipeViewModel
     
+    @Environment(ViewRouter.self) var viewRouter
+    @Environment(MapViewModel.self) private var mapViewModel
+    @Environment(Player.self) private var player
+    
     var body: some View {
-
-            ScrollView {
-                VStack(spacing: 0){
-
-                    Rectangle()
-                        .fill(Color.clear)
-                        .frame(height: 200)
-                        .padding(.bottom, 20)
-                        
+        ScrollView {
+            
+            VStack(spacing: 0) {
+                headerSection
                 
-                    HStack {
-                        VStack(alignment: .center) {
-                            Text("Preparo")
-                                .bold()
-                                .foregroundStyle(Color.brown100)
-                                .font(.callout)
-                                Text("\(viewModel.recipe.time) min")
-                                    .foregroundStyle(Color.brown700)
-                                    .bold()
-                                    .font(.body)
-                            
-                            
-                        }
-                        .padding(.leading, 25)
-                        
-                            Spacer()
-                        
-                        VStack(alignment: .center) {
-                            Text("Porções")
-                                .bold()
-                                .foregroundStyle(Color.brown100)
-                                .font(.callout)
-                            
-                                Text(viewModel.recipe.portions)
-                                    .foregroundStyle(Color.brown700)
-                                    .bold()
-                                    .font(.body)
-                            
-                        }
-                        .padding(.trailing, 20)
-                        
-                    }
-                    .padding(.bottom, 15)
-                    
-                    VStack(spacing:3){
-                        
-                        Text(viewModel.recipe.name)
-                            .foregroundStyle(Color.brown700)
-                            .bold()
-                            .font(.largeTitle)
-                            .frame(maxWidth: 360)
-                            .multilineTextAlignment(.center)
-                        
-                        Rectangle()
-                            .fill(.brown100)
-                            .frame(width: 360, height: 2)
-
-                    }
-                    .padding(.bottom, 10)
-                    
-                    HStack(spacing: 10) {
-                        ForEach (viewModel.recipe.tags, id: \.rawValue){ tag in
-                            TagComponent(tag: tag)
-                        }
-                    }
-                    .padding(.bottom, 20)
-                    
-                        
+                if viewModel.recipe.status == .unlocked {
                     Text("Ingredientes")
                         .bold()
                         .foregroundStyle(Color.brown700)
-                        .font(.title2)
+                        .font(.hammersmith(fontStyle: .title2))
                         .padding(.bottom, 10)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 20)
+                        .padding(.bottom, 10)
+                    
+                    IngredientFlowLayout(horizontalSpacing: 10, verticalSpacing: 10) {
+                        ForEach(viewModel.recipe.igredients.indices, id: \.self) { index in
+                            
+                            let igredient = viewModel.recipe.igredients[index]
+                            
+                            if igredient.status == false {
+                                Button(action: {
+                                    viewModel.toogleStatus(at: index)
+                                }, label: {
+                                    IngredientComponent(igredient: igredient, currentStatus: .normal)
+                                })
+                            } else {
+                                Button(action: {
+                                    viewModel.toogleStatus(at: index)
+                                }, label: {
+                                    IngredientComponent(igredient: igredient, currentStatus: .green)
+                                })
+                            }
+                        }
+                    }
+                    .frame(maxWidth: 360)
+                    .padding(.bottom, 20)
+                    
+                    Text("Preparo")
+                        .bold()
+                        .foregroundStyle(Color.brown700)
+                        .font(.hammersmith(fontStyle: .title2))
+                        .padding(.bottom, 10)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 10)
+                    
+                    ForEach(viewModel.recipe.steps, id: \.self) { step in
+                        StepsScreenComponent(step: step)
+                            .padding(.bottom, 15)
+                    }
                     
                     
+                }else if viewModel.recipe.status == .locked {
+                    DescriptionComponent(recipe: viewModel.recipe, currentStatus: .recipeViewLocked)
+                        .padding(.bottom, 10)
                     
-//                    HStack(spacing: 10) {
-//                        ForEach (viewModel.recipe.ingredients, id: \.self){ ingredient in
-//                            Losango()
-//                                .fill(Color.blue)
-//                                .frame(width: 150, height: 150)
-//                        }
-//                    }
                     
                 }
-               
+                
             }
             .background {
                 VStack(spacing: 0) {
@@ -100,14 +77,133 @@ struct RecipeView: View {
                     Color.cream500
                 }
             }
-            .ignoresSafeArea(edges: .all)
-            .navigationTitle(viewModel.recipe.name)
+            
+        }
+        .safeAreaInset(edge: .bottom) {
+            
+            VStack {
+                if viewModel.recipe.status == .unlocked {
+                    Button(action: {
+                        viewRouter.stepsView(recipe: viewModel.recipe)
+                    }, label: {
+                        BrownButtonComponent(recipe: viewModel.recipe, currentButton: .largeFill, canAfford: player.coin >= viewModel.recipe.price)
+                    })
+                    .accessibilityLabel("Iniciar receita \(viewModel.recipe.name)")
+                    
+                } else if viewModel.recipe.status == .locked {
+                    Button(action: {
+                        viewModel.buyRecipe(recipe: viewModel.recipe, mapViewModel: mapViewModel, player: player)
+                    }, label: {
+                        BrownButtonComponent(recipe: viewModel.recipe, currentButton: .largeFill, canAfford: player.coin >= viewModel.recipe.price)
+                    })
+                    .accessibilityLabel("Adquirir receita por \(viewModel.recipe.price) moedas")
+                    .accessibilityHint(player.coin >= viewModel.recipe.price
+                        ? "Voce tem moedas suficientes"
+                        : "Voce nao tem moedas suficientes")
+
+                }
+            }
+            .padding(.bottom, 20)
+            .background(Color.clear)
+        }
+        .background {
+            VStack(spacing: 0) {
+                Color("\(viewModel.recipe.category.rawValue)")
+                Color.cream500
+            }
+        }
+        .ignoresSafeArea(edges: .all)
+        
+        .navigationTitle(viewModel.recipe.name)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(viewModel.recipe.name)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.white)
+                    .blendMode(.plusLighter)
+            }
+        }
+    }
+    
+    // MARK: - Sub-views
+    
+    @ViewBuilder
+    private var headerSection: some View {
+        Color.clear
+            .frame(height: 200)
+            .overlay(alignment: .bottom) {
+                DiamondComponent(recipe: viewModel.recipe, hasStroke: true, strokeWidth: 10)
+                    .frame(width: 140, height: 140)
+                    .offset(y: 70)
+            }
+            .padding(.bottom, 20)
+        HStack {
+            VStack(alignment: .center) {
+                Text("Preparo")
+                    .bold()
+                    .foregroundStyle(Color.brown100)
+                    .font(.hammersmith(fontStyle: .caption))
+                Text("\(viewModel.recipe.time) min")
+                    .foregroundStyle(Color.brown700)
+                    .bold()
+                    .font(.hammersmith())
+            }
+            .padding(.leading, 25)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Tempo de preparo: \(viewModel.recipe.time) minutos")
+
+            
+            Spacer()
+            
+            VStack(alignment: .center) {
+                Text("Porções")
+                    .bold()
+                    .foregroundStyle(Color.brown100)
+                    .font(.hammersmith(fontStyle: .caption))
+                
+                Text(viewModel.recipe.portions)
+                    .foregroundStyle(Color.brown700)
+                    .bold()
+                    .font(.hammersmith())
+            }
+            .padding(.trailing, 20)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Porcoes: \(viewModel.recipe.portions)")
+
+        }
+        .padding(.bottom, 15)
+        
+        VStack(spacing: 0) {
+            Text(viewModel.recipe.name)
+                .foregroundStyle(Color.brown700)
+                .bold()
+                .font(Font.custom("JainiPurva-Regular", size: 48, relativeTo: .largeTitle))
+                .frame(maxWidth: 360)
+                .multilineTextAlignment(.center)
+                .modifier(LockedRecipeTitleModifier(isLocked: viewModel.recipe.status != .unlocked))
+
+            Rectangle()
+                .fill(.brown100)
+                .frame(width: 360, height: 2)
+                .accessibilityHidden(true)
+        }
+        .padding(.bottom, 10)
+        
+        VStack(alignment: .center, spacing: 10) {
+            ForEach(Array(viewModel.recipe.tags.indices).chunked(into: 3), id: \.self) { rowTags in
+                HStack(spacing: 10) {
+                    ForEach(rowTags, id: \.self) { index in
+                        TagComponent(tag: viewModel.recipe.tags[index], isHidden: viewModel.recipe.status != .unlocked && index >= 2)
+                    }
+                }
+            }
+        }
+        .frame(maxWidth: 360)
+        .padding(.top, 10)
+        .padding(.bottom, 15)
         
     }
+    
+    
 }
-
-//#Preview {
-//    RecipeView()
-//}
-
-

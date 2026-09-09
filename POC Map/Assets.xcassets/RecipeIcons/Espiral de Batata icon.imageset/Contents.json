@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Espiral de Batata.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

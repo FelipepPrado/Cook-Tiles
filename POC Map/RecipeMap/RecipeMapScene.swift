@@ -9,6 +9,16 @@ final class MapScene: SKScene {
         height: 270.8
     )
     
+    var coinBalance: Int = 0 {
+        didSet {
+            for recipeTile in recipeTiles {
+                updatePriceColor(for: recipeTile)
+            }
+        }
+    }
+    
+    var onCameraDidMove: (() -> Void)?
+    
     var recipes: [Recipe] = []
     
     var recipeTiles: [RecipeTile] = []
@@ -24,14 +34,27 @@ final class MapScene: SKScene {
     
     var isDragging = false
     
+    
+    private var pinchGesture: UIPinchGestureRecognizer?
+    private let minCameraScale: CGFloat = 0.5
+    private let maxCameraScale: CGFloat = 3.5
+    
     override func didMove(to view: SKView) {
         
-        backgroundColor = .systemMint
+        backgroundColor = .clear
         
         anchorPoint = CGPoint(
             x: 0.5,
             y: 0.5
         )
+        
+        let pinch = UIPinchGestureRecognizer(
+            target: self,
+            action: #selector(handlePinch(_:))
+        )
+
+        view.addGestureRecognizer(pinch)
+        pinchGesture = pinch
         
         createCamera()
     }
@@ -163,11 +186,16 @@ final class MapScene: SKScene {
             tile.name = "recipe_\(recipeIndex)"
             
             
-            let tileOverlay = SKSpriteNode(imageNamed: "nuvem")
+            let tileOverlay = SKSpriteNode(imageNamed: "\(recipe.overlayImage)")
             
             tileOverlay.anchorPoint = CGPoint(x: 0.5, y: 0)
             
-            tileOverlay.position = CGPoint(x: 0, y: 30)
+            if recipe.status == .locked || recipe.status == .unavailable {
+                tileOverlay.position = CGPoint(x: 0, y: 25)
+            } else {
+                tileOverlay.position = CGPoint(x: 0, y: 12)
+            }
+            
             tileOverlay.zPosition = 0.9
             
             let container: SKNode = {
@@ -180,9 +208,6 @@ final class MapScene: SKScene {
             
             addChild(tile)
             
-            // MUDOU:
-            // agora guardamos a coordenada
-            // lógica do tile.
             let recipeTile = RecipeTile(
                 recipe: recipe,
                 tile: tile,
@@ -199,9 +224,7 @@ final class MapScene: SKScene {
             recipeIndex += 1
         }
         
-        // NOVO:
-        // depois que todos existem,
-        // calculamos os estados.
+
         refreshTileStates()
     }
     
@@ -245,10 +268,7 @@ final class MapScene: SKScene {
                 - recipeTile.col
             )
             
-            return
-            rowDifference
-            + colDifference
-            == 1
+            return rowDifference + colDifference == 1
         }
     }
     
@@ -260,7 +280,13 @@ final class MapScene: SKScene {
             container.position = CGPoint(x: 0, y: 100)
             container.zPosition = 1
         
-        let priceLabel = SKLabelNode(text: "R$ \(price)")
+        let coinImage = SKSpriteNode(texture: .init(imageNamed: "recipeCoin"))
+        
+        coinImage.setScale(0.5)
+        coinImage.zPosition = 1.1
+        
+        
+        let priceLabel = SKLabelNode(text:"\(price)")
         
         priceLabel.horizontalAlignmentMode = .center
         priceLabel.verticalAlignmentMode = .center
@@ -268,21 +294,39 @@ final class MapScene: SKScene {
         priceLabel.fontName = "AvenirNext-Bold"
         priceLabel.fontColor = .white
         priceLabel.zPosition = 1.1
+            
+        let spacing: CGFloat = 5
+        let totalContentWidth = priceLabel.frame.width + spacing + coinImage.frame.width
         
-        let padding: CGFloat = 8
+        priceLabel.position = CGPoint(
+            x: -(totalContentWidth / 2) + (priceLabel.frame.width / 2),
+            y: 0
+        )
+        
+        
+        coinImage.position = CGPoint(
+            x: (totalContentWidth / 2) - (coinImage.frame.width / 2),
+            y: 0
+        )
+
+        let padding: CGFloat = 16
         let background = SKShapeNode(
             rectOf: CGSize(
-                width: priceLabel.frame.width + padding * 3,
-                height: priceLabel.frame.height + padding * 3
+                width: totalContentWidth + padding * 2,
+                height: max(priceLabel.frame.height, coinImage.frame.height) + padding
             ),
-            cornerRadius: 30
+            cornerRadius: 15
         )
-        background.fillColor = .green500
+        
+        background.name = "priceBackground"
+        background.alpha = 0.8
+        background.fillColor = coinBalance >= price ? .green500 : .brown100
         background.strokeColor = .clear
         background.zPosition = 1
         
         container.addChild(background)
         container.addChild(priceLabel)
+        container.addChild(coinImage)
         
         return container
     }
@@ -335,9 +379,31 @@ final class MapScene: SKScene {
         }
     }
     
+    func tileScreenPositions() -> [(recipeTile: RecipeTile, screenPoint: CGPoint)] {
+        guard let view = self.view else { return [] }
+
+        return recipeTiles.map { recipeTile in
+            let scenePoint = recipeTile.tile.position
+            let viewPoint = convertPoint(toView: scenePoint)
+
+            let normalized = CGPoint(
+                x: viewPoint.x / view.bounds.width,
+                y: viewPoint.y / view.bounds.height
+            )
+
+            return (recipeTile: recipeTile, screenPoint: normalized)
+        }
+    }
+    
     // MARK: - Tile Visual
     
+    private func updatePriceColor(for recipeTile: RecipeTile) {
+        let background = recipeTile.priceTag.childNode(withName: "priceBackground") as? SKShapeNode
+        background?.fillColor = coinBalance >= recipeTile.recipe.price ? .green500 : .brown100
+    }
+
     func updateVisual(for recipeTile: RecipeTile) {
+        updatePriceColor(for: recipeTile)
         
         recipeTile.tile.alpha = 1
         recipeTile.tile.colorBlendFactor = 0
@@ -345,7 +411,7 @@ final class MapScene: SKScene {
         switch recipeTile.recipe.status {
             
         case .unlocked:
-            recipeTile.overlay.texture = SKTexture(imageNamed: "batata")
+            recipeTile.overlay.texture = SKTexture(imageNamed: "\(recipeTile.recipe.overlayImage)")
             recipeTile.priceTag.isHidden = true
             
         case .locked:
@@ -512,6 +578,8 @@ final class MapScene: SKScene {
         
         self.previousTouchPosition =
         currentTouchPosition
+        
+        onCameraDidMove?()
     }
     
     override func touchesEnded(
@@ -545,30 +613,6 @@ final class MapScene: SKScene {
             return
         }
         
-        print(
-            "Recipe:",
-            recipeTile.recipe.name
-        )
-        
-        print(
-            "Status:",
-            recipeTile.recipe.status
-        )
-        
-        print(
-            "Position:",
-            recipeTile.row,
-            recipeTile.col
-        )
-        print(
-            "Category:",
-            recipeTile.recipe.category.rawValue
-        )
-        print(
-            "level:",
-            recipeTile.recipe.level
-        )
-        
         onRecipeTapped?(
             recipeTile.recipe
         )
@@ -581,5 +625,31 @@ final class MapScene: SKScene {
         
         previousTouchPosition = nil
         isDragging = false
+    }
+    
+    @objc private func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+        guard gesture.state == .began ||
+              gesture.state == .changed else { return }
+
+        isDragging = true
+        previousTouchPosition = nil
+
+        let newScale = mapCamera.xScale / gesture.scale
+
+        mapCamera.setScale(
+            min(max(newScale, minCameraScale), maxCameraScale)
+        )
+
+        gesture.scale = 1
+        
+        onCameraDidMove?()
+    }
+
+    override func willMove(from view: SKView) {
+        if let pinchGesture {
+            view.removeGestureRecognizer(pinchGesture)
+        }
+
+        pinchGesture = nil
     }
 }

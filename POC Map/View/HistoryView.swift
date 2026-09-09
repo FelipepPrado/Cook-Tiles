@@ -1,11 +1,158 @@
 import SwiftUI
+import SwiftData
 
 struct HistoryView: View {
+    
+    @Query(sort: \Meal.date, order: .reverse)
+    private var meals: [Meal]
+    
+    @State private var viewModel = HistoryViewModel()
+    
     var body: some View {
-        EmptyView()
+        ZStack{
+            Color.cream500
+                .ignoresSafeArea()
+            if viewModel.groupedMeals.isEmpty{
+                VStack(spacing: 25){
+                    Spacer()
+                    Image("lockedRecipe")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 170, height: 130)
+                        .accessibilityHidden(true)
+                    
+                    Text("Você ainda não cadastrou nenhuma Refeição!")
+                        .font(.hammersmith(fontStyle: .title2))
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(.brown100)
+                    Spacer()
+                }
+                .frame(maxWidth: 288)
+                .frame(maxHeight: .infinity, alignment: .center)
+            }
+            else{
+                ScrollView(.vertical) {
+                    VStack{
+                        ForEach(viewModel.groupedMeals, id: \.date) { group in
+                            VStack(
+                                alignment: .leading,
+                                spacing: 10
+                            ) {
+                                Text(formattedDate(group.date).uppercased())
+                                    .font(.hammersmith())
+                                    .foregroundStyle(.brown200)
+                                
+                                ScrollView(
+                                    .horizontal,
+                                    showsIndicators: false
+                                ) {
+                                    LazyHStack(spacing: 20) {
+                                        ForEach(group.meals.sorted(by: { $0.date > $1.date})) { meal in
+                                            Button(action: {
+                                                viewModel.selectedMeal = meal
+                                            }, label:{
+                                                HistoryRecipeComponent(meal: meal)
+                                            })
+                                            .accessibilityLabel("Refeicao com \(meal.recipes.count) receita\(meal.recipes.count > 1 ? "s" : ""), \(meal.stars) estrelas")
+                                            .accessibilityHint("Toque duas vezes para ver detalhes")
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .padding(.leading, 20)
+                        .padding(.top, 10)
+                    }
+                }
+            }
+            
+        }
+        .onAppear{
+            viewModel.addGroupedMeal(meals)
+        }
+        .sheet(item: $viewModel.selectedMeal){ selectedMeal in
+            MealView(meal: selectedMeal)
+        }
+        .navigationTitle("Histórico de Refeições")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Histórico de Refeições")
+                    .fontWeight(.bold)
+                    .foregroundStyle(.brown200)
+                    .blendMode(.plusDarker)
+            }
+        }
+    }
+    
+    private func formattedDate(_ date: Date) -> String {
+        date.formatted(
+            .dateTime
+                .weekday(.abbreviated)
+                .day(.twoDigits)
+                .month(.twoDigits)
+                .year()
+                .locale(Locale(identifier: "pt_BR"))
+        )
+        .replacingOccurrences(of: ".", with: "")
     }
 }
 
 #Preview {
-    HistoryView()
+    let configuration = ModelConfiguration(
+        isStoredInMemoryOnly: true
+    )
+    
+    let container = try! ModelContainer(
+        for: Meal.self,
+        Recipe.self,
+        configurations: configuration
+    )
+    
+    let calendar = Calendar.current
+    
+//    container.mainContext.insert(
+//        Meal(
+//            image: Data(),
+//            stars: 5,
+//            recipes: [],
+//            score: 100,
+//            comment: "Muito bom!",
+//            date: .now
+//        )
+//    )
+//    
+//    container.mainContext.insert(
+//        Meal(
+//            image: Data(),
+//            stars: 4,
+//            recipes: [],
+//            score: 80,
+//            comment: "Gostei bastante.",
+//            date: calendar.date(
+//                byAdding: .hour,
+//                value: -2,
+//                to: .now
+//            )!
+//        )
+//    )
+//    
+//    container.mainContext.insert(
+//        Meal(
+//            image: Data(),
+//            stars: 3,
+//            recipes: [],
+//            score: 60,
+//            comment: "Ficou razoável.",
+//            date: calendar.date(
+//                byAdding: .day,
+//                value: -1,
+//                to: .now
+//            )!
+//        )
+//    )
+    
+    return HistoryView()
+        .modelContainer(container)
 }

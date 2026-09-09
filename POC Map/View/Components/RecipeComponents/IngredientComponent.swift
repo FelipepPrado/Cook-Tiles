@@ -8,14 +8,89 @@
 import SwiftUI
 
 struct IngredientComponent: View {
+    
+    let igredient: Igredient
+    let currentStatus: StatusColor
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        switch currentStatus {
+            
+        case .normal:
+            VStack(alignment: .center) {
+                Text("\(igredient.quantity) \(igredient.unit)")
+                    .font(.hammersmith())
+                    .foregroundColor(.brown200)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: true)
+
+                
+                Text(igredient.name)
+                    .font(.hammersmith(fontStyle: .caption))
+                    .bold()
+                    .foregroundColor(.brown200)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: true)
+
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .frame(minHeight: 80)
+            .background(.cream200)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.cream800, lineWidth: 5)
+            )
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("\(igredient.name), \(igredient.quantity) \(igredient.unit)")
+            .accessibilityValue("Nao selecionado")
+            .accessibilityHint("Toque duas vezes para marcar")
+            
+        case .green:
+            
+            VStack(alignment: .center) {
+                Text("\(igredient.quantity) \(igredient.unit)")
+                    .font(.hammersmith())
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: true)
+                    .foregroundStyle(.green700)
+
+                
+                Text(igredient.name)
+                    .font(.hammersmith(fontStyle: .caption))
+                    .bold()
+                    .foregroundColor(.brown200)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: true)
+
+                    
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .frame(minHeight: 80)
+            .background(.cream200)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.green500, lineWidth: 5)
+            )
+            .accessibilityElement(children: .ignore)
+            .accessibilityValue("Selecionado")
+            .accessibilityHint("Toque duas vezes para desmarcar")
+
+        }
+
     }
 }
 
 #Preview {
-    IngredientComponent()
+    IngredientComponent(igredient: Igredient(name: "alho", quantity: "100", unit: "gramas", status: false), currentStatus: .normal)
 }
+
 struct Losango: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
@@ -35,4 +110,8 @@ struct Losango: Shape {
         
         return path
     }
+}
+
+enum StatusColor: CaseIterable {
+    case normal, green
 }

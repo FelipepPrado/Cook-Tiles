@@ -1,6 +1,6 @@
 struct Igredient: Codable, Hashable{
     var name: String
-    var quantity: Double
+    var quantity: String
     var unit: String
     var status: Bool
 }

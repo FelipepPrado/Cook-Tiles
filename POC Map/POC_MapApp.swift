@@ -16,7 +16,7 @@ struct POC_MapApp: App {
             )
 
             let context = container.mainContext
-
+ 
             DataLoader.loadRecipesIfNeeded(context: context)
             DataLoader.loadPlayerIfNeeded(context: context)
 
@@ -31,5 +31,6 @@ struct POC_MapApp: App {
         }
         .modelContainer(container)
         .environment(ViewRouter())
+
     }
 }
